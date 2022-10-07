@@ -21,11 +21,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>William</td>
-                    <td>Castañeda</td>
-                    <td>3152743445</td>
-                    <td>turo</td>
+                  <tr *ngFor="let employee of employees">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.lastName}}</td>
+                    <td>{{employee.phoneNumber}}</td>
+                    <td>{{employee.position}}</td>
                     <td>
                         <i class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"></i>
                         <i class="fa-solid fa-trash-can fa-lg text-danger"></i>

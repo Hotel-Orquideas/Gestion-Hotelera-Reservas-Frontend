@@ -8,17 +8,17 @@
                         <div class="row">
                             <div class="col">
                                 <p class="float-start">Nombre (*)</p>
-                                <input type="text" name="" id="" class="form-control" placeholder="Nombre">
+                                <input type="text" name="" id="" class="form-control" placeholder="Nombre" (ngModel)="employee.name">
                             </div>
                             <div class="col">
                                 <p class="float-start">Apellido (*)</p>
-                                <input type="text" name="" id="" class="form-control" placeholder="Apellido">
+                                <input type="text" name="" id="" class="form-control" placeholder="Apellido" (ngModel)="employee.lastName">
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="float-start">Tipo de Documento (*)</p>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" (ngModel)="employee.typeDocument">
                                     <option selected>Seleccione una opción</option>
                                     <option value="CC">Cédula de Ciudadanía</option>
                                     <option value="PA">Pasaporte</option>
@@ -28,28 +28,28 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">Número de Documento (*)</p>
-                                <input type="text" name="" id="" class="form-control" placeholder="Número de documento">
+                                <input type="text" name="" id="" class="form-control" placeholder="Número de documento" (ngModel)="employee.document">
                             </div>
                             <div class="col">
                                 <p class="float-start">Teléfono (*)</p>
-                                <input type="text" name="" id="" class="form-control" placeholder="Teléfono">
+                                <input type="text" name="" id="" class="form-control" placeholder="Teléfono" (ngModel)="employee.phoneNumber">
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="float-start">Puesto de Trabajo (*)</p>
-                                <input type="text" name="" id="" class="form-control" placeholder="Puesto">
+                                <input type="text" name="" id="" class="form-control" placeholder="Puesto" (ngModel)="employee.position">
                             </div>
                             <div class="col">
                                 <p class="float-start">Correo Electrónico (*)</p>
-                                <input type="email" name="" id="" class="form-control" placeholder="Email">
+                                <input type="email" name="" id="" class="form-control" placeholder="Email" (ngModel)="employee.email">
                             </div>
                         </div>
                         <div class="row mt-4">
                             
                             <div class="col">
                                 <p class="float-start">Género (*)</p>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" (ngModel)="employee.genre">
                                     <option selected>Seleccione una opción</option>
                                     <option value="M">Masculino</option>
                                     <option value="F">Femenino</option>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">RH (*)</p>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" (ngModel)="employee.bloodType">
                                     <option selected>Seleccione una opción</option>
                                     <option value="O+">O+</option>
                                     <option value="O-">O-</option>
@@ -72,21 +72,21 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">Fecha de Nacimiento (*)</p>
-                                <input type="date" name="" id="" class="form-control" placeholder="uno.ejemplo">
+                                <input type="date" name="" id="" class="form-control" placeholder="uno.ejemplo" (ngModel)="employee.birthdate">
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="float-start">Nombre de usuario (*)</p>
-                                <input type="text" name="" id="" class="form-control" placeholder="uno.ejemplo">
+                                <input type="text" name="" id="" class="form-control" placeholder="uno.ejemplo" (ngModel)="employee.userName">
                             </div>
                             <div class="col">
                                 <p class="float-start">Contraseña (*)</p>
-                                <input type="password" class="form-control">
+                                <input type="password" class="form-control" (ngModel)="employee.password">
                             </div>
                         </div>
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-dark btn-lg">Registrar Empleado</button>
+                            <button role="button" (click)="register()" class="btn btn-dark btn-lg">Registrar Empleado</button>
                         </div>
                     </form>
                 </div>
