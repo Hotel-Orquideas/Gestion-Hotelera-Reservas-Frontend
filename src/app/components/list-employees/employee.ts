@@ -15,4 +15,5 @@ export class Employee {
     //roleId:number;
     //hotelId:number;
 
+
 }

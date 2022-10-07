@@ -20,5 +20,13 @@ export class ListEmployeesComponent implements OnInit {
       employee=>this.employees=employee
     );
   }
+  
+  delete(employee:Employee):void{
+    this.employeeService.deleteEmployee(employee.document).subscribe(
+      emp=>this.employeeService.getEmployees().subscribe(
+        response=>this.employees=response
+      )
+    );
+  }
 
 }

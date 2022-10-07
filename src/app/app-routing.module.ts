@@ -7,6 +7,7 @@ import { RegisterEmployeeComponent } from './components/register-employee/regist
 const routes: Routes = [
   {path:'list-employees', component:ListEmployeesComponent},
   {path:'register-employee', component:RegisterEmployeeComponent},
+  {path:'register-employee/:doc', component:RegisterEmployeeComponent},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
 ];
