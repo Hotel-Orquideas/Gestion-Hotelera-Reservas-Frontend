@@ -7,6 +7,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ListEmployeesComponent } from './components/list-employees/list-employees.component';
 import { RegisterEmployeeComponent } from './components/register-employee/register-employee.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ErrorNotFoundComponent } from './components/error-not-found/error-not-f
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
