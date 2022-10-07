@@ -8,17 +8,17 @@
                         <div class="row">
                             <div class="col">
                                 <p class="float-start">Nombre (*)</p>
-                                <input type="text" name="nombre" id="" class="form-control" placeholder="Nombre" [(ngModel)]="employee.name">
+                                <input type="text" name="nombre" id="" class="form-control" placeholder="Nombre" [(ngModel)]="employee.person.name">
                             </div>
                             <div class="col">
                                 <p class="float-start">Apellido (*)</p>
-                                <input type="text" name="apellido" id="" class="form-control" placeholder="Apellido" [(ngModel)]="employee.lastName">
+                                <input type="text" name="apellido" id="" class="form-control" placeholder="Apellido" [(ngModel)]="employee.person.lastName">
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="float-start">Tipo de Documento (*)</p>
-                                <select class="form-select" aria-label="Default select example" name="tipo-documento" [(ngModel)]="employee.typeDocument">
+                                <select class="form-select" aria-label="Default select example" name="tipo-documento" [(ngModel)]="employee.person.typeDocument">
                                     <option selected>Seleccione una opción</option>
                                     <option value="CC">Cédula de Ciudadanía</option>
                                     <option value="PA">Pasaporte</option>
@@ -28,11 +28,11 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">Número de Documento (*)</p>
-                                <input type="text" name="documento" id="" class="form-control" placeholder="Número de documento" [(ngModel)]="employee.document">
+                                <input type="text" name="documento" id="" class="form-control" placeholder="Número de documento" [(ngModel)]="employee.person.document">
                             </div>
                             <div class="col">
                                 <p class="float-start">Teléfono (*)</p>
-                                <input type="text" name="telefono" id="" class="form-control" placeholder="Teléfono" [(ngModel)]="employee.phoneNumber">
+                                <input type="text" name="telefono" id="" class="form-control" placeholder="Teléfono" [(ngModel)]="employee.person.phoneNumber">
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -42,14 +42,14 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">Correo Electrónico (*)</p>
-                                <input type="email" name="email" id="" class="form-control" placeholder="Email" [(ngModel)]="employee.email">
+                                <input type="email" name="email" id="" class="form-control" placeholder="Email" [(ngModel)]="employee.person.email">
                             </div>
                         </div>
                         <div class="row mt-4">
                             
                             <div class="col">
                                 <p class="float-start">Género (*)</p>
-                                <select class="form-select" aria-label="Default select example" name="genero" [(ngModel)]="employee.genre">
+                                <select class="form-select" aria-label="Default select example" name="genero" [(ngModel)]="employee.person.genre">
                                     <option selected>Seleccione una opción</option>
                                     <option value="M">Masculino</option>
                                     <option value="F">Femenino</option>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">RH (*)</p>
-                                <select class="form-select" aria-label="Default select example" name="rh" [(ngModel)]="employee.bloodType">
+                                <select class="form-select" aria-label="Default select example" name="rh" [(ngModel)]="employee.person.bloodType">
                                     <option selected>Seleccione una opción</option>
                                     <option value="O+">O+</option>
                                     <option value="O-">O-</option>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">Fecha de Nacimiento (*)</p>
-                                <input type="date" name="fecha-nacimiento" id="" class="form-control" placeholder="uno.ejemplo" [(ngModel)]="employee.birthdate">
+                                <input type="date" name="fecha-nacimiento" id="" class="form-control" placeholder="uno.ejemplo" [(ngModel)]="employee.person.birthdate">
                             </div>
                         </div>
                         <div class="row mt-4">

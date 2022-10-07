@@ -22,12 +22,12 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let employee of employees">
-                    <td>{{employee.name}}</td>
-                    <td>{{employee.lastName}}</td>
-                    <td>{{employee.phoneNumber}}</td>
+                    <td>{{employee.person.name}}</td>
+                    <td>{{employee.person.lastName}}</td>
+                    <td>{{employee.person.phoneNumber}}</td>
                     <td>{{employee.position}}</td>
                     <td>
-                        <i class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;" [routerLink]="['/register-employee',employee.id]"></i>
+                        <i class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;" [routerLink]="['/register-employee',employee.person.document]"></i>
                         <i class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(employee)"></i>
                     </td>
                   </tr>
