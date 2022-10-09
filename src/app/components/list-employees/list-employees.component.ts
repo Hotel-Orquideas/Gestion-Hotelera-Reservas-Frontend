@@ -22,7 +22,7 @@ export class ListEmployeesComponent implements OnInit {
   }
   
   delete(employee:Employee):void{
-    this.employeeService.deleteEmployee(employee.document).subscribe(
+    this.employeeService.deleteEmployee(employee).subscribe(
       emp=>this.employeeService.getEmployees().subscribe(
         response=>this.employees=response
       )

@@ -27,7 +27,7 @@ export class RegisterEmployeeComponent implements OnInit {
   cargar():void{
     this.activatedRoute.params.subscribe(
       emp=>{
-        let id=emp['id'];
+        let id=emp['person.document'];
         if(id){
           this.employeeService.getEmployee(id).subscribe(
             es=>this.employee=es

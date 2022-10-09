@@ -47,8 +47,8 @@ export class EmployeeService {
     return this.http.put<Employee>(this.urlEndPoint,employee);
   }
 
-  deleteEmployee(doc:string):Observable<Employee>{
-    return this.http.delete<Employee>(this.urlEndPoint+'/'+doc);
+  deleteEmployee(employee:Employee):Observable<Employee>{
+    return this.http.patch<Employee>(this.urlEndPoint+'/'+employee.document,employee);
   }
 
 }
