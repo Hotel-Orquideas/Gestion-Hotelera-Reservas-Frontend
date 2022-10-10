@@ -27,11 +27,14 @@ export class RegisterEmployeeComponent implements OnInit {
   cargar():void{
     this.activatedRoute.params.subscribe(
       emp=>{
-        let id=emp['person.document'];
+        let id=emp['doc'];
         if(id){
+          alert("esto funciona");
           this.employeeService.getEmployee(id).subscribe(
             es=>this.employee=es
           );
+        }else{
+          alert("no funciona");
         }
       }
     );
@@ -39,7 +42,9 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   register():void{
-    alert("Empleado creado correctamente.");
+    
+    
+    alert("Empleado creado correctamente."+ this.employee.birthdate);
     this.employeeService.registerEmployee(this.employee).subscribe(
       res=>this.router.navigate(['/list-employees'])
     );

@@ -39,7 +39,7 @@ export class EmployeeService {
   }
 
   /**
-   * Actualizar emplead
+   * Actualizar empleado
    * @param employee 
    * @returns 
    */
@@ -47,8 +47,12 @@ export class EmployeeService {
     return this.http.put<Employee>(this.urlEndPoint,employee);
   }
 
-  deleteEmployee(employee:Employee):Observable<Employee>{
-    return this.http.patch<Employee>(this.urlEndPoint+'/'+employee.document,employee);
+  /**
+   * Eliminar empleado
+   * @param employee
+   */
+  deleteEmployee(doc:string):Observable<Employee>{
+    return this.http.patch<Employee>(this.urlEndPoint+'/'+doc,null);
   }
 
 }

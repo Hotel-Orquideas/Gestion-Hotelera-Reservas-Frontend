@@ -1,6 +1,5 @@
 export class Employee {
     id:number=0;
-    
     name:string="";
     lastName:string="";
     typeDocument:string="";
@@ -13,6 +12,7 @@ export class Employee {
     position:string="";
     userName:string="";
     password:string="";
+    
     
     person={
         "name":this.name,

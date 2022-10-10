@@ -8,6 +8,7 @@ import { Employee } from './employee';
   templateUrl: './list-employees.component.html',
   styleUrls: ['./list-employees.component.css']
 })
+
 export class ListEmployeesComponent implements OnInit {
 
   employees:Employee[]= new Array;
@@ -21,8 +22,8 @@ export class ListEmployeesComponent implements OnInit {
     );
   }
   
-  delete(employee:Employee):void{
-    this.employeeService.deleteEmployee(employee).subscribe(
+  delete(doc:string):void{
+    this.employeeService.deleteEmployee(doc).subscribe(
       emp=>this.employeeService.getEmployees().subscribe(
         response=>this.employees=response
       )

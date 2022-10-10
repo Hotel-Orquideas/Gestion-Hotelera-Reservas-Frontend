@@ -28,7 +28,7 @@
                     <td>{{employee.position}}</td>
                     <td>
                         <i class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;" [routerLink]="['/register-employee',employee.person.document]"></i>
-                        <i class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(employee)"></i>
+                        <i class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(employee.person.document)"></i>
                     </td>
                   </tr>
                 </tbody>
