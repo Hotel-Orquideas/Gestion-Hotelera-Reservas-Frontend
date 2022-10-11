@@ -44,8 +44,31 @@ export class EmployeeService {
    * @returns 
    */
   updateEmployee(employee:Employee):Observable<Employee>{
-    console.log("llego: "+employee.id+" "+ employee.person.document);
-    return this.http.put<Employee>(this.urlEndPoint+'/'+employee.person.document,employee);
+
+    console.log(employee.position);
+    console.log(employee.person.name);
+    console.log(employee.person.lastName);
+    console.log(employee.person.typeDocument);
+    console.log(employee.person.document);
+    console.log(employee.person.genre);
+    console.log(employee.person.birthdate);
+    console.log(employee.person.phoneNumber);
+    console.log(employee.person.email);
+    console.log(employee.person.bloodType);
+    const datos={
+      "position":`${employee.position}`,
+      "name":`${employee.person.name}`,
+      "lastName":`${employee.person.lastName}`,
+      "typeDocument":`${employee.person.typeDocument}`,
+      "document":`${employee.person.document}`,
+      "genre":`${employee.person.genre}`,
+      "birthdate":`${employee.person.birthdate}`,
+      "phoneNumber":`${employee.person.phoneNumber}`,
+      "email":`${employee.person.email}`,
+      "bloodType":`${employee.person.bloodType}`
+    };
+
+    return this.http.put<Employee>(this.urlEndPoint+'/'+employee.person.document,datos);
   }
 
   /**
