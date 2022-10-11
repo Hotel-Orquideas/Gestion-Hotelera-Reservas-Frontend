@@ -51,7 +51,7 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   update():void{
-    alert("empleado actualizado correctamente");
+    alert("empleado actualizado correctamente: "+ this.employee.id);
     this.employeeService.updateEmployee(this.employee).subscribe(
       emp=>this.router.navigate(['/list-employees'])
     );

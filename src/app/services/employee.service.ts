@@ -44,7 +44,8 @@ export class EmployeeService {
    * @returns 
    */
   updateEmployee(employee:Employee):Observable<Employee>{
-    return this.http.put<Employee>(this.urlEndPoint,employee);
+    console.log("llego: "+employee.id+" "+ employee.person.document);
+    return this.http.put<Employee>(this.urlEndPoint+'/'+employee.person.document,employee);
   }
 
   /**
