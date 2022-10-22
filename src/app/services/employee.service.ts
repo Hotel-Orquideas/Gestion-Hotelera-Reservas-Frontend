@@ -45,16 +45,8 @@ export class EmployeeService {
    */
   updateEmployee(employee:Employee):Observable<Employee>{
 
-    console.log(employee.position);
-    console.log(employee.person.name);
-    console.log(employee.person.lastName);
-    console.log(employee.person.typeDocument);
-    console.log(employee.person.document);
-    console.log(employee.person.genre);
-    console.log(employee.person.birthdate);
-    console.log(employee.person.phoneNumber);
-    console.log(employee.person.email);
-    console.log(employee.person.bloodType);
+
+
     const datos={
       "position":`${employee.position}`,
       "name":`${employee.person.name}`,
@@ -76,7 +68,7 @@ export class EmployeeService {
    * @param employee
    */
   deleteEmployee(doc:string):Observable<Employee>{
-    return this.http.patch<Employee>(this.urlEndPoint+'/'+doc,null);
+    return this.http.patch<Employee>(this.urlEndPoint+'/'+doc, null);
   }
 
 }

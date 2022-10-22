@@ -7,7 +7,7 @@ import { Employee } from '../list-employees/employee';
 @Component({
   selector: 'app-register-employee',
   templateUrl: './register-employee.component.html',
-  styleUrls: ['./register-employee.component.css']
+  styleUrls: ['./register-employee.component.css'],
 })
 export class RegisterEmployeeComponent implements OnInit {
 
@@ -29,12 +29,10 @@ export class RegisterEmployeeComponent implements OnInit {
       emp=>{
         let id=emp['doc'];
         if(id){
-          alert("esto funciona");
+          
           this.employeeService.getEmployee(id).subscribe(
             es=>this.employee=es
           );
-        }else{
-          alert("no funciona");
         }
       }
     );
@@ -43,8 +41,7 @@ export class RegisterEmployeeComponent implements OnInit {
 
   register():void{
     
-    
-    alert("Empleado creado correctamente."+ this.employee.birthdate);
+    //alert("Empleado creado correctamente."+ this.employee.birthdate);
     this.employeeService.registerEmployee(this.employee).subscribe(
       res=>this.router.navigate(['/list-employees'])
     );
