@@ -1,9 +1,13 @@
+<p-breadcrumb [model]="items" [home]="home" *ngIf="!employee.id else elseBreadCrumb"></p-breadcrumb>
+<ng-template #elseBreadCrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home" ></p-breadcrumb>
+</ng-template>
 <div class="container pt-4">
     <div class="row">
         <div class="col-lg-10 offset-lg-1">
             <div class="card text-center">
                 <div class="card-body">
-                    <h3>Agregar Empleado</h3>
+                    <h3>Registrar Empleado</h3>
                     <form class="mt-4">
                         <div class="row">
                             <div class="col">
@@ -75,26 +79,16 @@
                                 <input type="date" name="fecha-nacimiento" id="" class="form-control" placeholder="uno.ejemplo" [(ngModel)]='employee.birthdate' [(ngModel)]='employee.person.birthdate'>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <p class="float-start">Nombre de usuario (*)</p>
-                                <input type="text" name="usuario" id="" class="form-control" placeholder="uno.ejemplo" [(ngModel)]="employee.userName">
-                            </div>
-                            <div class="col">
-                                <p class="float-start">Contraseña (*)</p>
-                                <input type="password" class="form-control" name="contraseña" [(ngModel)]="employee.password">
-                            </div>
-                        </div>
 
                     </form>
                     <div class="mt-4">
-                        <button class="btn btn-dark btn-lg" role="button" (click)="register()" *ngIf="!employee.id else elseBlock">Registrar Empleado</button>
+                        <button class="btn btn-dark btn-lg" role="button" (click)="register()" *ngIf="!employee.id else elseBlock">Registrar</button>
                     </div>
                     
                         
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button class="btn btn-dark btn-lg" role="button" (click)="update()">Actualizar Empleado</button>
+                            <button class="btn btn-dark btn-lg" role="button" (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>
                     

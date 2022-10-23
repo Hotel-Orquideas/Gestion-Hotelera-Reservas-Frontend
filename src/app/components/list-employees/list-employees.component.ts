@@ -11,6 +11,7 @@ import * as jspdf from 'jspdf'
 import 'jspdf-autotable';
 import * as jsPDF from 'jspdf';
 import { FormArrayName } from '@angular/forms';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-list-employees',
@@ -27,9 +28,8 @@ export class ListEmployeesComponent implements OnInit {
   headSimple: any[] = new Array;//para exportar pdf
   empSimple:any[]= new Array;//para exportar pdf
   dataTable:any[]= new Array;//para exportar pdf
-  exportColumns: any[]= new Array;
-  loading: boolean = true;
-  position: string = "";
+  items: MenuItem[]=new Array;//para breadcrumb
+  home: MenuItem={};//para breadcrumb
 
 
   constructor(private employeeService: EmployeeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
@@ -40,6 +40,7 @@ export class ListEmployeesComponent implements OnInit {
       employee => this.employees = employee
     );
 
+    //este cols se usa para poder exportar en csv, por eso en fiel está como sale para obtener el dato de la clase employee.person.dato
     this.cols = [
       { field: "person.name", header: 'Nombre' },
       { field: "person.lastName", header: 'Apellido' },
@@ -53,8 +54,19 @@ export class ListEmployeesComponent implements OnInit {
       { field: "person.bloodType", header: 'TipoSangre' }
     ];
 
+    //este lo uso para crear las tablas de la tabla para exportar en pdf
     this.headSimple = [['Nombre', 'Apellido', 'Cargo', 'Tipo Documento', 'Documento', 'Genero','Telefono','Correo']]
     
+
+    //etiquetas para el breadcrumb
+    this.items = [
+      { label: 'Empleado' },
+      { label: 'Empleados registrados' }
+    ];
+
+    //icono de casa pra el breadcrumb
+    this.home = { icon: 'pi pi-home', routerLink: '/' };
+
   }
 
   delete(doc: string) {

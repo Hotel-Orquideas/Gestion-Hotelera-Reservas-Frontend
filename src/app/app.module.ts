@@ -19,6 +19,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TooltipModule} from 'primeng/tooltip';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+
 
 
 
@@ -44,7 +46,8 @@ import {TooltipModule} from 'primeng/tooltip';
     ConfirmDialogModule,
     ToastModule,
     ToolbarModule,
-    TooltipModule
+    TooltipModule,
+    BreadcrumbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
