@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -9,6 +9,8 @@ import { ListEmployeesComponent } from './components/list-employees/list-employe
 import { RegisterEmployeeComponent } from './components/register-employee/register-employee.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+
+import { ToastrModule } from 'ngx-toastr';
 
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
@@ -20,7 +22,8 @@ import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TooltipModule} from 'primeng/tooltip';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
-
+import { CalendarModule } from 'primeng/calendar';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 
 
@@ -38,6 +41,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     TableModule,
     PaginatorModule,
     ButtonModule,
@@ -47,7 +51,10 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     ToastModule,
     ToolbarModule,
     TooltipModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    ToastrModule.forRoot(),
+    CalendarModule,
+    KeyFilterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

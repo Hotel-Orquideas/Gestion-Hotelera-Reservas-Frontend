@@ -1,69 +1,130 @@
 <p-breadcrumb [model]="items" [home]="home" *ngIf="!employee.id else elseBreadCrumb"></p-breadcrumb>
 <ng-template #elseBreadCrumb>
-    <p-breadcrumb [model]="itemsElse" [home]="home" ></p-breadcrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
 </ng-template>
+
 <div class="container pt-4">
     <div class="row">
         <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4" *ngIf="!employee.id else elseTittle">
+                        Registrar Empleado
+                    </span>
+                    <ng-template #elseTittle>
+                        <span class="h4">
+                            Actualizar Empleado
+                        </span>
+                    </ng-template>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/list-employees"></button>
+                </ng-template>
+            </p-toolbar>
             <div class="card text-center">
                 <div class="card-body">
-                    <h3>Registrar Empleado</h3>
-                    <form class="mt-4">
+                    <form class="mt-4" [formGroup]="formRegister">
                         <div class="row">
                             <div class="col">
+
                                 <p class="float-start">Nombre (*)</p>
-                                <input type="text" name="nombre" id="" class="form-control" placeholder="Nombre" [(ngModel)]="employee.name" [(ngModel)]="employee.person.name">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-user-large"></i></span>
+                                    <input formControlName="name" type="text" pInputText class="form-control"
+                                        placeholder="Nombre" [(ngModel)]="employee.name"
+                                        [(ngModel)]="employee.person.name">
+                                </div>
+
                             </div>
                             <div class="col">
                                 <p class="float-start">Apellido (*)</p>
-                                <input type="text" name="apellido" id="" class="form-control" placeholder="Apellido" [(ngModel)]="employee.lastName"  [(ngModel)]="employee.person.lastName">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-user-large"></i></span>
+                                    <input formControlName="lastName" type="text" pInputText class="form-control"
+                                        placeholder="Apellido" [(ngModel)]="employee.lastName"
+                                        [(ngModel)]="employee.person.lastName">
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="float-start">Tipo de Documento (*)</p>
-                                <select class="form-select" aria-label="Default select example" name="tipo-documento" [(ngModel)]="employee.typeDocument" [(ngModel)]="employee.person.typeDocument">
-                                    <option selected>Seleccione una opción</option>
+                                <select formControlName="documentType" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="employee.typeDocument"
+                                    [(ngModel)]="employee.person.typeDocument">
+                                    <option [selected]="true">Seleccione una opción</option>
                                     <option value="CC">Cédula de Ciudadanía</option>
                                     <option value="PA">Pasaporte</option>
                                     <option value="TI">Tarjeta de Identidad</option>
                                     <option value="CE">Cédula de Extranjería</option>
-                                  </select>
+                                </select>
+
                             </div>
                             <div class="col">
                                 <p class="float-start">Número de Documento (*)</p>
-                                <input type="text" name="documento" id="" class="form-control" placeholder="Número de documento" [(ngModel)]="employee.document" [(ngModel)]="employee.person.document">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-hashtag"></i></span>
+                                    <input formControlName="document" type="text" pInputText pKeyFilter="int" class="form-control"
+                                        placeholder="Número de documento" [(ngModel)]="employee.document"
+                                        [(ngModel)]="employee.person.document" *ngIf="!employee.id else elseInput">
+                                    <ng-template #elseInput>
+                                        <input readonly formControlName="document" type="text" pInputText
+                                            class="form-control" placeholder="Número de documento"
+                                            [(ngModel)]="employee.person.document">
+                                    </ng-template>
+                                </div>
                             </div>
                             <div class="col">
                                 <p class="float-start">Teléfono (*)</p>
-                                <input type="text" name="telefono" id="" class="form-control" placeholder="Teléfono" [(ngModel)]="employee.phoneNumber" [(ngModel)]="employee.person.phoneNumber">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-mobile-retro"></i></span>
+                                    <input formControlName="phoneNumber" type="text" pInputText class="form-control" pKeyFilter="int"
+                                        placeholder="Teléfono" [(ngModel)]="employee.phoneNumber"
+                                        [(ngModel)]="employee.person.phoneNumber">
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="float-start">Puesto de Trabajo (*)</p>
-                                <input type="text" name="puesto-trabajo" id="" class="form-control" placeholder="Puesto" [(ngModel)]="employee.position">
+                                <input formControlName="position" type="text" id="" class="form-control"
+                                    placeholder="Puesto" [(ngModel)]="employee.position">
                             </div>
                             <div class="col">
                                 <p class="float-start">Correo Electrónico (*)</p>
-                                <input type="email" name="email" id="" class="form-control" placeholder="Email" [(ngModel)]="employee.email" [(ngModel)]="employee.person.email">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="email" type="email" pInputText class="form-control"
+                                        placeholder="Email" [(ngModel)]="employee.email"
+                                        [(ngModel)]="employee.person.email">
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
-                            
+
                             <div class="col">
                                 <p class="float-start">Género (*)</p>
-                                <select class="form-select" aria-label="Default select example" name="genero" [(ngModel)]="employee.genre" [(ngModel)]="employee.person.genre">
-                                    <option selected>Seleccione una opción</option>
+
+                                <select formControlName="genre" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="employee.genre"
+                                    [(ngModel)]="employee.person.genre">
+                                    <option [selected]="true">Seleccione una opción</option>
                                     <option value="M">Masculino</option>
                                     <option value="F">Femenino</option>
                                     <option value="O">Otro</option>
-                                 </select>
+                                </select>
+
                             </div>
+
                             <div class="col">
-                                <p class="float-start">RH (*)</p>
-                                <select class="form-select" aria-label="Default select example" name="rh" [(ngModel)]="employee.bloodType" [(ngModel)]="employee.person.bloodType">
-                                    <option selected>Seleccione una opción</option>
+                                <p class="float-start">Tipo de Sangre(*)</p>
+
+                                <select formControlName="bloodType" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="employee.bloodType"
+                                    [(ngModel)]="employee.person.bloodType">
+                                    <option [selected]="true">Seleccione una opción</option>
                                     <option value="O+">O+</option>
                                     <option value="O-">O-</option>
                                     <option value="A+">A+</option>
@@ -72,26 +133,36 @@
                                     <option value="B-">B-</option>
                                     <option value="AB+">AB+</option>
                                     <option value="AB-">AB-</option>
-                                 </select>
+                                </select>
+
                             </div>
                             <div class="col">
                                 <p class="float-start">Fecha de Nacimiento (*)</p>
-                                <input type="date" name="fecha-nacimiento" id="" class="form-control" placeholder="uno.ejemplo" [(ngModel)]='employee.birthdate' [(ngModel)]='employee.person.birthdate'>
+                                <p-calendar formControlName="birthdate" [minDate]="minDate" [maxDate]="maxDate" 
+                                [(ngModel)]='employee.birthdate' [(ngModel)]='employee.birthdate'
+                                [showIcon]="true" inputId="icon"></p-calendar>
+                                <!--
+                                <input formControlName="birthdate" type="date" id="" class="form-control"
+                                    placeholder="uno.ejemplo" [(ngModel)]='employee.birthdate'
+                                    [(ngModel)]='employee.person.birthdate'>
+                                -->
                             </div>
                         </div>
 
                     </form>
                     <div class="mt-4">
-                        <button class="btn btn-dark btn-lg" role="button" (click)="register()" *ngIf="!employee.id else elseBlock">Registrar</button>
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()" *ngIf="!employee.id else elseBlock">Registrar</button>
                     </div>
-                    
-                        
+
+
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button class="btn btn-dark btn-lg" role="button" (click)="update()">Actualizar</button>
+                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>
-                    
+
                 </div>
             </div>
         </div>
