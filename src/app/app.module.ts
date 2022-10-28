@@ -30,6 +30,8 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import { RegisterCompanyComponent } from './components/company-components/register-company/register-company.component';
 import { ListCompaniesComponent } from './components/company-components/list-companies/list-companies.component';
 import { ViewCompanyComponent } from './components/company-components/view-company/view-company.component';
+import { RegisterServiceComponent } from './components/service-components/register-service/register-service.component';
+import { ListServicesComponent } from './components/service-components/list-services/list-services.component';
 
 
 
@@ -42,7 +44,9 @@ import { ViewCompanyComponent } from './components/company-components/view-compa
     ErrorNotFoundComponent,
     RegisterCompanyComponent,
     ListCompaniesComponent,
-    ViewCompanyComponent
+    ViewCompanyComponent,
+    RegisterServiceComponent,
+    ListServicesComponent
   ],
   imports: [
     BrowserModule,
