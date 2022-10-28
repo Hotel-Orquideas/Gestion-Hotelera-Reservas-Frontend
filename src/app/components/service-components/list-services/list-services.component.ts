@@ -12,7 +12,8 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-list-services',
   templateUrl: './list-services.component.html',
-  styleUrls: ['./list-services.component.css']
+  styleUrls: ['./list-services.component.css'],
+  providers: [MessageService, ConfirmationService]
 })
 export class ListServicesComponent implements OnInit {
 

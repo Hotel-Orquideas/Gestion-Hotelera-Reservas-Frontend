@@ -17,7 +17,7 @@ export class RegisterCompanyComponent implements OnInit {
 
   company: Company = new Company();
   items: MenuItem[] = new Array;//para breadcrumb
-  itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar empleado
+  itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar empresa
   home: MenuItem = {};//para breadcrumb
 
   constructor(private companyService: CompanyService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
@@ -60,7 +60,7 @@ export class RegisterCompanyComponent implements OnInit {
       { label: 'Registrar empresa' }
     ];
 
-    //etiquetas para el breadcrumb cuando es actualziar empleado
+    //etiquetas para el breadcrumb cuando es actualziar empresa
     this.itemsElse = [
       { label: 'Empresa' },
       { label: 'Actualizar empresa' }
