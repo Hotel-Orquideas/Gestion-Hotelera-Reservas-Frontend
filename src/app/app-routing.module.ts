@@ -6,6 +6,8 @@ import { RegisterEmployeeComponent } from './components/employee-components/regi
 import { ListCompaniesComponent } from './components/company-components/list-companies/list-companies.component';
 import { RegisterCompanyComponent } from './components/company-components/register-company/register-company.component';
 import { ViewCompanyComponent } from './components/company-components/view-company/view-company.component';
+import { ListServicesComponent } from './components/service-components/list-services/list-services.component';
+import { RegisterServiceComponent } from './components/service-components/register-service/register-service.component';
 
 const routes: Routes = [
   {path:'employee/list-employees', component:ListEmployeesComponent},
@@ -15,6 +17,9 @@ const routes: Routes = [
   {path:'company/register-company', component:RegisterCompanyComponent},
   {path:'company/register-company/:nit', component:RegisterCompanyComponent},
   {path:'company/view-company/:nit', component:ViewCompanyComponent},
+  {path:'service/list-services',component:ListServicesComponent},
+  {path:'service/register-service',component:RegisterServiceComponent},
+  {path:'service/register-service/:id',component:RegisterServiceComponent},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
 ];
