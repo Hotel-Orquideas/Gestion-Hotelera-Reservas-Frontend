@@ -48,6 +48,27 @@ export class NavBarComponent implements OnInit {
             url: 'company/list-companies'
           }
         ]
+      },{
+        label:'Administración',
+        icon:'',
+        items:[
+          {
+            label:'Servicios',
+            icon:'',
+            items:[
+              {
+                label:'Agregar nuevo',
+                icon:'',
+                url:''
+              },
+              {
+                label:'Listar',
+                icon:'',
+                url:''
+              }
+            ]
+          }
+        ]
       }
     ]
 
