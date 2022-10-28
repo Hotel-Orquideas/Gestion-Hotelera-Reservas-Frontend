@@ -50,21 +50,21 @@ export class NavBarComponent implements OnInit {
         ]
       },{
         label:'Administración',
-        icon:'',
+        icon:'fa-solid fa-toolbox',
         items:[
           {
             label:'Servicios',
-            icon:'',
+            icon:'fa-solid fa-bell-concierge',
             items:[
               {
                 label:'Agregar nuevo',
-                icon:'',
-                url:''
+                icon:'fa-regular fa-square-plus',
+                url:'service/register-service'
               },
               {
                 label:'Listar',
-                icon:'',
-                url:''
+                icon:'fa-solid fa-hand-holding',
+                url:'service/list-services'
               }
             ]
           }
