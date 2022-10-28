@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Employee } from '../components/list-employees/employee';
+import { Employee } from '../../components/employee-components/list-employees/employee';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class EmployeeService {
 
   private urlEndPoint:string= 'http://localhost:3005/management/api/employee';

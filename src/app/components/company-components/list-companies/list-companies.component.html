@@ -1,0 +1,119 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast></p-toast>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+
+
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <span class="h4">
+            Empresas Registradas
+          </span>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-secondary mr-2"
+            routerLink="/company/register-company"></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="empresas" [value]="companies"
+        [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+        [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+          'name',
+          'nit',
+          'email',
+          'phoneNumber',
+          'legalAgent'
+        ]">
+
+
+        <ng-template pTemplate="caption">
+
+
+          <div class="row">
+            <div class="col-6">
+
+              <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()" class="me-2"
+                pTooltip="CSV" tooltipPosition="top"></button>
+
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
+
+
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
+
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Palabra Clave" />
+              </span>
+            </div>
+
+          </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+
+            <th pSortableColumn="nit">
+              Nit
+              <p-sortIcon field="nit"></p-sortIcon>
+
+            </th>
+            <th pSortableColumn="name">
+              Nombre <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="legalAgent">
+              Representante <p-sortIcon field="legalAgent"></p-sortIcon>
+            </th>
+            <th pSortableColumn="phoneNumber">
+              Telefono <p-sortIcon field="phoneNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">
+              Correo <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th>Acción</th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-company>
+          <tr>
+
+
+
+            <td>{{company.nit}}</td>
+            <td>{{company.name}}</td>
+            <td>{{company.legalAgent}}</td>
+            <td>{{company.phoneNumber}}</td>
+            <td>{{company.email}}</td>
+
+            <td>
+
+              <i pTooltip="Editar" tooltipPosition="top" class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
+                [routerLink]="['/company/register-company',company.nit]"></i>
+              <i pTooltip="Visualizar" tooltipPosition="top" class="pi pi-eye text-warning " style="margin-right: 1em;font-size: 1.3rem"
+                [routerLink]="['/company/view-company',company.nit]"></i>
+              <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(company.nit)"></i>
+            </td>
+
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7">Ninguna empresa encontrada.</td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+  </div>
+</div>

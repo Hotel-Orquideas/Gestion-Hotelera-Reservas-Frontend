@@ -5,7 +5,7 @@ export class Person {
     typeDocument:string="";
     document:string="";
     genre:string="";
-    birthdate:Date=new Date();
+    birthdate:Date= new Date();
     phoneNumber:string="";
     email:string="";
     bloodType:string="";

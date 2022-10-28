@@ -1,0 +1,97 @@
+<p-breadcrumb [model]="items" [home]="home" *ngIf="!company.id else elseBreadCrumb"></p-breadcrumb>
+<ng-template #elseBreadCrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+</ng-template>
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4" *ngIf="!company.id else elseTittle">
+                        Registrar Empresa
+                    </span>
+                    <ng-template #elseTittle>
+                        <span class="h4">
+                            Actualizar Empresa
+                        </span>
+                    </ng-template>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/company/list-companies"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <form class="mt-4" [formGroup]="formRegister">
+                        <div class="row">
+                            <div class="col">
+
+                                <p class="float-start">Nit (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-sharp fa-solid fa-id-badge"></i></span>
+                                    <input formControlName="nit" type="text" pInputText class="form-control"
+                                        placeholder="NIT" [(ngModel)]="company.nit">
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <p class="float-start">Nombre (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-sharp fa-solid fa-spell-check"></i></span>
+                                    <input formControlName="name" type="text" pInputText class="form-control"
+                                        placeholder="Nombre empresa" [(ngModel)]="company.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="float-start">Representante (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-user-tie"></i></span>
+                                    <input formControlName="legalAgent" type="text" pInputText class="form-control"
+                                        placeholder="Nombre representante" [(ngModel)]="company.legalAgent">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="float-start">Teléfono (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-phone"></i></span>
+                                    <input formControlName="phoneNumber" type="text" pInputText class="form-control"
+                                        pKeyFilter="int" placeholder="Teléfono" [(ngModel)]="company.phoneNumber">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <p class="float-start">Correo Electrónico (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="email" type="email" pInputText class="form-control"
+                                        placeholder="Email" [(ngModel)]="company.email">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()" *ngIf="!company.id else elseBlock">Registrar</button>
+                    </div>
+
+
+                    <ng-template #elseBlock>
+                        <div class="mt-4">
+                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                (click)="update()">Actualizar</button>
+                        </div>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

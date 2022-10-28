@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeService } from 'src/app/services/employee-service/employee.service';
 import { Employee } from '../list-employees/employee';
 import { MenuItem } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
@@ -149,7 +149,7 @@ export class RegisterEmployeeComponent implements OnInit {
           closeButton:true,
           progressBar:true
         });
-        this.router.navigate(['/list-employees'])}
+        this.router.navigate(['/employee/list-employees'])}
     );
   }
 
@@ -160,7 +160,7 @@ export class RegisterEmployeeComponent implements OnInit {
           closeButton:true,
           progressBar:true
         });
-        this.router.navigate(['/list-employees'])}
+        this.router.navigate(['/employee/list-employees'])}
     );
   }
 

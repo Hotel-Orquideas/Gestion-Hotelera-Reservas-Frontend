@@ -5,8 +5,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { ListEmployeesComponent } from './components/list-employees/list-employees.component';
-import { RegisterEmployeeComponent } from './components/register-employee/register-employee.component';
+import { ListEmployeesComponent } from './components/employee-components/list-employees/list-employees.component';
+import { RegisterEmployeeComponent } from './components/employee-components/register-employee/register-employee.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,6 +24,12 @@ import {TooltipModule} from 'primeng/tooltip';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { CalendarModule } from 'primeng/calendar';
 import {KeyFilterModule} from 'primeng/keyfilter';
+import {AvatarModule} from 'primeng/avatar';
+import {MenubarModule} from 'primeng/menubar';
+import {TieredMenuModule} from 'primeng/tieredmenu';
+import { RegisterCompanyComponent } from './components/company-components/register-company/register-company.component';
+import { ListCompaniesComponent } from './components/company-components/list-companies/list-companies.component';
+import { ViewCompanyComponent } from './components/company-components/view-company/view-company.component';
 
 
 
@@ -33,7 +39,10 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     NavBarComponent,
     ListEmployeesComponent,
     RegisterEmployeeComponent,
-    ErrorNotFoundComponent
+    ErrorNotFoundComponent,
+    RegisterCompanyComponent,
+    ListCompaniesComponent,
+    ViewCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +63,10 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     BreadcrumbModule,
     ToastrModule.forRoot(),
     CalendarModule,
-    KeyFilterModule
+    KeyFilterModule,
+    AvatarModule,
+    MenubarModule,
+    TieredMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeService } from 'src/app/services/employee-service/employee.service';
 import { Router } from '@angular/router';
 import { Employee } from './employee';
 import { ConfirmationService } from 'primeng/api';
@@ -40,7 +40,7 @@ export class ListEmployeesComponent implements OnInit {
       employee => this.employees = employee
     );
 
-    //este cols se usa para poder exportar en csv, por eso en fiel está como sale para obtener el dato de la clase employee.person.dato
+    //este cols se usa para poder exportar en csv, por eso en field está como sale para obtener el dato de la clase employee.person.dato
     this.cols = [
       { field: "person.name", header: 'Nombre' },
       { field: "person.lastName", header: 'Apellido' },
@@ -54,7 +54,7 @@ export class ListEmployeesComponent implements OnInit {
       { field: "person.bloodType", header: 'TipoSangre' }
     ];
 
-    //este lo uso para crear las tablas de la tabla para exportar en pdf
+    //este lo uso para crear las cabeceras de la tabla para exportar en pdf
     this.headSimple = [['Nombre', 'Apellido', 'Cargo', 'Tipo Documento', 'Documento', 'Genero','Telefono','Correo']]
     
 
@@ -69,6 +69,7 @@ export class ListEmployeesComponent implements OnInit {
 
   }
 
+  //función para eliminar el empleado
   delete(doc: string) {
     var nameEmployee: string = "";
     var lastNameEmployee: string = "";
