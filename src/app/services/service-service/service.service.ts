@@ -15,7 +15,7 @@ export class ServiceService {
    * Se obtiene una lista de todos los servicios registrados
    * @returns lista de empleados
    */
-   getEmployees():Observable<Service[]>{
+   getServices():Observable<Service[]>{
     return this.http.get<Service[]>(this.urlEndPoint);
   }
 
@@ -24,7 +24,7 @@ export class ServiceService {
    * @param service 
    * @returns 
    */
-  registerEmployee(service:Service):Observable<Service>{
+  registerService(service:Service):Observable<Service>{
     return this.http.post<Service>(this.urlEndPoint,service);
   }
 
@@ -33,7 +33,7 @@ export class ServiceService {
    * @param doc
    * @returns Obtener un solo servicio registrado
    */
-  getEmployee(id:number):Observable<Service>{
+  getService(id:number):Observable<Service>{
     return this.http.get<Service>(this.urlEndPoint+'/'+id);
   }
 
@@ -42,7 +42,7 @@ export class ServiceService {
    * @param service 
    * @returns 
    */
-  updateEmployee(service:Service):Observable<Service>{
+  updateService(service:Service):Observable<Service>{
     return this.http.put<Service>(this.urlEndPoint+'/'+service.id,service);
   }
 
@@ -50,7 +50,7 @@ export class ServiceService {
    * Eliminar servicio
    * @param service
    */
-  deleteEmployee(id:number):Observable<Service>{
+  deleteService(id:number):Observable<Service>{
     return this.http.delete<Service>(this.urlEndPoint+'/'+id)
   }
 
