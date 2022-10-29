@@ -26,7 +26,8 @@
           'person.name',
           'person.lastName',
           'person.phoneNumber',
-          'position'
+          'position',
+          'state'
         ]">
 
 
@@ -63,18 +64,18 @@
           <tr>
 
             <th pSortableColumn="person.name">
-              Nombre
+              Nombre Completo
               <p-sortIcon field="person.name"></p-sortIcon>
 
-            </th>
-            <th pSortableColumn="person.lastName">
-              Apellido <p-sortIcon field="person.lastName"></p-sortIcon>
             </th>
             <th pSortableColumn="person.phoneNumber">
               Telefono <p-sortIcon field="person.phoneNumber"></p-sortIcon>
             </th>
             <th pSortableColumn="position">
               Cargo <p-sortIcon field="position"></p-sortIcon>
+            </th>
+            <th pSortableColumn="state">
+              Estado <p-sortIcon field="state"></p-sortIcon>
             </th>
             <th>Acción</th>
             <!--
@@ -88,12 +89,12 @@
         <ng-template pTemplate="body" let-employee>
           <tr>
 
-
-
-            <td>{{employee.person.name}}</td>
-            <td>{{employee.person.lastName}}</td>
+            <td>{{employee.person.name}} {{employee.person.lastName}}</td>
             <td>{{employee.person.phoneNumber}}</td>
             <td>{{employee.position}}</td>
+            <td>
+              <p-badge value="{{textInBadge(employee.state)}}" severity="{{colorInBadge(employee.state)}}"></p-badge>
+            </td>
 
             <td>
 

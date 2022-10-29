@@ -190,5 +190,32 @@ export class ListEmployeesComponent implements OnInit {
 
   }
 
+  //función para texto en badge
+  textInBadge(status:string):string{
+
+    if (status=="A") {
+      return "Activo"
+    }else if(status=="B"){
+      return "Bloqueado"
+    }else{
+      return "Sin estado - error"
+    }
+
+  }
+
+
+  //función para color del badge
+  colorInBadge(status:string):string{
+
+    if (status=="A") {
+      return "success"
+    }else if(status=="B"){
+      return "warning"
+    }else{
+      return "Sin color - error"
+    }
+
+  }
+
 
 }

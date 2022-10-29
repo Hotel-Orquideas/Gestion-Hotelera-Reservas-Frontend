@@ -3,6 +3,7 @@ import { Person } from "./person";
 export class Employee extends Person{
     id:number;
     position:string="";
+    state:string;
     userName:string="";
     password:string="";
     person:Person = new Person();

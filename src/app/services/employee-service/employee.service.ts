@@ -50,6 +50,7 @@ export class EmployeeService {
 
     const datos={
       "position":`${employee.position}`,
+      "state":`${employee.state}`,
       "name":`${employee.person.name}`,
       "lastName":`${employee.person.lastName}`,
       "typeDocument":`${employee.person.typeDocument}`,

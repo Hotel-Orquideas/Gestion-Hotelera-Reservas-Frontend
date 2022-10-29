@@ -14,64 +14,65 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterEmployeeComponent implements OnInit {
 
 
-  public formRegister : FormGroup= new FormGroup<any>('');//para formulario registrar
-  
+  public formRegister: FormGroup = new FormGroup<any>('');//para formulario registrar
+
 
   employee: Employee = new Employee();
   documentTypes: any = new Array;//para option
   genres: any = new Array;//para option
   rhs: any = new Array;//para option
-  minDate: Date=new Date;
-  maxDate: Date=new Date;
+  minDate: Date = new Date;
+  maxDate: Date = new Date;
   items: MenuItem[] = new Array;//para breadcrumb
   itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar empleado
   home: MenuItem = {};//para breadcrumb
 
 
-  constructor(private employeeService: EmployeeService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr:ToastrService) { }
+  constructor(private employeeService: EmployeeService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
 
     //validaciones básicas para el formulario de registrar
-    this.formRegister= this.formBuilder.group({
-      name:['', [
+    this.formRegister = this.formBuilder.group({
+      name: ['', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15)
       ]],
-      lastName:['', [
+      lastName: ['', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15)
       ]],
-      documentType:['', [
+      documentType: ['', [
         Validators.required,
       ]],
-      document:['', [
+      document: ['', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(11)
       ]],
-      phoneNumber:['', [
+      phoneNumber: ['', [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(15)
       ]],
-      position:['', [
+      position: ['', [
         Validators.required
       ]],
-      email:['', [
+      state: [''],
+      email: ['', [
         Validators.required,
         Validators.email
       ]],
-      genre:['', [
+      genre: ['', [
         Validators.required
       ]],
-      bloodType:['', [
+      bloodType: ['', [
         Validators.required
       ]],
-      birthdate:['', [
+      birthdate: ['', [
       ]]
     });
 
@@ -94,14 +95,14 @@ export class RegisterEmployeeComponent implements OnInit {
 
     //para option rh
     this.rhs = [
-      { rh: 'O+'},
-      { rh: 'O-'},
-      { rh: 'A+'},
-      { rh: 'A-'},
-      { rh: 'B+'},
-      { rh: 'B-'},
-      { rh: 'AB+'},
-      { rh: 'AB-'}
+      { rh: 'O+' },
+      { rh: 'O-' },
+      { rh: 'A+' },
+      { rh: 'A-' },
+      { rh: 'B+' },
+      { rh: 'B-' },
+      { rh: 'AB+' },
+      { rh: 'AB-' }
     ];
 
     //condiciones fecha, no puede tener menos de 18 años, no puede tener más de 60 años
@@ -133,7 +134,7 @@ export class RegisterEmployeeComponent implements OnInit {
           this.employeeService.getEmployee(id).subscribe(
             es => this.employee = es
           );
-          
+
         }
       }
     );
@@ -141,26 +142,38 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   register(): void {
+    //pongo esto porque el componente p-inputNumber siempre retorna un número y no string
+    this.employee.person.document = this.employee.person.document + '';
+    this.employee.document = this.employee.document + '';
 
-    
+   
     this.employeeService.registerEmployee(this.employee).subscribe(
       res => {
-        this.toastr.success('El empleado se ha registrado satisfactoriamente.', 'Registro empleado',{
-          closeButton:true,
-          progressBar:true
+        this.toastr.success('El empleado se ha registrado satisfactoriamente.', 'Registro empleado', {
+          closeButton: true,
+          progressBar: true
         });
-        this.router.navigate(['/employee/list-employees'])}
+        this.router.navigate(['/employee/list-employees'])
+      }
     );
   }
 
   update(): void {
+
+    //pongo esto porque el componente p-inputNumber siempre retorna un número y no string
+    this.employee.person.document = this.employee.person.document + '';
+    this.employee.document = this.employee.document + '';
+
+    console.log(this.employee.state);
+
     this.employeeService.updateEmployee(this.employee).subscribe(
       emp => {
         this.toastr.info('El empleado se ha actualizado satisfactoriamente.', 'Actualziar empleado', {
-          closeButton:true,
-          progressBar:true
+          closeButton: true,
+          progressBar: true
         });
-        this.router.navigate(['/employee/list-employees'])}
+        this.router.navigate(['/employee/list-employees'])
+      }
     );
   }
 
