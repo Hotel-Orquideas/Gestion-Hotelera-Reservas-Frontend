@@ -66,13 +66,25 @@
                                 <p class="float-start">Número de Documento (*)</p>
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="fa-solid fa-hashtag"></i></span>
+                                    <p-inputNumber formControlName="document"
+                                    pKeyFilter="int" placeholder="Número de documento"
+                                    [(ngModel)]="employee.document"
+                                        [(ngModel)]="employee.person.document" *ngIf="!employee.id else elseInput"></p-inputNumber>
+                                    <!--
                                     <input formControlName="document" type="text" pInputText pKeyFilter="int" class="form-control"
                                         placeholder="Número de documento" [(ngModel)]="employee.document"
                                         [(ngModel)]="employee.person.document" *ngIf="!employee.id else elseInput">
+                                    -->
                                     <ng-template #elseInput>
+                                        <p-inputNumber [readonly]="true" formControlName="document"
+                                        pKeyFilter="int" placeholder="Número de documento"
+                                        [(ngModel)]="employee.document"
+                                            [(ngModel)]="employee.person.document"></p-inputNumber>
+                                        <!--
                                         <input readonly formControlName="document" type="text" pInputText
                                             class="form-control" placeholder="Número de documento"
                                             [(ngModel)]="employee.person.document">
+                                        -->
                                     </ng-template>
                                 </div>
                             </div>
@@ -80,9 +92,13 @@
                                 <p class="float-start">Teléfono (*)</p>
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="fa-solid fa-mobile-retro"></i></span>
+                                    <!--
+                                    <p-inputMask formControlName="phoneNumber" styleClass="border-radius: 0;"  mask="(999) 999 999 9999" placeholder="(999) 999 999 9999" [(ngModel)]="employee.phoneNumber" [(ngModel)]="employee.person.phoneNumber"></p-inputMask>
+                                    -->
                                     <input formControlName="phoneNumber" type="text" pInputText class="form-control" pKeyFilter="int"
                                         placeholder="Teléfono" [(ngModel)]="employee.phoneNumber"
                                         [(ngModel)]="employee.person.phoneNumber">
+                                        
                                 </div>
                             </div>
                         </div>

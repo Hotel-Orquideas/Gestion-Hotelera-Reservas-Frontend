@@ -1,11 +1,12 @@
 import { Person } from "./person";
 
 export class Employee extends Person{
-    id:number=0;
+    id:number;
     position:string="";
     userName:string="";
     password:string="";
     person:Person = new Person();
+    roleSender:string="Administrador";
 
     /*
     person={
