@@ -14,6 +14,8 @@ import { ViewCompanyComponent } from './components/company-components/view-compa
 import { RegisterServiceComponent } from './components/service-components/register-service/register-service.component';
 import { ListServicesComponent } from './components/service-components/list-services/list-services.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
+import { ListRoomTypesComponent } from './components/roomType-components/list-room-types/list-room-types.component';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -35,8 +37,7 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import {BadgeModule} from 'primeng/badge';
-import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
-import { ListRoomTypesComponent } from './components/list-room-types/list-room-types.component';
+
 
 
 

@@ -13,7 +13,7 @@ export class ServiceService {
 
   /**
    * Se obtiene una lista de todos los servicios registrados
-   * @returns lista de empleados
+   * @returns lista de servicios
    */
    getServices():Observable<Service[]>{
     return this.http.get<Service[]>(this.urlEndPoint);
@@ -30,7 +30,7 @@ export class ServiceService {
 
   /**
    * Se envía el id a consultar
-   * @param doc
+   * @param id
    * @returns Obtener un solo servicio registrado
    */
   getService(id:number):Observable<Service>{
