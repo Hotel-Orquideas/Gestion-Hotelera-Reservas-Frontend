@@ -49,7 +49,7 @@ export class NavBarComponent implements OnInit {
           }
         ]
       },{
-        label:'Administración',
+        label:'Gestión',
         icon:'fa-solid fa-toolbox',
         items:[
           {
@@ -65,6 +65,22 @@ export class NavBarComponent implements OnInit {
                 label:'Listar',
                 icon:'fa-solid fa-hand-holding',
                 url:'service/list-services'
+              }
+            ]
+          },
+          {
+            label:'Tipos de Habitación',
+            icon:'fa-solid fa-people-roof',
+            items:[
+              {
+                label:'Agregar tipo',
+                icon:'fa-solid fa-file-circle-plus',
+                url:'roomType/register-room-type'
+              },
+              {
+                label:'Listar tipos',
+                icon:'fa-solid fa-clipboard-list',
+                url:'roomType/list-room-types'
               }
             ]
           }
