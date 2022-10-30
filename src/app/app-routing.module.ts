@@ -8,6 +8,8 @@ import { RegisterCompanyComponent } from './components/company-components/regist
 import { ViewCompanyComponent } from './components/company-components/view-company/view-company.component';
 import { ListServicesComponent } from './components/service-components/list-services/list-services.component';
 import { RegisterServiceComponent } from './components/service-components/register-service/register-service.component';
+import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
+import { ListRoomTypesComponent } from './components/roomType-components/list-room-types/list-room-types.component';
 
 const routes: Routes = [
   {path:'employee/list-employees', component:ListEmployeesComponent},
@@ -20,6 +22,9 @@ const routes: Routes = [
   {path:'service/list-services',component:ListServicesComponent},
   {path:'service/register-service',component:RegisterServiceComponent},
   {path:'service/register-service/:id',component:RegisterServiceComponent},
+  {path:'roomType/list-room-types/',component:ListRoomTypesComponent},
+  {path:'roomType/register-room-type/:id',component:RegisterRoomTypeComponent},
+  {path:'roomType/register-room-type',component:RegisterRoomTypeComponent},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
 ];

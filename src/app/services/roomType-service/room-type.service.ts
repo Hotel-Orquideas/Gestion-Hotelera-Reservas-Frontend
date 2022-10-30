@@ -50,7 +50,7 @@ export class RoomTypeService {
    * Eliminar tipo de habitación
    * @param RoomType
    */
-  deleteService(id:number):Observable<RoomType>{
+  deleteRoomType(id:number):Observable<RoomType>{
     return this.http.delete<RoomType>(this.urlEndPoint+'/'+id)
   }
 }
