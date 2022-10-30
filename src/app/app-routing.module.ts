@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:'service/list-services',component:ListServicesComponent},
   {path:'service/register-service',component:RegisterServiceComponent},
   {path:'service/register-service/:id',component:RegisterServiceComponent},
-  {path:'roomType/list-room-types/',component:ListRoomTypesComponent},
+  {path:'roomType/list-room-types',component:ListRoomTypesComponent},
   {path:'roomType/register-room-type/:id',component:RegisterRoomTypeComponent},
   {path:'roomType/register-room-type',component:RegisterRoomTypeComponent},
   {path:'error-not-found',component:ErrorNotFoundComponent},

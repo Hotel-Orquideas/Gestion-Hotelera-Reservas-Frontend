@@ -84,11 +84,11 @@ export class ListEmployeesComponent implements OnInit {
 
 
     this.confirmationService.confirm({
-      message: 'Está seguro que desea eliminar al empleado ' + nameEmployee + ' ' + lastNameEmployee + '?',
+      message: 'Está seguro que desea eliminar al colaborador ' + nameEmployee + ' ' + lastNameEmployee + '?',
       header: 'Confirmación para eliminar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Empleado eliminado correctamente', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Colaborador eliminado correctamente', life: 3000 });
         this.employeeService.deleteEmployee(doc).subscribe(
           emp => {
             this.employeeService.getEmployees().subscribe(
@@ -129,7 +129,7 @@ export class ListEmployeesComponent implements OnInit {
     var doc = new jspdf.jsPDF();
 
     doc.setFontSize(14);
-    doc.text('Lista de Empleados', 11, 8);
+    doc.text('Lista de Colaboradores', 11, 8);
     doc.setTextColor(100);
 
 
@@ -140,7 +140,7 @@ export class ListEmployeesComponent implements OnInit {
         fontSize: 6
       }
     })
-    doc.save('empleados.pdf');
+    doc.save('colaboradores.pdf');
   }
 
 
@@ -174,7 +174,7 @@ export class ListEmployeesComponent implements OnInit {
       const worksheet = xlsx.utils.json_to_sheet(this.listEmpsJson());
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, "empleados");
+      this.saveAsExcelFile(excelBuffer, "colaboradores");
     });
   }
 

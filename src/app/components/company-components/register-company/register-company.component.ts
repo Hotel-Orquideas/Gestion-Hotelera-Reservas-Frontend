@@ -63,6 +63,7 @@ export class RegisterCompanyComponent implements OnInit {
     //etiquetas para el breadcrumb cuando es actualziar empresa
     this.itemsElse = [
       { label: 'Empresa' },
+      { label: 'Empresas registradas', url: 'company/list-companies' },
       { label: 'Actualizar empresa' }
     ];
 

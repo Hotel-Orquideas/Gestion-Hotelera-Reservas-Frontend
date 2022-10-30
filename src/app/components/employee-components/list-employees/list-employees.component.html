@@ -9,7 +9,7 @@
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
           <span class="h4">
-            Empleados Registrados
+            Colaboradores Registrados
           </span>
         </ng-template>
 
@@ -19,7 +19,7 @@
         </ng-template>
       </p-toolbar>
 
-      <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="empleados" [value]="employees"
+      <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="colaboradores" [value]="employees"
         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
         [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
@@ -108,7 +108,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="7">Empleados no encontrados.</td>
+            <td colspan="7">Colaboradores no encontrados.</td>
           </tr>
         </ng-template>
 

@@ -49,6 +49,7 @@ export class RegisterServiceComponent implements OnInit {
     //etiquetas para el breadcrumb cuando es actualziar servicio
     this.itemsElse = [
       { label: 'Servicio' },
+      { label: 'Servicios registrados', url:'service/list-services' },
       { label: 'Actualizar servicio' }
     ];
 

@@ -112,14 +112,15 @@ export class RegisterEmployeeComponent implements OnInit {
 
     //etiquetas para el breadcrumb
     this.items = [
-      { label: 'Empleado' },
-      { label: 'Registrar empleado' }
+      { label: 'Colabolador' },
+      { label: 'Registrar colaborador' }
     ];
 
     //etiquetas para el breadcrumb cuando es actualziar empleado
     this.itemsElse = [
-      { label: 'Empleado' },
-      { label: 'Actualizar empleado' }
+      { label: 'Colabolador' },
+      { label: 'Colaboradores registrados', url: 'employee/list-employees' },
+      { label: 'Actualizar colaborador' }
     ];
 
     //icono de casa pra el breadcrumb
@@ -149,7 +150,7 @@ export class RegisterEmployeeComponent implements OnInit {
    
     this.employeeService.registerEmployee(this.employee).subscribe(
       res => {
-        this.toastr.success('El empleado se ha registrado satisfactoriamente.', 'Registro empleado', {
+        this.toastr.success('El colaborador se ha registrado satisfactoriamente.', 'Registro colaborador', {
           closeButton: true,
           progressBar: true
         });
@@ -168,7 +169,7 @@ export class RegisterEmployeeComponent implements OnInit {
 
     this.employeeService.updateEmployee(this.employee).subscribe(
       emp => {
-        this.toastr.info('El empleado se ha actualizado satisfactoriamente.', 'Actualziar empleado', {
+        this.toastr.info('El colaborador se ha actualizado satisfactoriamente.', 'Actualziar colaborador', {
           closeButton: true,
           progressBar: true
         });
