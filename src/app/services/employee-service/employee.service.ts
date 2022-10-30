@@ -45,9 +45,7 @@ export class EmployeeService {
    * @returns 
    */
   updateEmployee(employee:Employee):Observable<Employee>{
-
-
-
+    
     const datos={
       "position":`${employee.position}`,
       "state":`${employee.state}`,

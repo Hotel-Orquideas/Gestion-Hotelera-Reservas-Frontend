@@ -1,5 +1,5 @@
 export class RoomType{
     id:number;
-    name:string;
+    name:string="";
     numMaxGuests:number;
 }

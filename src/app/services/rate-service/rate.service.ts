@@ -26,6 +26,7 @@ export class RateService {
    * @returns 
    */
   registerRate(rate:Rate):Observable<Rate>{
+    rate.roomTypeId=parseInt(rate.roomTypeId+"");
     return this.http.post<Rate>(this.urlEndPoint,rate);
   }
 
@@ -44,7 +45,14 @@ export class RateService {
    * @returns 
    */
   updateRate(rate:Rate):Observable<Rate>{
-    return this.http.put<Rate>(this.urlEndPoint+'/'+rate.id,rate);
+
+    const datos={
+      "name":`${rate.name}`,
+      "value":rate.value,
+      "roomTypeId":parseInt(rate.roomTypeId+'')
+    }
+
+    return this.http.put<Rate>(this.urlEndPoint+'/'+rate.id,datos);
   }
 
   /**
