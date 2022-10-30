@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../list-employees/employee';
 import { MenuItem } from 'primeng/api';
 import { EmployeeService } from 'src/app/services/employee-service/employee.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-view-employee',
@@ -15,9 +16,12 @@ export class ViewEmployeeComponent implements OnInit {
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private employeeService: EmployeeService, private activatedRoute: ActivatedRoute) { }
+  constructor(private employeeService: EmployeeService, private activatedRoute: ActivatedRoute, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     this.activatedRoute.params.subscribe(
 

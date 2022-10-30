@@ -12,6 +12,7 @@ import 'jspdf-autotable';
 import * as jsPDF from 'jspdf';
 import { FormArrayName } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-list-employees',
@@ -32,9 +33,12 @@ export class ListEmployeesComponent implements OnInit {
   home: MenuItem={};//para breadcrumb
 
 
-  constructor(private employeeService: EmployeeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private employeeService: EmployeeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+    
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     this.employeeService.getEmployees().subscribe(
       employee => this.employees = employee

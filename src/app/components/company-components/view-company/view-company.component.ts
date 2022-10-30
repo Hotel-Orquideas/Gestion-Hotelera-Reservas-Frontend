@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from 'src/app/services/company-service/company.service';
 import { Company } from '../list-companies/company';
 import { MenuItem } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-view-company',
@@ -15,10 +16,12 @@ export class ViewCompanyComponent implements OnInit {
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private companyService: CompanyService, private activatedRoute: ActivatedRoute) { }
+  constructor(private companyService: CompanyService, private activatedRoute: ActivatedRoute, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     this.activatedRoute.params.subscribe(
 

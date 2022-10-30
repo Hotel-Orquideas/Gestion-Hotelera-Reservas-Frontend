@@ -8,6 +8,7 @@ import * as FileSaver from 'file-saver';
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable';
 import { MenuItem } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-list-services',
@@ -26,9 +27,12 @@ export class ListServicesComponent implements OnInit {
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private serviceService: ServiceService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private serviceService: ServiceService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     this.serviceService.getServices().subscribe(
       service => this.services = service

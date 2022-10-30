@@ -5,6 +5,7 @@ import { EmployeeService } from 'src/app/services/employee-service/employee.serv
 import { Employee } from '../list-employees/employee';
 import { MenuItem } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-register-employee',
@@ -28,10 +29,12 @@ export class RegisterEmployeeComponent implements OnInit {
   home: MenuItem = {};//para breadcrumb
 
 
-  constructor(private employeeService: EmployeeService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private employeeService: EmployeeService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     //validaciones básicas para el formulario de registrar
     this.formRegister = this.formBuilder.group({
@@ -147,7 +150,7 @@ export class RegisterEmployeeComponent implements OnInit {
     this.employee.person.document = this.employee.person.document + '';
     this.employee.document = this.employee.document + '';
 
-   
+
     this.employeeService.registerEmployee(this.employee).subscribe(
       res => {
         this.toastr.success('El colaborador se ha registrado satisfactoriamente.', 'Registro colaborador', {

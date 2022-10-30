@@ -8,6 +8,7 @@ import * as jspdf from 'jspdf'
 import 'jspdf-autotable';
 import { MenuItem } from 'primeng/api';
 import { RoomTypeService } from 'src/app/services/roomType-service/room-type.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-list-room-types',
@@ -26,9 +27,12 @@ export class ListRoomTypesComponent implements OnInit {
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private roomTypeService: RoomTypeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private roomTypeService: RoomTypeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     this.roomTypeService.getRoomTypes().subscribe(
       roomType => this.roomTypes = roomType

@@ -5,6 +5,7 @@ import { Company } from '../list-companies/company';
 import { MenuItem } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from 'src/app/services/company-service/company.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-register-company',
@@ -20,37 +21,40 @@ export class RegisterCompanyComponent implements OnInit {
   itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar empresa
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private companyService: CompanyService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private companyService: CompanyService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
-        //validaciones básicas para el formulario de registrar
-        this.formRegister= this.formBuilder.group({
-          nit:['', [
-            Validators.required,
-            Validators.minLength(10),
-            Validators.maxLength(15)
-          ]],
-          name:['', [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(15)
-          ]],
-          legalAgent:['', [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(30)
-          ]],
-          phoneNumber:['', [
-            Validators.required,
-            Validators.minLength(10),
-            Validators.maxLength(15)
-          ]],
-          email:['', [
-            Validators.required,
-            Validators.email
-          ]]
-        });
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
+    
+    //validaciones básicas para el formulario de registrar
+    this.formRegister = this.formBuilder.group({
+      nit: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(15)
+      ]],
+      name: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]],
+      legalAgent: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]],
+      phoneNumber: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(15)
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]]
+    });
 
     this.cargar(); //llena el formulario si existe NIT en el parametro url
 
@@ -79,7 +83,7 @@ export class RegisterCompanyComponent implements OnInit {
           this.companyService.getCompany(nit).subscribe(
             es => this.company = es
           );
-          
+
         }
       }
     );
@@ -88,14 +92,15 @@ export class RegisterCompanyComponent implements OnInit {
 
   register(): void {
 
-    
+
     this.companyService.registerCompany(this.company).subscribe(
       res => {
-        this.toastr.success('La empresa se ha registrado satisfactoriamente.', 'Registro empresa',{
-          closeButton:true,
-          progressBar:true
+        this.toastr.success('La empresa se ha registrado satisfactoriamente.', 'Registro empresa', {
+          closeButton: true,
+          progressBar: true
         });
-        this.router.navigate(['/company/list-companies'])}
+        this.router.navigate(['/company/list-companies'])
+      }
     );
   }
 
@@ -103,10 +108,11 @@ export class RegisterCompanyComponent implements OnInit {
     this.companyService.updateCompany(this.company).subscribe(
       emp => {
         this.toastr.info('La empresa se ha actualizado satisfactoriamente.', 'Actualziar empresa', {
-          closeButton:true,
-          progressBar:true
+          closeButton: true,
+          progressBar: true
         });
-        this.router.navigate(['/company/list-companies'])}
+        this.router.navigate(['/company/list-companies'])
+      }
     );
   }
 

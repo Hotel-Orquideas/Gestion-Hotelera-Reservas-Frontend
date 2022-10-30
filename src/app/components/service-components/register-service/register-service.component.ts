@@ -5,6 +5,7 @@ import { Service } from '../list-services/service';
 import { MenuItem } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from 'src/app/services/service-service/service.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-register-service',
@@ -20,9 +21,12 @@ export class RegisterServiceComponent implements OnInit {
   itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar servicio
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private serviceService: ServiceService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private serviceService: ServiceService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true
 
     //validaciones básicas para el formulario de registrar
     this.formRegister = this.formBuilder.group({

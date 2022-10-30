@@ -16,6 +16,7 @@ import { ListServicesComponent } from './components/service-components/list-serv
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
 import { ListRoomTypesComponent } from './components/roomType-components/list-room-types/list-room-types.component';
+import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -37,7 +38,7 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import {BadgeModule} from 'primeng/badge';
-import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
+import { RippleModule } from 'primeng/ripple';
 
 
 
@@ -84,7 +85,8 @@ import { ViewEmployeeComponent } from './components/employee-components/view-emp
     TieredMenuModule,
     InputNumberModule,
     InputMaskModule,
-    BadgeModule
+    BadgeModule,
+    RippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

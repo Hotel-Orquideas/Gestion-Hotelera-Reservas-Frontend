@@ -8,6 +8,7 @@ import * as FileSaver from 'file-saver';
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable';
 import { MenuItem } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-list-companies',
@@ -21,14 +22,17 @@ export class ListCompaniesComponent implements OnInit {
   comps = new Array(); //para poder exportar en excel
   cols: any[] = new Array;//para exportar en CSV
   headSimple: any[] = new Array;//para exportar pdf
-  compSimple:any[]= new Array;//para exportar pdf
-  dataTable:any[]= new Array;//para exportar pdf
+  compSimple: any[] = new Array;//para exportar pdf
+  dataTable: any[] = new Array;//para exportar pdf
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private companyService: CompanyService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private companyService: CompanyService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
 
     this.companyService.getCompanies().subscribe(
       company => this.companies = company
@@ -44,7 +48,7 @@ export class ListCompaniesComponent implements OnInit {
     ];
 
     //este lo uso para crear las cabeceras de la tabla para exportar en pdf
-    this.headSimple = [['Nit', 'Nombre', 'Representante','Correo', 'Telefono']]
+    this.headSimple = [['Nit', 'Nombre', 'Representante', 'Correo', 'Telefono']]
 
 
     //etiquetas para el breadcrumb
@@ -61,10 +65,10 @@ export class ListCompaniesComponent implements OnInit {
   //eliminar empresa
   delete(nit: string) {
     var nameCompany: string = "";
-    var companySelect:Company;
+    var companySelect: Company;
     for (var i = 0; i < this.companies.length; i++) {
       if (this.companies[i].nit == nit) {
-        companySelect=this.companies[i]
+        companySelect = this.companies[i]
         nameCompany = this.companies[i].name;
       }
     }
@@ -94,9 +98,9 @@ export class ListCompaniesComponent implements OnInit {
   }
 
   //se genera la lista para añadir los datos a la tabla
-  listDataTable(){
-    for (var i = 0; i < this.companies.length; i++) { 
-     let comp1=[
+  listDataTable() {
+    for (var i = 0; i < this.companies.length; i++) {
+      let comp1 = [
         this.companies[i].nit,
         this.companies[i].name,
         this.companies[i].legalAgent,
@@ -133,14 +137,14 @@ export class ListCompaniesComponent implements OnInit {
    * añadir todas las empresas a una lista json
    * @returns json con todas las empresas
    */
-  listCompaniesJson(){
-    for (var i = 0; i < this.companies.length; i++) { 
+  listCompaniesJson() {
+    for (var i = 0; i < this.companies.length; i++) {
       this.comps.push({
-        Nombre:this.companies[i].name,
-        Nit:this.companies[i].nit,
-        Correo:this.companies[i].email,
-        Telefono:this.companies[i].phoneNumber,
-        Representante:this.companies[i].legalAgent
+        Nombre: this.companies[i].name,
+        Nit: this.companies[i].nit,
+        Correo: this.companies[i].email,
+        Telefono: this.companies[i].phoneNumber,
+        Representante: this.companies[i].legalAgent
       });
     }
     return this.comps;
@@ -160,11 +164,11 @@ export class ListCompaniesComponent implements OnInit {
 
   saveAsExcelFile(buffer: any, fileName: string): void {
 
-    
+
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';
     const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+      type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 
