@@ -39,6 +39,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import {BadgeModule} from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
+import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
+import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
 
 
 
@@ -58,7 +60,9 @@ import { RippleModule } from 'primeng/ripple';
     ListServicesComponent,
     RegisterRoomTypeComponent,
     ListRoomTypesComponent,
-    ViewEmployeeComponent
+    ViewEmployeeComponent,
+    RegisterRateComponent,
+    ListRatesComponent
   ],
   imports: [
     BrowserModule,
