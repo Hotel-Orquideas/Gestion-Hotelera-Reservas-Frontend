@@ -83,6 +83,22 @@ export class NavBarComponent implements OnInit {
                 url:'roomType/list-room-types'
               }
             ]
+          },
+          {
+            label:'Tarifas',
+            icon:'fa-brands fa-sellcast',
+            items:[
+              {
+                label:'Agregar Tarifa',
+                icon:'fa-solid fa-file-invoice-dollar',
+                url:'rate/register-rate',
+              },
+              {
+                label:'Listar Tarfas',
+                icon:'fa-solid fa-filter-circle-dollar',
+                url:'rate/list-rates'
+              },
+            ]
           }
         ]
       }

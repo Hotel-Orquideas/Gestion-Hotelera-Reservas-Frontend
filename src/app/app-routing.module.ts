@@ -11,6 +11,8 @@ import { RegisterServiceComponent } from './components/service-components/regist
 import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
 import { ListRoomTypesComponent } from './components/roomType-components/list-room-types/list-room-types.component';
 import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
+import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
+import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
 
 const routes: Routes = [
   {path:'employee/list-employees', component:ListEmployeesComponent},
@@ -27,6 +29,9 @@ const routes: Routes = [
   {path:'roomType/list-room-types',component:ListRoomTypesComponent},
   {path:'roomType/register-room-type/:id',component:RegisterRoomTypeComponent},
   {path:'roomType/register-room-type',component:RegisterRoomTypeComponent},
+  {path:'rate/list-rates',component:ListRatesComponent},
+  {path:'rate/register-rate',component:RegisterRateComponent},
+  {path:'rate/register-rate/:id',component:RegisterRateComponent},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
 ];
