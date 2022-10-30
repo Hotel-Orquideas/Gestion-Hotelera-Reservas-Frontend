@@ -1,0 +1,150 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+<div class="container mt-4 col-lg-6">
+    <div class="card">
+        <div class="card-body">
+
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Colaborador: {{employee.person.name}} {{employee.person.lastName}}
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-secondary mr-2"
+                        [routerLink]="['/employee/register-employee', employee.person.document]"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <div class="row">
+                <div class="col-8 offset-lg-2">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div style="text-align: center;">
+                                <span class="h4">
+                                    Datos
+                                </span>
+                            </div>
+
+                            <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+
+                            <div>
+                                <div class="row flex align-items-center mb-3">
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Tipo de documento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.person.typeDocument}}
+                                    </div>
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Número de documento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.person.document}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Cargo: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.position}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Teléfono: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.person.phoneNumber}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Correo: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.person.email}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Fecha de nacimiento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.person.birthdate | date: 'dd/MM/yyyy'}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Tipo de sangre: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{employee.person.bloodType}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Estado: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <p-badge value="{{textInBadge(employee.state)}}" severity="{{colorInBadge(employee.state)}}"></p-badge>
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Género: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{genreInText(employee.person.genre)}}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

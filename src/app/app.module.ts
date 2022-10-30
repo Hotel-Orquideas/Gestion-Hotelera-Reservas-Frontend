@@ -37,6 +37,7 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import {BadgeModule} from 'primeng/badge';
+import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
 
 
 
@@ -55,7 +56,8 @@ import {BadgeModule} from 'primeng/badge';
     RegisterServiceComponent,
     ListServicesComponent,
     RegisterRoomTypeComponent,
-    ListRoomTypesComponent
+    ListRoomTypesComponent,
+    ViewEmployeeComponent
   ],
   imports: [
     BrowserModule,

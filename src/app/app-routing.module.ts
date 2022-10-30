@@ -10,11 +10,13 @@ import { ListServicesComponent } from './components/service-components/list-serv
 import { RegisterServiceComponent } from './components/service-components/register-service/register-service.component';
 import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
 import { ListRoomTypesComponent } from './components/roomType-components/list-room-types/list-room-types.component';
+import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
 
 const routes: Routes = [
   {path:'employee/list-employees', component:ListEmployeesComponent},
   {path:'employee/register-employee', component:RegisterEmployeeComponent},
   {path:'employee/register-employee/:doc', component:RegisterEmployeeComponent},
+  {path:'employee/view-employee/:doc', component:ViewEmployeeComponent},
   {path:'company/list-companies', component:ListCompaniesComponent},
   {path:'company/register-company', component:RegisterCompanyComponent},
   {path:'company/register-company/:nit', component:RegisterCompanyComponent},

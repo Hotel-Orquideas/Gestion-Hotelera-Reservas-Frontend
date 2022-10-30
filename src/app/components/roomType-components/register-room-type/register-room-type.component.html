@@ -47,8 +47,10 @@
                                     <p-inputNumber formControlName="numMaxGuests" [showButtons]="true"
                                         decrementButtonClass="p-button-outlined p-button-secondary"
                                         incrementButtonClass="p-button-outlined p-button-secondary"
-                                        [min]="1" [max]="200"
-                                        placeholder="capacidad permitida" [(ngModel)]="roomType.numMaxGuests">
+                                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" 
+                                        [min]="1"
+                                        [max]="200" placeholder="capacidad permitida"
+                                        [(ngModel)]="roomType.numMaxGuests">
                                     </p-inputNumber>
                                 </div>
                             </div>

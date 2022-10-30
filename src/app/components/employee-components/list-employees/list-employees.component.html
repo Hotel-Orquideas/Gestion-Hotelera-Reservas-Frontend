@@ -44,8 +44,8 @@
                 class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
 
 
-              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF"
-                tooltipPosition="top"></button>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
 
             </div>
             <div class="col"></div>
@@ -98,9 +98,11 @@
 
             <td>
 
-              <i class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
+              <i pTooltip="Editar" tooltipPosition="top" class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
                 [routerLink]="['/employee/register-employee',employee.person.document]"></i>
-              <i class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(employee.person.document)"></i>
+              <i pTooltip="Visualizar" tooltipPosition="top" class="pi pi-eye text-warning "
+                style="margin-right: 1em;font-size: 1.3rem" [routerLink]="['/employee/view-employee',employee.person.document]"></i>
+              <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(employee.person.document)"></i>
             </td>
 
           </tr>
