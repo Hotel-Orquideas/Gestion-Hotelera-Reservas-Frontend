@@ -86,11 +86,14 @@
 
                         <td>
 
-                            <i pTooltip="Editar" tooltipPosition="top"
-                                class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
-                                [routerLink]="['/roomType/register-room-type',roomType.id]"></i>
-                            <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger"
-                                (click)="delete(roomType.id)"></i>
+                            <button type="button" pButton pRipple icon="pi pi-pencil"
+                                class="p-button-info p-button-text p-button-sm me-1" pTooltip="Editar"
+                                tooltipPosition="top" [routerLink]="['/roomType/register-room-type',roomType.id]"></button>
+
+                            <button type="button" pButton pRipple icon="pi pi-trash"
+                                class="p-button-danger p-button-text p-button-sm" pTooltip="Eliminar"
+                                tooltipPosition="top" (click)="delete(roomType.id)"></button>
+
                         </td>
 
                     </tr>

@@ -97,11 +97,17 @@
 
             <td>
 
-              <i pTooltip="Editar" tooltipPosition="top" class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
-                [routerLink]="['/company/register-company',company.nit]"></i>
-              <i pTooltip="Visualizar" tooltipPosition="top" class="pi pi-eye text-warning " style="margin-right: 1em;font-size: 1.3rem"
-                [routerLink]="['/company/view-company',company.nit]"></i>
-              <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger" (click)="delete(company.nit)"></i>
+              <button type="button" pButton pRipple icon="pi pi-pencil"
+                class="p-button-info p-button-text p-button-sm me-1" pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/company/register-company',company.nit]"></button>
+
+              <button type="button" pButton pRipple icon="pi pi-eye"
+                class="p-button-warning p-button-text me-1 p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
+                [routerLink]="['/company/view-company',company.nit]"></button>
+
+              <button type="button" pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-text p-button-sm"
+                pTooltip="Eliminar" tooltipPosition="top" (click)="delete(company.nit)"></button>
+
             </td>
 
           </tr>

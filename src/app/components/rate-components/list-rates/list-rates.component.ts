@@ -74,7 +74,7 @@ export class ListRatesComponent implements OnInit {
 
 
     this.confirmationService.confirm({
-      message: 'Está seguro que desea eliminar la tarifaón ' + nameRate + ' ?',
+      message: 'Está seguro que desea eliminar la tarifa ' + nameRate + ' ?',
       header: 'Confirmación para eliminar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

@@ -9,7 +9,7 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <span class="h4">
-                       Tarifas Registradas
+                        Tarifas Registradas
                     </span>
                 </ng-template>
 
@@ -19,8 +19,8 @@
                 </ng-template>
             </p-toolbar>
 
-            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="Tarifas"
-                [value]="rates" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="Tarifas" [value]="rates"
+                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
                 [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
           'name',
@@ -91,11 +91,14 @@
 
                         <td>
 
-                            <i pTooltip="Editar" tooltipPosition="top"
-                                class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
-                                [routerLink]="['/rate/register-rate',rate.id]"></i>
-                            <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger"
-                                (click)="delete(rate.id)"></i>
+                            <button type="button" pButton pRipple icon="pi pi-pencil"
+                                class="p-button-info p-button-text p-button-sm me-1" pTooltip="Editar"
+                                tooltipPosition="top" [routerLink]="['/rate/register-rate',rate.id]"></button>
+
+                            <button type="button" pButton pRipple icon="pi pi-trash"
+                                class="p-button-danger p-button-text p-button-sm" pTooltip="Eliminar"
+                                tooltipPosition="top" (click)="delete(rate.id)"></button>
+
                         </td>
 
                     </tr>
