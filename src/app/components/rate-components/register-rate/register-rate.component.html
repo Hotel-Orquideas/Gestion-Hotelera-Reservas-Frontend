@@ -3,7 +3,7 @@
     <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
 </ng-template>
 
-<div class="container pt-4">
+<div class="container pt-4" >
     <div class="row">
         <div class="col-lg-10 offset-lg-1">
             <p-toolbar styleClass="mb-4">
@@ -33,7 +33,7 @@
                                     <span class="p-inputgroup-addon"><i
                                             class="fa-sharp fa-solid fa-spell-check"></i></span>
                                     <input formControlName="name" type="text" pInputText class="form-control"
-                                         placeholder="Nombre tarifa" [(ngModel)]="rate.name">
+                                        placeholder="Nombre tarifa" [(ngModel)]="rate.name">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,8 @@
                                 <p class="float-start">Tipo de Habitación (*)</p>
                                 <select formControlName="roomTypeId" class="form-select form-select-lg"
                                     aria-label="Default select example" [(ngModel)]="rate.roomTypeId">
-                                    <option [selected]="true" *ngFor="let roomType of roomTypes" value="{{roomType.id}}">{{roomType.name}}</option>
+                                    <option [selected]="true" *ngFor="let roomType of roomTypes"
+                                        value="{{roomType.id}}">{{roomType.name}}</option>
                                 </select>
                             </div>
                         </div>

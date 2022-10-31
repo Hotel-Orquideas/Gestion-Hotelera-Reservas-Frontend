@@ -41,6 +41,9 @@ import {BadgeModule} from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
 import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
 import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
+import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
+import { ListRoomsComponent } from './components/room-components/list-rooms/list-rooms.component';
+import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
 
 
 
@@ -62,7 +65,10 @@ import { ListRatesComponent } from './components/rate-components/list-rates/list
     ListRoomTypesComponent,
     ViewEmployeeComponent,
     RegisterRateComponent,
-    ListRatesComponent
+    ListRatesComponent,
+    RegisterRoomComponent,
+    ListRoomsComponent,
+    ViewRoomComponent
   ],
   imports: [
     BrowserModule,

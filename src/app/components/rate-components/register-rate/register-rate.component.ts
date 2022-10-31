@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Rate } from '../list-rates/rate';
@@ -19,12 +19,13 @@ export class RegisterRateComponent implements OnInit {
   public formRegister: FormGroup = new FormGroup<any>('');//para formulario registrar
 
   rate: Rate = new Rate();
-  roomTypes: RoomType[];
+  roomTypes: RoomType[] = new Array();
   items: MenuItem[] = new Array;//para breadcrumb
   itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar servicio
   home: MenuItem = {};//para breadcrumb
 
   constructor(private rateService: RateService, private roomTypeService: RoomTypeService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
+
 
   ngOnInit(): void {
 
@@ -53,7 +54,6 @@ export class RegisterRateComponent implements OnInit {
 
     this.cargar(); //llena el formulario si existe id en el parametro url
 
-
     //etiquetas para el breadcrumb
     this.items = [
       { label: 'Tarifa' },
@@ -73,7 +73,7 @@ export class RegisterRateComponent implements OnInit {
   }
 
   cargar(): void {
-    
+
     this.activatedRoute.params.subscribe(
       rat => {
         let id = rat['id'];
@@ -81,7 +81,7 @@ export class RegisterRateComponent implements OnInit {
           this.rateService.getRate(id).subscribe(
             tar => this.rate = tar
           );
-          
+
         }
       }
     );
@@ -90,27 +90,47 @@ export class RegisterRateComponent implements OnInit {
 
   register(): void {
 
-    
+
     this.rateService.registerRate(this.rate).subscribe(
       res => {
-        this.toastr.success('La tarifa se ha registrado satisfactoriamente.', 'Registro tarifa',{
-          closeButton:true,
-          progressBar:true
+        this.toastr.success('La tarifa se ha registrado satisfactoriamente.', 'Registro tarifa', {
+          closeButton: true,
+          progressBar: true
         });
-        this.router.navigate(['/rate/list-rates'])}
+        this.router.navigate(['/rate/list-rates'])
+      }
     );
   }
 
   update(): void {
-    
+
     this.rateService.updateRate(this.rate).subscribe(
       emp => {
         this.toastr.info('La tarifa se ha actualizado satisfactoriamente.', 'Actualziar tarifa', {
-          closeButton:true,
-          progressBar:true
+          closeButton: true,
+          progressBar: true
         });
-        this.router.navigate(['/rate/list-rates'])}
+        this.router.navigate(['/rate/list-rates'])
+      }
     );
   }
+  /*
+
+  //comprobamos que haya almenos un tipo de habitación, sino mandamos un mensaje que registre uno
+  showIsEmpty(name:string){
+
+
+
+    if (name == "") {
+      this.toastr.error('No hay tipos de habitaciones registrados. Registre uno y vuelva a intentar.', 'Error', {
+        closeButton: true,
+        progressBar: true
+      });
+      this.router.navigate(['/rate/list-rates'])
+      
+    }
+  }
+  */
+
 
 }
