@@ -26,7 +26,8 @@ export class RoomService {
    * @returns 
    */
   registerRoom(room:Room):Observable<Room>{
-    
+    room.roomTypeId= parseInt(room.roomTypeId+"");
+    room.rateId= parseInt(room.rateId+"");
     return this.http.post<Room>(this.urlEndPoint,room);
   }
 
@@ -45,8 +46,8 @@ export class RoomService {
    * @returns 
    */
   updateRoom(room:Room):Observable<Room>{
-
-
+    room.roomTypeId= parseInt(room.roomTypeId+"");
+    room.rateId= parseInt(room.rateId+"");
     return this.http.put<Room>(this.urlEndPoint+'/'+room.id,room);
   }
 

@@ -1,1 +1,97 @@
-<p>register-room works!</p>
+<p-breadcrumb [model]="items" [home]="home" *ngIf="!room.id else elseBreadCrumb"></p-breadcrumb>
+<ng-template #elseBreadCrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+</ng-template>
+
+<div class="container pt-4" >
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4" *ngIf="!room.id else elseTittle">
+                        Registrar Tarifa
+                    </span>
+                    <ng-template #elseTittle>
+                        <span class="h4">
+                            Actualizar Tarifa
+                        </span>
+                    </ng-template>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/room/list-rooms"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <form class="mt-4" [formGroup]="formRegister">
+                        <div class="row">
+                            <div class="col">
+                                <p class="float-start">Número (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i
+                                            class="fa-sharp fa-solid fa-spell-check"></i></span>
+                                    <input formControlName="number" type="text" pInputText class="form-control"
+                                        placeholder="Número habitación" [(ngModel)]="room.number">
+                                </div>
+                            </div>
+                            <div class="col" style="display: none;" *ngIf="!room.id else elseSelectBlock">
+                            </div>
+                            <ng-template #elseSelectBlock>
+
+                                <div class="col">
+                                    <p class="float-start">Estado (*)</p>
+                                    <select formControlName="state" class="form-select form-select-lg"
+                                        aria-label="Default select example" [(ngModel)]="room.state">
+                                        <option [selected]="true">Seleccione una opción</option>
+                                        <option value="A">
+                                            Activo
+                                        </option>
+                                        <option value="B">
+                                            Bloqueado
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </ng-template>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="float-start">Tarifa (*)</p>
+                                <select formControlName="rateId" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="room.rateId">
+                                    <option [selected]="true" *ngFor="let rate of rates"
+                                        value="{{rate.id}}">{{rate.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <p class="float-start">Tipo de Habitación (*)</p>
+                                <select formControlName="roomTypeId" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="room.roomTypeId">
+                                    <option [selected]="true" *ngFor="let roomType of roomTypes"
+                                        value="{{roomType.id}}">{{roomType.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()" *ngIf="!room.id else elseBlock">Registrar</button>
+                    </div>
+
+
+                    <ng-template #elseBlock>
+                        <div class="mt-4">
+                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                (click)="update()">Actualizar</button>
+                        </div>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
