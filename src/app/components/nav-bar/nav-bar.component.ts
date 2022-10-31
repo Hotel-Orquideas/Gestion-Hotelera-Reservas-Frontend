@@ -99,6 +99,22 @@ export class NavBarComponent implements OnInit {
                 url:'rate/list-rates'
               },
             ]
+          },
+          {
+            label:'Habitaciones',
+            icon:'fa-solid fa-person-shelter',
+            items:[
+              {
+                label:'Agregar Habitación',
+                icon:'fa-solid fa-door-closed',
+                url:'room/register-room'
+              },
+              {
+                label:'Listar Habitaciones',
+                icon:'fa-solid fa-elevator',
+                url:'room/list-rooms'
+              }
+            ]
           }
         ]
       }

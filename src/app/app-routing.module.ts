@@ -13,6 +13,9 @@ import { ListRoomTypesComponent } from './components/roomType-components/list-ro
 import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
 import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
 import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
+import { ListRoomsComponent } from './components/room-components/list-rooms/list-rooms.component';
+import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
+import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
 
 const routes: Routes = [
   {path:'employee/list-employees', component:ListEmployeesComponent},
@@ -32,6 +35,10 @@ const routes: Routes = [
   {path:'rate/list-rates',component:ListRatesComponent},
   {path:'rate/register-rate',component:RegisterRateComponent},
   {path:'rate/register-rate/:id',component:RegisterRateComponent},
+  {path:'room/list-rooms', component:ListRoomsComponent},
+  {path:'room/register-room', component:RegisterRoomComponent},
+  {path:'room/register-room/:id', component:RegisterRoomComponent},
+  {path:'room/view-room/:id', component:ViewRoomComponent},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
 ];
