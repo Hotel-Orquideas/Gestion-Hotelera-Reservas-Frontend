@@ -16,29 +16,32 @@ import { ListRatesComponent } from './components/rate-components/list-rates/list
 import { ListRoomsComponent } from './components/room-components/list-rooms/list-rooms.component';
 import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
 import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
+import { LoginComponent } from './components/login-components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  {path:'employee/list-employees', component:ListEmployeesComponent},
-  {path:'employee/register-employee', component:RegisterEmployeeComponent},
-  {path:'employee/register-employee/:doc', component:RegisterEmployeeComponent},
-  {path:'employee/view-employee/:doc', component:ViewEmployeeComponent},
-  {path:'company/list-companies', component:ListCompaniesComponent},
-  {path:'company/register-company', component:RegisterCompanyComponent},
-  {path:'company/register-company/:nit', component:RegisterCompanyComponent},
-  {path:'company/view-company/:nit', component:ViewCompanyComponent},
-  {path:'service/list-services',component:ListServicesComponent},
-  {path:'service/register-service',component:RegisterServiceComponent},
-  {path:'service/register-service/:id',component:RegisterServiceComponent},
-  {path:'roomType/list-room-types',component:ListRoomTypesComponent},
-  {path:'roomType/register-room-type/:id',component:RegisterRoomTypeComponent},
-  {path:'roomType/register-room-type',component:RegisterRoomTypeComponent},
-  {path:'rate/list-rates',component:ListRatesComponent},
-  {path:'rate/register-rate',component:RegisterRateComponent},
-  {path:'rate/register-rate/:id',component:RegisterRateComponent},
-  {path:'room/list-rooms', component:ListRoomsComponent},
-  {path:'room/register-room', component:RegisterRoomComponent},
-  {path:'room/register-room/:id', component:RegisterRoomComponent},
-  {path:'room/view-room/:id', component:ViewRoomComponent},
+  { path:'login', component: LoginComponent },
+  {path:'employee/list-employees', component:ListEmployeesComponent, canActivate:[AuthGuard]},
+  {path:'employee/register-employee', component:RegisterEmployeeComponent, canActivate:[AuthGuard]},
+  {path:'employee/register-employee/:doc', component:RegisterEmployeeComponent, canActivate:[AuthGuard]},
+  {path:'employee/view-employee/:doc', component:ViewEmployeeComponent, canActivate:[AuthGuard]},
+  {path:'company/list-companies', component:ListCompaniesComponent, canActivate:[AuthGuard]},
+  {path:'company/register-company', component:RegisterCompanyComponent, canActivate:[AuthGuard]},
+  {path:'company/register-company/:nit', component:RegisterCompanyComponent, canActivate:[AuthGuard]},
+  {path:'company/view-company/:nit', component:ViewCompanyComponent, canActivate:[AuthGuard]},
+  {path:'service/list-services',component:ListServicesComponent, canActivate:[AuthGuard]},
+  {path:'service/register-service',component:RegisterServiceComponent, canActivate:[AuthGuard]},
+  {path:'service/register-service/:id',component:RegisterServiceComponent, canActivate:[AuthGuard]},
+  {path:'roomType/list-room-types',component:ListRoomTypesComponent, canActivate:[AuthGuard]},
+  {path:'roomType/register-room-type/:id',component:RegisterRoomTypeComponent, canActivate:[AuthGuard]},
+  {path:'roomType/register-room-type',component:RegisterRoomTypeComponent, canActivate:[AuthGuard]},
+  {path:'rate/list-rates',component:ListRatesComponent, canActivate:[AuthGuard]},
+  {path:'rate/register-rate',component:RegisterRateComponent, canActivate:[AuthGuard]},
+  {path:'rate/register-rate/:id',component:RegisterRateComponent, canActivate:[AuthGuard]},
+  {path:'room/list-rooms', component:ListRoomsComponent, canActivate:[AuthGuard]},
+  {path:'room/register-room', component:RegisterRoomComponent, canActivate:[AuthGuard]},
+  {path:'room/register-room/:id', component:RegisterRoomComponent, canActivate:[AuthGuard]},
+  {path:'room/view-room/:id', component:ViewRoomComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
 ];

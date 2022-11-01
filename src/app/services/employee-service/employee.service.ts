@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from '../../components/employee-components/list-employees/employee';
@@ -9,16 +9,21 @@ import { Employee } from '../../components/employee-components/list-employees/em
 
 export class EmployeeService {
 
+  token=localStorage.getItem('x-token'); //se trae el token
+  headers = new HttpHeaders({"x-token": this.token}); //se crea el header
   private urlEndPoint:string= 'http://localhost:3005/management/api/employee';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+   }
 
   /**
    * Se obtiene una lista de todos los empleados registrados
    * @returns lista de empleados
    */
   getEmployees():Observable<Employee[]>{
-    return this.http.get<Employee[]>(this.urlEndPoint);
+    
+    return this.http.get<Employee[]>(this.urlEndPoint, { headers: this.headers } )
+    ;
   }
 
   /**
@@ -27,7 +32,7 @@ export class EmployeeService {
    * @returns 
    */
   registerEmployee(employee:Employee):Observable<Employee>{
-    return this.http.post<Employee>(this.urlEndPoint,employee);
+    return this.http.post<Employee>(this.urlEndPoint,employee, { headers: this.headers });
   }
 
   /**
@@ -36,7 +41,7 @@ export class EmployeeService {
    * @returns Obtener un solo empleado registrado
    */
   getEmployee(doc:string):Observable<Employee>{
-    return this.http.get<Employee>(this.urlEndPoint+'/'+doc);
+    return this.http.get<Employee>(this.urlEndPoint+'/'+doc, { headers: this.headers });
   }
 
   /**
@@ -60,7 +65,7 @@ export class EmployeeService {
       "bloodType":`${employee.person.bloodType}`
     };
 
-    return this.http.put<Employee>(this.urlEndPoint+'/'+employee.person.document,datos);
+    return this.http.put<Employee>(this.urlEndPoint+'/'+employee.person.document,datos, { headers: this.headers });
   }
 
   /**
@@ -68,7 +73,7 @@ export class EmployeeService {
    * @param employee
    */
   deleteEmployee(doc:string):Observable<Employee>{
-    return this.http.patch<Employee>(this.urlEndPoint+'/'+doc, null);
+    return this.http.patch<Employee>(this.urlEndPoint+'/'+doc, null, { headers: this.headers });
   }
 
 }

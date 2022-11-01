@@ -51,6 +51,8 @@ import { ListRatesComponent } from './components/rate-components/list-rates/list
 import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
 import { ListRoomsComponent } from './components/room-components/list-rooms/list-rooms.component';
 import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
+import { LoginComponent } from './components/login-components/login/login.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 
@@ -75,7 +77,8 @@ import { ViewRoomComponent } from './components/room-components/view-room/view-r
     ListRatesComponent,
     RegisterRoomComponent,
     ListRoomsComponent,
-    ViewRoomComponent
+    ViewRoomComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +114,10 @@ import { ViewRoomComponent } from './components/room-components/view-room/view-r
     ProgressBarModule,
     RatingModule
   ],
-  providers: [],
+  providers: [
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

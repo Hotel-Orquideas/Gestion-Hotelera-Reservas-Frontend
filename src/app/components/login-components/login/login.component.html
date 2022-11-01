@@ -1,0 +1,21 @@
+<p-toast></p-toast>
+<div class="card mt-2 shadow-sm p-3 mb-5 bg-white rounded col-lg-4 offset-lg-4">
+    <div class="text-center mb-5">
+        <img src="../../../../assets/avat.jpg" alt="Image" height="50" class="mb-3">
+        <div class="text-900 fs-3 mb-3">Hotel las orquídeas</div>
+    </div>
+
+    <div>
+        <label for="email" class="block fs-6 mb-2">Correo</label>
+        <input id="email" [(ngModel)]="dataEmployee.userName" type="text" pInputText class="w-100 mb-3 form-control">
+
+        <label for="password" class="block fs-6 mb-2">Contraseña</label>
+        <input id="password" [(ngModel)]="dataEmployee.password" type="password" pInputText class="w-100 mb-3 form-control">
+
+        <div class="mb-4 float-end">
+            <a href="#" class="font-medium text-decoration-none ms-2 text-info text-end">Olvidó su contraseña?</a>
+        </div>
+
+        <button pButton pRipple label="Iniciar sesión" icon="pi pi-user" class="w-100" (click)="login()"></button>
+    </div>
+</div>

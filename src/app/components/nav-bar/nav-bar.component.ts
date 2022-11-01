@@ -139,11 +139,17 @@ export class NavBarComponent implements OnInit {
       },
       {
         label: 'Cerrar Sesión',
-        icon: 'fa-solid fa-arrow-right-from-bracket'
+        icon: 'fa-solid fa-arrow-right-from-bracket',
+        url: ''
       }
     ]
 
 
+  }
+
+  logout():string{
+    localStorage.removeItem("x-token");
+    return' login';
   }
 
 }
