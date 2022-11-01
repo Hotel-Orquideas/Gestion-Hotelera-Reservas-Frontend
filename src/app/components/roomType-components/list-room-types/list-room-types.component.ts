@@ -77,16 +77,27 @@ export class ListRoomTypesComponent implements OnInit {
       header: 'Confirmación para eliminar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Tipo de habitación eliminado correctamente', life: 3000 });
+
         this.roomTypeService.deleteRoomType(id).subscribe(
           emp => {
             this.roomTypeService.getRoomTypes().subscribe(
               response => this.roomTypes = response
             )
-
+            this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Tipo de habitación eliminado correctamente', life: 3000 });
+          },
+          error => {
+            //mejorar este mensaje - mostrando las tarifas y habitaciones que dependen de este
+            this.messageService.add({
+              severity: 'error', summary: 'Error al eliminar',
+              detail: "No es posible eliminar este tipo de habitación debido a que hay tarifas y tipos de habitación que dependen de esta, elimine/edite primero las tarifas y habitaciones y vuelva a intentar",
+              life: 3000
+            })
           }
 
         );
+
+
+
       }, reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Se ha cancelado la operación.', life: 3000 });
         this.roomTypeService.getRoomTypes()

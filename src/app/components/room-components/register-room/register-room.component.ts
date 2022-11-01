@@ -41,8 +41,8 @@ export class RegisterRoomComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(40)
       ]],
-      rateId: [''],
-      roomTypeId: ['']
+      roomTypeId: [''],
+      state: ['']
     });
 
     //traemos todos los tipo de habitación
@@ -72,6 +72,20 @@ export class RegisterRoomComponent implements OnInit {
 
     //icono de casa pra el breadcrumb
     this.home = { icon: 'pi pi-home', routerLink: '/' };
+
+  }
+
+  //comprobar que existe al menos un tipo de habitación para poder dejar ingresar a agregar
+  existsRoomTypes() {
+
+    if (this.roomTypes.length >= 1) {
+    } else {
+      this.toastr.error('No hay tipos de habitación registrados. Registre uno e intente nuevamente', 'Error', {
+        closeButton: true,
+        progressBar: true
+      });
+      this.router.navigate(['/room/list-rooms'])
+    }
 
   }
 

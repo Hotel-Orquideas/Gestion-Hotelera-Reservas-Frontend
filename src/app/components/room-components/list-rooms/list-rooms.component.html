@@ -9,13 +9,13 @@
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
           <span class="h4">
-            Habitaciones Registrados
+            Habitaciones Registradas
           </span>
         </ng-template>
 
         <ng-template pTemplate="right">
           <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-secondary mr-2"
-            routerLink="/room/register-room"></button>
+            (click)="existsRoomTypes()"></button>
         </ng-template>
       </p-toolbar>
 
@@ -90,17 +90,19 @@
             <td>{{room.rateId}}</td>
 
             <td>
+              <span class="p-buttonset">
+                <button type="button" pButton pRipple icon="pi pi-pencil"
+                  class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/room/register-room',room.id]"></button>
 
-              <button type="button" pButton pRipple icon="pi pi-pencil"
-                class="p-button-info p-button-text p-button-sm me-1" pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/room/register-room',room.id]"></button>
+                <button type="button" pButton pRipple icon="pi pi-eye"
+                  class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
+                  [routerLink]="['/room/view-room',room.id]"></button>
 
-              <button type="button" pButton pRipple icon="pi pi-eye"
-                class="p-button-warning p-button-text me-1 p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
-                [routerLink]="['/room/view-room',room.id]"></button>
-
-              <button type="button" pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-text p-button-sm"
-                pTooltip="Eliminar" tooltipPosition="top" (click)="delete(room.id)"></button>
+                <button type="button" pButton pRipple icon="pi pi-trash"
+                  class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
+                  (click)="delete(room.id)"></button>
+              </span>
 
           </tr>
         </ng-template>

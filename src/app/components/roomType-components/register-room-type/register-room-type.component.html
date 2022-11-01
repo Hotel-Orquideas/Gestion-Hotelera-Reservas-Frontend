@@ -33,7 +33,7 @@
                                     <span class="p-inputgroup-addon"><i
                                             class="fa-sharp fa-solid fa-spell-check"></i></span>
                                     <input formControlName="name" type="text" pInputText class="form-control"
-                                        pKeyFilter="alpha" placeholder="Nombre tipo habitación"
+                                        placeholder="Nombre tipo habitación"
                                         [(ngModel)]="roomType.name">
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                         incrementButtonClass="p-button-outlined p-button-secondary"
                                         incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" 
                                         [min]="1"
-                                        [max]="200" placeholder="capacidad permitida"
+                                        [max]="200" placeholder="capacidad"
                                         [(ngModel)]="roomType.numMaxGuests">
                                     </p-inputNumber>
                                 </div>

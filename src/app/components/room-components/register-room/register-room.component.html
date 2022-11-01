@@ -48,8 +48,8 @@
                                         <option value="A">
                                             Activo
                                         </option>
-                                        <option value="B">
-                                            Bloqueado
+                                        <option value="O">
+                                            Ocupado
                                         </option>
                                     </select>
                                 </div>
@@ -58,18 +58,10 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <p class="float-start">Tarifa (*)</p>
-                                <select formControlName="rateId" class="form-select form-select-lg"
-                                    aria-label="Default select example" [(ngModel)]="room.rateId">
-                                    <option [selected]="true" *ngFor="let rate of rates"
-                                        value="{{rate.id}}">{{rate.name}}</option>
-                                </select>
-                            </div>
-                            <div class="col">
                                 <p class="float-start">Tipo de Habitación (*)</p>
-                                <select formControlName="roomTypeId" class="form-select form-select-lg"
+                                <select (click)="existsRoomTypes()" formControlName="roomTypeId" class="form-select form-select-lg"
                                     aria-label="Default select example" [(ngModel)]="room.roomTypeId">
-                                    <option [selected]="true" *ngFor="let roomType of roomTypes"
+                                    <option *ngFor="let roomType of roomTypes"
                                         value="{{roomType.id}}">{{roomType.name}}</option>
                                 </select>
                             </div>

@@ -9,6 +9,8 @@ import 'jspdf-autotable';
 import { MenuItem } from 'primeng/api';
 import { RateService } from 'src/app/services/rate-service/rate.service';
 import { PrimeNGConfig } from 'primeng/api';
+import { RoomType } from '../../roomType-components/list-room-types/roomType';
+import { RoomTypeService } from 'src/app/services/roomType-service/room-type.service';
 
 @Component({
   selector: 'app-list-rates',
@@ -17,8 +19,10 @@ import { PrimeNGConfig } from 'primeng/api';
   providers: [MessageService, ConfirmationService]
 })
 export class ListRatesComponent implements OnInit {
+ 
 
   rates: Rate[] = new Array;
+  roomTypes: RoomType[] = new Array();
   rt = new Array(); //para poder exportar en excel
   cols: any[] = new Array;//para exportar en CSV
   headSimple: any[] = new Array;//para exportar pdf
@@ -27,9 +31,14 @@ export class ListRatesComponent implements OnInit {
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private rateService: RateService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+  constructor(private rateService: RateService, private roomTypeService: RoomTypeService ,private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //para saber si hay al menos un tipo de habitación
+    this.roomTypeService.getRoomTypes().subscribe(
+      roomType => this.roomTypes = roomType
+    );
 
     //para darle efecto al hacer click a los botones
     this.primengConfig.ripple = true;
@@ -93,6 +102,17 @@ export class ListRatesComponent implements OnInit {
         this.rateService.getRates()
       }
     });
+  }
+
+  //comprobar que existe al menos un tipo de habitación para poder dejar ingresar a agregar
+  existsRoomTypes(){
+   
+    if(this.roomTypes.length>=1){
+      this.router.navigate(['/rate/register-rate']);
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'No hay tipos de habitación registrados, registre uno y proceda nuevamente.', life: 3000 });
+    }
+
   }
 
   //se genera la lista para añadir los datos a la tabla

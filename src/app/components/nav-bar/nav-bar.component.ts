@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { isConditionalExpression } from 'typescript';
+import { Router } from '@angular/router';
+import { MenuItem, MessageService } from 'primeng/api';
+import { RoomTypeService } from 'src/app/services/roomType-service/room-type.service';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,12 +11,15 @@ import { isConditionalExpression } from 'typescript';
 })
 export class NavBarComponent implements OnInit {
 
+  
+  
   menuItems: MenuItem[];
   itemsMenuAvatar: MenuItem[];
 
   constructor() { }
 
   ngOnInit(): void {
+
     //items del menú principal
     this.menuItems = [
       {
@@ -48,71 +53,71 @@ export class NavBarComponent implements OnInit {
             url: 'company/list-companies'
           }
         ]
-      },{
-        label:'Gestión',
-        icon:'fa-solid fa-toolbox',
-        items:[
+      }, {
+        label: 'Gestión',
+        icon: 'fa-solid fa-toolbox',
+        items: [
           {
-            label:'Servicios',
-            icon:'fa-solid fa-bell-concierge',
-            items:[
+            label: 'Servicios',
+            icon: 'fa-solid fa-bell-concierge',
+            items: [
               {
-                label:'Agregar nuevo',
-                icon:'fa-regular fa-square-plus',
-                url:'service/register-service'
+                label: 'Agregar nuevo',
+                icon: 'fa-regular fa-square-plus',
+                url: 'service/register-service'
               },
               {
-                label:'Listar',
-                icon:'fa-solid fa-hand-holding',
-                url:'service/list-services'
+                label: 'Listar',
+                icon: 'fa-solid fa-hand-holding',
+                url: 'service/list-services'
               }
             ]
           },
           {
-            label:'Tipos de Habitación',
-            icon:'fa-solid fa-people-roof',
-            items:[
+            label: 'Tipos de Habitación',
+            icon: 'fa-solid fa-people-roof',
+            items: [
               {
-                label:'Agregar tipo',
-                icon:'fa-solid fa-file-circle-plus',
-                url:'roomType/register-room-type'
+                label: 'Agregar tipo',
+                icon: 'fa-solid fa-file-circle-plus',
+                url: 'roomType/register-room-type'
               },
               {
-                label:'Listar tipos',
-                icon:'fa-solid fa-clipboard-list',
-                url:'roomType/list-room-types'
+                label: 'Listar tipos',
+                icon: 'fa-solid fa-clipboard-list',
+                url: 'roomType/list-room-types'
               }
             ]
           },
           {
-            label:'Tarifas',
-            icon:'fa-brands fa-sellcast',
-            items:[
+            label: 'Tarifas',
+            icon: 'fa-brands fa-sellcast',
+            items: [
               {
-                label:'Agregar Tarifa',
-                icon:'fa-solid fa-file-invoice-dollar',
-                url:'rate/register-rate',
+                label: 'Agregar Tarifa',
+                icon: 'fa-solid fa-file-invoice-dollar',
+                url: 'rate/register-rate',
               },
               {
-                label:'Listar Tarfas',
-                icon:'fa-solid fa-filter-circle-dollar',
-                url:'rate/list-rates'
+                label: 'Listar Tarfas',
+                icon: 'fa-solid fa-filter-circle-dollar',
+                url: 'rate/list-rates'
               },
             ]
           },
           {
-            label:'Habitaciones',
-            icon:'fa-solid fa-person-shelter',
-            items:[
+            label: 'Habitaciones',
+            icon: 'fa-solid fa-person-shelter',
+            items: [
               {
-                label:'Agregar Habitación',
-                icon:'fa-solid fa-door-closed',
-                url:'room/register-room'
+                label: 'Agregar Habitación',
+                icon: 'fa-solid fa-door-closed',
+                url: 'room/register-room'
               },
               {
-                label:'Listar Habitaciones',
-                icon:'fa-solid fa-elevator',
-                url:'room/list-rooms'
+                label: 'Listar Habitaciones',
+                icon: 'fa-solid fa-elevator',
+                url: 'room/list-rooms'
               }
             ]
           }
@@ -121,29 +126,24 @@ export class NavBarComponent implements OnInit {
     ]
 
     //items menu 
-    this.itemsMenuAvatar=[
+    this.itemsMenuAvatar = [
       {
-        label:'Rol: Administrador'
+        label: 'Rol: Administrador'
       },
       {
-        separator:true
+        separator: true
       },
       {
-        label:'Configuración',
-        icon:'fa-solid fa-gear'
+        label: 'Configuración',
+        icon: 'fa-solid fa-gear'
       },
       {
-        label:'Cerrar Sesión',
-        icon:'fa-solid fa-arrow-right-from-bracket'
+        label: 'Cerrar Sesión',
+        icon: 'fa-solid fa-arrow-right-from-bracket'
       }
     ]
 
 
-
-
-
   }
-
-
 
 }

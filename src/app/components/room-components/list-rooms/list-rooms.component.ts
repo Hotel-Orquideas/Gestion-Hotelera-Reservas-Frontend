@@ -10,6 +10,9 @@ import 'jspdf-autotable';
 import { FormArrayName } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { RoomType } from '../../roomType-components/list-room-types/roomType';
+import { ArrayType } from '@angular/compiler';
+import { RoomTypeService } from 'src/app/services/roomType-service/room-type.service';
 
 @Component({
   selector: 'app-list-rooms',
@@ -20,45 +23,51 @@ import { PrimeNGConfig } from 'primeng/api';
 export class ListRoomsComponent implements OnInit {
 
   rooms: Room[] = new Array;
+  roomTypes: RoomType[] = new Array(); // para traer todos los tipos de habitaciones
   rm = new Array(); //para poder exportar en excel
   cols: any[] = new Array;
   headSimple: any[] = new Array;//para exportar pdf
-  empSimple:any[]= new Array;//para exportar pdf
-  dataTable:any[]= new Array;//para exportar pdf
-  items: MenuItem[]=new Array;//para breadcrumb
-  home: MenuItem={};//para breadcrumb
+  empSimple: any[] = new Array;//para exportar pdf
+  dataTable: any[] = new Array;//para exportar pdf
+  items: MenuItem[] = new Array;//para breadcrumb
+  home: MenuItem = {};//para breadcrumb
 
-  constructor(private roomService: RoomService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+  constructor(private roomService: RoomService, private roomTypeService: RoomTypeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
-        //para darle efecto al hacer click a los botones
-        this.primengConfig.ripple = true;
+    //para saber si hay al menos un tipo de habitación
+    this.roomTypeService.getRoomTypes().subscribe(
+      roomType => this.roomTypes = roomType
+    );
 
-        this.roomService.getRooms().subscribe(
-          room => this.rooms = room
-        );
-    
-        //este cols se usa para poder exportar en csv, por eso en field está como sale para obtener el dato de la clase employee.person.dato
-        this.cols = [
-          { field: "number", header: 'Número' },
-          { field: "state", header: 'Estado' },
-          { field: "roomTypeId", header: 'Tipo de habitación' },
-          { field: "rateId", header: 'Tarifa' },
-        ];
-    
-        //este lo uso para crear las cabeceras de la tabla para exportar en pdf
-        this.headSimple = [['Número', 'Estado', 'Tipo habitación', 'Tarifa']]
-        
-    
-        //etiquetas para el breadcrumb
-        this.items = [
-          { label: 'Habitación' },
-          { label: 'Habitaciones registradas' }
-        ];
-    
-        //icono de casa pra el breadcrumb
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
+    //para darle efecto al hacer click a los botones
+    this.primengConfig.ripple = true;
+
+    this.roomService.getRooms().subscribe(
+      room => this.rooms = room
+    );
+
+    //este cols se usa para poder exportar en csv, por eso en field está como sale para obtener el dato de la clase employee.person.dato
+    this.cols = [
+      { field: "number", header: 'Número' },
+      { field: "state", header: 'Estado' },
+      { field: "roomTypeId", header: 'Tipo de habitación' },
+      { field: "rateId", header: 'Tarifa' },
+    ];
+
+    //este lo uso para crear las cabeceras de la tabla para exportar en pdf
+    this.headSimple = [['Número', 'Estado', 'Tipo habitación', 'Tarifa']]
+
+
+    //etiquetas para el breadcrumb
+    this.items = [
+      { label: 'Habitación' },
+      { label: 'Habitaciones registradas' }
+    ];
+
+    //icono de casa pra el breadcrumb
+    this.home = { icon: 'pi pi-home', routerLink: '/' };
 
   }
 
@@ -75,7 +84,7 @@ export class ListRoomsComponent implements OnInit {
 
 
     this.confirmationService.confirm({
-      message: 'Está seguro que desea eliminar la habitación ' + nameRoom +'?',
+      message: 'Está seguro que desea eliminar la habitación ' + nameRoom + '?',
       header: 'Confirmación para eliminar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -96,14 +105,24 @@ export class ListRoomsComponent implements OnInit {
     });
   }
 
+  //comprobar que existe al menos un tipo de habitación para poder dejar ingresar a agregar
+  existsRoomTypes() {
+
+    if (this.roomTypes.length >= 1) {
+      this.router.navigate(['/room/register-room']);
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'No hay tipos de habitación registrados, registre uno y proceda nuevamente.', life: 3000 });
+    }
+
+  }
+
   //se genera la lista para añadir los datos a la tabla
-  listDataTable(){
-    for (var i = 0; i < this.rooms.length; i++) { 
-     let r1=[
+  listDataTable() {
+    for (var i = 0; i < this.rooms.length; i++) {
+      let r1 = [
         this.rooms[i].number,
         this.rooms[i].state,
         this.rooms[i].roomTypeId,
-        this.rooms[i].rateId
 
       ];
       this.dataTable.push(r1);
@@ -136,13 +155,12 @@ export class ListRoomsComponent implements OnInit {
    * añadir todos las habitaciones a una lista json
    * @returns json con todos los empelados
    */
-  listRoomsJson(){
-    for (var i = 0; i < this.rooms.length; i++) { 
+  listRoomsJson() {
+    for (var i = 0; i < this.rooms.length; i++) {
       this.rm.push({
-        Nombre:this.rooms[i].number,
-        Apellido:this.rooms[i].state,
-        Cargo:this.rooms[i].roomTypeId,
-        tipoDocumento:this.rooms[i].rateId,
+        Número: this.rooms[i].number,
+        Estado: this.rooms[i].state,
+        TipoHabitacion: this.rooms[i].roomTypeId,
       });
     }
     return this.rm;
@@ -162,24 +180,24 @@ export class ListRoomsComponent implements OnInit {
 
   saveAsExcelFile(buffer: any, fileName: string): void {
 
-    
+
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';
     const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+      type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 
   }
 
   //función para texto en badge
-  textInBadge(status:string):string{
+  textInBadge(status: string): string {
 
-    if (status=="A") {
+    if (status == "A") {
       return "Activo"
-    }else if(status=="B"){
-      return "Bloqueado"
-    }else{
+    } else if (status == "O") {
+      return "Ocupada"
+    } else {
       return "Sin estado - error"
     }
 
@@ -187,14 +205,14 @@ export class ListRoomsComponent implements OnInit {
 
 
   //función para color del badge
-  colorInBadge(status:string):string{
+  colorInBadge(status: string): string {
 
-    if (status=="A") {
+    if (status == "A") {
       return "success"
-    }else if(status=="B"){
+    } else if (status == "O") {
       return "warning"
-    }else{
-      return "Sin color - error"
+    } else {
+      return "danger"
     }
 
   }

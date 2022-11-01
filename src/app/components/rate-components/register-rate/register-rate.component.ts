@@ -72,6 +72,20 @@ export class RegisterRateComponent implements OnInit {
 
   }
 
+  //comprobar que existe al menos un tipo de habitación para poder dejar ingresar a agregar
+  existsRoomTypes() {
+
+    if (this.roomTypes.length >= 1) {
+    } else {
+      this.toastr.error('Error, no hay tipos de habitación registrados, registre uno y vuelva a intentar.', 'Error', {
+        closeButton: true,
+        progressBar: true
+      });
+      this.router.navigate(['/rate/list-rates']);
+    }
+
+  }
+
   cargar(): void {
 
     this.activatedRoute.params.subscribe(
