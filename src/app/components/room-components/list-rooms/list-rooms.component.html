@@ -19,14 +19,13 @@
         </ng-template>
       </p-toolbar>
 
-      <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="habitaciones" [value]="rooms"
+      <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="habitaciones" [value]="rooms" dataKey="number"
         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
         [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
           'number',
           'state',
           'roomTypeId',
-          'rateId'
         ]">
 
 
@@ -61,6 +60,7 @@
         <ng-template pTemplate="header">
           <tr>
 
+            <th style="width: 3rem"></th>
             <th pSortableColumn="number">
               Número
               <p-sortIcon field="number"></p-sortIcon>
@@ -72,21 +72,27 @@
             <th pSortableColumn="roomTypeId">
               Tipo Habitación <p-sortIcon field="roomTypeId"></p-sortIcon>
             </th>
-            <th pSortableColumn="rateId">
-              Tarifa <p-sortIcon field="rateId"></p-sortIcon>
+            <th>
+              Tarifas Asociadas
             </th>
             <th>Acción</th>
 
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-room>
+        <ng-template pTemplate="body" let-room let-expanded="expanded">
           <tr>
+
+            <td>
+              <button pTooltip="Ver Tarifas" tooltipPosition="top" type="button" pButton pRipple [pRowToggler]="room"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
 
             <td>{{room.number}}</td>
             <td>
               <p-badge value="{{textInBadge(room.state)}}" severity="{{colorInBadge(room.state)}}"></p-badge>
             </td>
-            <td>{{room.roomTypeId}}</td>
+            <td>{{nameRoomType(room.roomTypeId)}}</td>
             <td>{{room.rateId}}</td>
 
             <td>
@@ -103,7 +109,35 @@
                   class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
                   (click)="delete(room.id)"></button>
               </span>
+            </td>
 
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion">
+          <tr>
+            <td colspan="2">
+              <div>
+                <p-table [value]="rates" dataKey="value">
+
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="value">
+                        Tarifas asociadas<p-sortIcon field="value"></p-sortIcon>
+
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rate2>
+                    <tr>
+                      <td>
+                        {{rate2.id}}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </td>
           </tr>
         </ng-template>
 

@@ -87,6 +87,7 @@ export class ViewRoomComponent implements OnInit {
 
   }
 
+  //obtener el nombre de un tipo de habitación
   nameRoomType(id:number):string{
     let nameRoomType:string;
     for (let i = 0; i < this.roomTypes.length; i++) {

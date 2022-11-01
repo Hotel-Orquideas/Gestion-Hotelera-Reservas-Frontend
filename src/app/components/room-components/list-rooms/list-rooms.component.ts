@@ -13,16 +13,33 @@ import { PrimeNGConfig } from 'primeng/api';
 import { RoomType } from '../../roomType-components/list-room-types/roomType';
 import { ArrayType } from '@angular/compiler';
 import { RoomTypeService } from 'src/app/services/roomType-service/room-type.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Rate } from '../../rate-components/list-rates/rate';
+import { RateService } from 'src/app/services/rate-service/rate.service';
 
 @Component({
   selector: 'app-list-rooms',
   templateUrl: './list-rooms.component.html',
   styleUrls: ['./list-rooms.component.css'],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
 })
 export class ListRoomsComponent implements OnInit {
 
   rooms: Room[] = new Array;
+  rates: Rate[] = new Array;
   roomTypes: RoomType[] = new Array(); // para traer todos los tipos de habitaciones
   rm = new Array(); //para poder exportar en excel
   cols: any[] = new Array;
@@ -32,13 +49,18 @@ export class ListRoomsComponent implements OnInit {
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 
-  constructor(private roomService: RoomService, private roomTypeService: RoomTypeService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+  constructor(private roomService: RoomService, private roomTypeService: RoomTypeService, private rateService: RateService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
     //para saber si hay al menos un tipo de habitación
     this.roomTypeService.getRoomTypes().subscribe(
       roomType => this.roomTypes = roomType
+    );
+
+    //traer todas las tarifas
+    this.rateService.getRates().subscribe(
+      rate => this.rates = rate
     );
 
     //para darle efecto al hacer click a los botones
@@ -216,5 +238,58 @@ export class ListRoomsComponent implements OnInit {
     }
 
   }
+
+  //obtener el nombre de un tipo de habitación
+  nameRoomType(id: number): string {
+    let nameRoomType: string;
+    for (let i = 0; i < this.roomTypes.length; i++) {
+
+      if (this.roomTypes[i].id === id) {
+        nameRoomType = this.roomTypes[i].name;
+      }
+
+    }
+
+    return nameRoomType
+
+  }
+
+  fnPrueba(): any[]{
+    const prueba=[
+      {
+        "rates":[
+          {
+            "value":300
+          },
+          {
+            "value":400
+          }
+        ]
+      },
+      {
+        "rates":[
+          {
+            "value":100
+          },
+          {
+            "value":200
+          }
+        ]
+      },
+      {
+        "rates":[
+          {
+            "value":800
+          },
+          {
+            "value":900
+          }
+        ]
+      }
+    ];
+    return prueba;
+  }
+
+
 
 }

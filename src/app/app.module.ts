@@ -39,6 +39,13 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import {BadgeModule} from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
+import {SliderModule} from 'primeng/slider';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {DialogModule} from 'primeng/dialog';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {RatingModule} from 'primeng/rating';
+
 import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
 import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
 import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
@@ -96,7 +103,13 @@ import { ViewRoomComponent } from './components/room-components/view-room/view-r
     InputNumberModule,
     InputMaskModule,
     BadgeModule,
-    RippleModule
+    RippleModule,
+    SliderModule,
+    MultiSelectModule,
+    ContextMenuModule,
+    DialogModule,
+    ProgressBarModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
