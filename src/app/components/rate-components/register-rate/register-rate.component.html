@@ -50,7 +50,7 @@
                                 <p class="float-start">Tipo de Habitación (*)</p>
                                 <select (click)="existsRoomTypes()" formControlName="roomTypeId" class="form-select form-select-lg"
                                     aria-label="Default select example" [(ngModel)]="rate.roomTypeId">
-                                    <option [selected]="true" *ngFor="let roomType of roomTypes"
+                                    <option *ngFor="let roomType of roomTypes"
                                         value="{{roomType.id}}">{{roomType.name}}</option>
                                 </select>
                             </div>

@@ -26,10 +26,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.dataEmployee.userName);
     this.authService.login(this.dataEmployee).subscribe(
       (response:any) => {
-        //console.log(response)
         localStorage.setItem('x-token',response.token);
         this.router.navigate(['/home']); //reemplazar por home
       },
