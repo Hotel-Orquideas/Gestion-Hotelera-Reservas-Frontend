@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/login-service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+
+  constructor(private authService: AuthService){}
+  isAuth():boolean{
+    return this.authService.isAuth();
+  }
   title = 'gestion-hotelera';
 }

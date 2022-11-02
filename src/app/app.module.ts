@@ -53,6 +53,7 @@ import { ListRoomsComponent } from './components/room-components/list-rooms/list
 import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
 import { LoginComponent } from './components/login-components/login/login.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { HomeComponent } from './components/home-components/home/home.component';
 
 
 
@@ -78,7 +79,8 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     RegisterRoomComponent,
     ListRoomsComponent,
     ViewRoomComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

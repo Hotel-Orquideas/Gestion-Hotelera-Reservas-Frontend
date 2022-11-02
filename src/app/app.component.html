@@ -1,2 +1,5 @@
-<app-nav-bar></app-nav-bar>
+<app-nav-bar *ngIf="isAuth() else elseAuthBlock"></app-nav-bar>
+<ng-template #elseAuthBlock>
+
+</ng-template>
 <router-outlet></router-outlet>

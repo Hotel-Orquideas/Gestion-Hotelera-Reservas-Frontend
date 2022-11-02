@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       (response:any) => {
         //console.log(response)
         localStorage.setItem('x-token',response.token);
-        this.router.navigate(['service/list-services']); //reemplazar por home
+        this.router.navigate(['/home']); //reemplazar por home
       },
       error =>{
         this.messageService.add({
