@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
   menuItems: MenuItem[];
   itemsMenuAvatar: MenuItem[];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
 
@@ -140,16 +140,16 @@ export class NavBarComponent implements OnInit {
       {
         label: 'Cerrar Sesión',
         icon: 'fa-solid fa-arrow-right-from-bracket',
-        url: ''
+        command: (event) => this.logout()
       }
     ]
 
 
   }
 
-  logout():string{
+  logout(){
     localStorage.removeItem("x-token");
-    return' login';
+    this.router.navigate(['login']);
   }
 
 }
