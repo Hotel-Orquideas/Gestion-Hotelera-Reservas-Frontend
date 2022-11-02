@@ -97,15 +97,19 @@
             </td>
 
             <td>
+              <span class="p-buttonset">
+                <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
+                  class="p-button-info p-button-outlined p-button-sm me-1" pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/employee/register-employee',employee.person.document]"></button>
 
-              <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
-                class="p-button-info p-button-text p-button-sm me-1" pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/employee/register-employee',employee.person.document]"></button>
-              <button type="button" pButton pRipple icon="pi pi-eye"
-                class="p-button-warning p-button-text me-1 p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
-                [routerLink]="['/employee/view-employee',employee.person.document]"></button>
-              <button type="button" pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-text p-button-sm"
-                pTooltip="Eliminar" tooltipPosition="top" (click)="delete(employee.person.document)"></button>
+                <button type="button" pButton pRipple icon="pi pi-eye"
+                  class="p-button-warning p-button-outlined me-1 p-button-sm" pTooltip="Visualizar"
+                  tooltipPosition="top" [routerLink]="['/employee/view-employee',employee.person.document]"></button>
+
+                <button type="button" pButton pRipple icon="pi pi-trash"
+                  class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
+                  (click)="delete(employee.person.document)"></button>
+              </span>
               <!--
               <i pTooltip="Editar" tooltipPosition="top" class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
                 [routerLink]="['/employee/register-employee',employee.person.document]"></i>

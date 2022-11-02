@@ -91,15 +91,15 @@
                         <td>{{rate.roomType.name}}</td>
 
                         <td>
+                            <span class="p-buttonset">
+                                <button type="button" pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-info p-button-outlined p-button-sm me-1" pTooltip="Editar"
+                                    tooltipPosition="top" [routerLink]="['/rate/register-rate',rate.id]"></button>
 
-                            <button type="button" pButton pRipple icon="pi pi-pencil"
-                                class="p-button-info p-button-text p-button-sm me-1" pTooltip="Editar"
-                                tooltipPosition="top" [routerLink]="['/rate/register-rate',rate.id]"></button>
-
-                            <button type="button" pButton pRipple icon="pi pi-trash"
-                                class="p-button-danger p-button-text p-button-sm" pTooltip="Eliminar"
-                                tooltipPosition="top" (click)="delete(rate.id)"></button>
-
+                                <button type="button" pButton pRipple icon="pi pi-trash"
+                                    class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar"
+                                    tooltipPosition="top" (click)="delete(rate.id)"></button>
+                            </span>
                         </td>
 
                     </tr>
