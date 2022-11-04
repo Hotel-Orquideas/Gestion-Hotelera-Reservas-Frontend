@@ -72,9 +72,6 @@
             <th pSortableColumn="roomTypeId">
               Tipo Habitación <p-sortIcon field="roomTypeId"></p-sortIcon>
             </th>
-            <th>
-              Tarifas Asociadas
-            </th>
             <th>Acción</th>
 
           </tr>
@@ -93,7 +90,6 @@
               <p-badge value="{{textInBadge(room.state)}}" severity="{{colorInBadge(room.state)}}"></p-badge>
             </td>
             <td>{{nameRoomType(room.roomTypeId)}}</td>
-            <td>{{room.rateId}}</td>
 
             <td>
               <span class="p-buttonset">
