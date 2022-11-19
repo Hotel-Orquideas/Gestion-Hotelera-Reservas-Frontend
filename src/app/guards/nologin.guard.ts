@@ -13,6 +13,7 @@ export class NologinGuard implements CanActivate {
 
   canActivate(): boolean {
 
+    /*
     if(this.authService.isAuth()){
       this.toastr.error('Ya tiene una sesión iniciada. Cierre sesión y vuelva a intentar.', 'Error', {
         closeButton: true,
@@ -24,6 +25,9 @@ export class NologinGuard implements CanActivate {
     }else{
       return true;
     }
+    */
+
+    return true;
 
 
   }

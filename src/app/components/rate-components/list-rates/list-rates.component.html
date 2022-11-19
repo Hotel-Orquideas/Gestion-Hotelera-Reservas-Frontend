@@ -23,12 +23,7 @@
             <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="Tarifas" [value]="rates"
                 [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
-                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-          'name',
-          'value',
-          'id',
-          'roomType.name'
-        ]">
+                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="['name','value','id','roomType.name']">
 
 
                 <ng-template pTemplate="caption">

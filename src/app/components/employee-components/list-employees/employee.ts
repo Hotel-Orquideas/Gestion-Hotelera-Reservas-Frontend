@@ -7,7 +7,7 @@ export class Employee extends Person{
     userName:string="";
     password:string="";
     person:Person = new Person();
-    roleSender:string="Administrador";
+    roleSender:string="administrador";
 
     /*
     person={
