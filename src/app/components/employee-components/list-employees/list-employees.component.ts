@@ -64,8 +64,8 @@ export class ListEmployeesComponent implements OnInit {
 
     //etiquetas para el breadcrumb
     this.items = [
-      { label: 'Empleado' },
-      { label: 'Empleados registrados' }
+      { label: 'Colaborador' },
+      { label: 'Colaboradores registrados' }
     ];
 
     //icono de casa pra el breadcrumb

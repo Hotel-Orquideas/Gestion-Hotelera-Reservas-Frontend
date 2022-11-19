@@ -1,1 +1,112 @@
-<p>list-clients works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast></p-toast>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+
+
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <span class="h4">
+            Clientes Registrados
+          </span>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-secondary mr-2"
+            routerLink="/client/register-client"></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="clientes" [value]="clients"
+        [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+        [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+          'person.name',
+          'person.lastName',
+          'person.phoneNumber',
+          'country_origin',
+        ]">
+
+
+        <ng-template pTemplate="caption">
+
+          <div class="row">
+            <div class="col-6">
+
+              <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()" class="me-2"
+                pTooltip="CSV" tooltipPosition="top"></button>
+
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
+
+
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
+
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Palabra Clave" />
+              </span>
+            </div>
+
+          </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+
+            <th pSortableColumn="person.name">
+              Nombre Completo
+              <p-sortIcon field="person.name"></p-sortIcon>
+
+            </th>
+            <th pSortableColumn="person.phoneNumber">
+              Telefono <p-sortIcon field="person.phoneNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="country_origin">
+              País de Origen <p-sortIcon field="country_origin"></p-sortIcon>
+            </th>
+            <th>Acción</th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-client>
+          <tr>
+
+            <td>{{client.person.name}} {{client.person.lastName}}</td>
+            <td>{{client.person.phoneNumber}}</td>
+            <td>{{client.country_origin}}</td>
+            <td>
+              <span class="p-buttonset">
+                <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
+                  class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/client/register-client',client.person.document]"></button>
+
+                <button type="button" pButton pRipple icon="pi pi-eye"
+                  class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar"
+                  tooltipPosition="top" [routerLink]="['/client/view-client',client.person.document]"></button>
+
+                <button type="button" pButton pRipple icon="pi pi-trash"
+                  class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
+                  (click)="delete(client.person.document)"></button>
+              </span>
+
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7">Clientes no encontrados.</td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+  </div>
+</div>
