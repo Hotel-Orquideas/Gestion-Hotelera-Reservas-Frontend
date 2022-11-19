@@ -103,7 +103,7 @@ export class ListClientsComponent implements OnInit {
         );
       }, reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Se ha cancelado la operación.', life: 3000 });
-        this.clientService.getEmployees()
+        this.clientService.getClients()
       }
     });
   }
