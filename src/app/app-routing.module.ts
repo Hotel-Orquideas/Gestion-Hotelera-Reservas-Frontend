@@ -20,6 +20,9 @@ import { LoginComponent } from './components/login-components/login/login.compon
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './components/home-components/home/home.component';
 import { NologinGuard } from './guards/nologin.guard';
+import { ListClientsComponent } from './components/client-components/list-clients/list-clients.component';
+import { RegisterClientComponent } from './components/client-components/register-client/register-client.component';
+import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
 
 const routes: Routes = [
  
@@ -46,6 +49,9 @@ const routes: Routes = [
   {path:'room/register-room', component:RegisterRoomComponent, canActivate:[AuthGuard]},
   {path:'room/register-room/:id', component:RegisterRoomComponent, canActivate:[AuthGuard]},
   {path:'room/view-room/:id', component:ViewRoomComponent, canActivate:[AuthGuard]},
+  {path:'client/list-clients', component:ListClientsComponent, canActivate:[AuthGuard]},
+  {path:'client/register-client/:doc', component:RegisterClientComponent, canActivate:[AuthGuard]},
+  {path:'client/view-client/:doc', component:ViewClientComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
