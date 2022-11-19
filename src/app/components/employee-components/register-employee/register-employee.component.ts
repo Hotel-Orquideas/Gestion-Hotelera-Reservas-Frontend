@@ -131,6 +131,7 @@ export class RegisterEmployeeComponent implements OnInit {
   }
 
   cargar(): void {
+
     this.activatedRoute.params.subscribe(
       emp => {
         let id = emp['doc'];

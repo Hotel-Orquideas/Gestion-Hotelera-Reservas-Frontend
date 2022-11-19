@@ -1,6 +1,13 @@
-<p-breadcrumb [model]="items" [home]="home" *ngIf="!client.id else elseBreadCrumb"></p-breadcrumb>
+<p-breadcrumb [model]="items" [home]="home" *ngIf=" (!client.id) else elseBreadCrumb"></p-breadcrumb>
+
 <ng-template #elseBreadCrumb>
-    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+    <ng-container *ngIf="!reservation else elseIfBreadCrumb">
+        <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+    </ng-container>
+</ng-template>
+
+<ng-template #elseIfBreadCrumb>
+    <p-breadcrumb [model]="itemsElseIf" [home]="home"></p-breadcrumb>
 </ng-template>
 
 <div class="container pt-4">
@@ -12,16 +19,43 @@
                         Registrar Cliente
                     </span>
                     <ng-template #elseTittle>
+                        <ng-container *ngIf="!reservation else elseIfTittle">
+                            <span class="h4">
+                                Actualizar Cliente
+                            </span>
+                        </ng-container>
+                    </ng-template>
+                    <ng-template #elseIfTittle>
                         <span class="h4">
-                            Actualizar Cliente
+                            Completar datos del Cliente
                         </span>
                     </ng-template>
                 </ng-template>
 
                 <ng-template pTemplate="right">
                     <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/employee/list-employees" *ngIf="!client.id else elseButtonBack"></button>
+
+                    <ng-template #elseButtonBack>
+                        
+                        <ng-container *ngIf="!reservation else elseIfButtonBack">
+                            <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
                         routerLink="/employee/list-employees"></button>
+                        </ng-container>
+
+                    </ng-template>
+
+                    <ng-template #elseIfButtonBack>
+
+                        <!--Falta agregar la ruta de donde está la reservación y se debe quitar el check del label-->
+                        <button pButton pRipple label="Volver check" icon="pi pi-arrow-left"
+                            class="p-button-secondary mr-2" routerLink=""></button>
+
+                    </ng-template>
                 </ng-template>
+
+
+
             </p-toolbar>
             <div class="card text-center">
                 <div class="card-body">
@@ -84,8 +118,7 @@
                             <div class="col">
                                 <p class="float-start">Fecha Expedición Documento (*)</p>
                                 <p-calendar formControlName="dateIssuanceDoc" [minDate]="minDate" [maxDate]="maxDate"
-                                    [(ngModel)]='client.dateIssuanceDoc' [showIcon]="true"
-                                    inputId="icon"></p-calendar>
+                                    [(ngModel)]='client.dateIssuanceDoc' [showIcon]="true" inputId="icon"></p-calendar>
                             </div>
 
                         </div>
@@ -116,7 +149,7 @@
                             <div class="col">
                                 <p class="float-start">Profesión (*)</p>
                                 <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-user-tie"></i></span>
                                     <input formControlName="profession" type="text" pInputText class="form-control"
                                         placeholder="Ej: Locutor" [(ngModel)]="client.profession">
                                 </div>
@@ -170,7 +203,7 @@
                             <div class="col">
                                 <p class="float-start">País de Origen (*)</p>
                                 <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-globe"></i></span>
                                     <input formControlName="country_origin" type="text" pInputText class="form-control"
                                         placeholder="Ej: Colombia" [(ngModel)]="client.country_origin">
                                 </div>
@@ -179,7 +212,7 @@
                             <div class="col">
                                 <p class="float-start">Ciudad de Origen (*)</p>
                                 <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-map-location"></i></span>
                                     <input formControlName="city_origin" type="text" pInputText class="form-control"
                                         placeholder="Ej: Tunja" [(ngModel)]="client.city_origin">
                                 </div>
@@ -191,18 +224,20 @@
                             <div class="col">
                                 <p class="float-start">País de Destino (*)</p>
                                 <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
-                                    <input formControlName="country_destination" type="text" pInputText class="form-control"
-                                        placeholder="Ej: Colombia" [(ngModel)]="client.country_destination">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-earth-americas"></i></span>
+                                    <input formControlName="country_destination" type="text" pInputText
+                                        class="form-control" placeholder="Ej: Colombia"
+                                        [(ngModel)]="client.country_destination">
                                 </div>
                             </div>
 
                             <div class="col">
                                 <p class="float-start">Ciudad de Destino (*)</p>
                                 <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
-                                    <input formControlName="city_destination" type="text" pInputText class="form-control"
-                                        placeholder="Ej: Sogamoso" [(ngModel)]="client.city_destination">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-map-location-dot"></i></span>
+                                    <input formControlName="city_destination" type="text" pInputText
+                                        class="form-control" placeholder="Ej: Sogamoso"
+                                        [(ngModel)]="client.city_destination">
                                 </div>
                             </div>
 
@@ -216,9 +251,20 @@
 
 
                     <ng-template #elseBlock>
+
+                        <ng-container *ngIf="!reservation else elseIfBlock">
+                            <div class="mt-4">
+                                <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                    (click)="update()">Actualizar</button>
+                            </div>
+                        </ng-container>
+
+                    </ng-template>
+
+                    <ng-template #elseIfBlock>
                         <div class="mt-4">
                             <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
-                                (click)="update()">Actualizar</button>
+                                (click)="update()">Completar</button>
                         </div>
                     </ng-template>
 

@@ -25,7 +25,10 @@ export class RegisterClientComponent implements OnInit {
   maxDate: Date = new Date;
   items: MenuItem[] = new Array;//para breadcrumb
   itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar cliente
+  itemsElseIf: MenuItem[] = new Array;//para breadcrumb cuando es actualizar cliente y hay reserva
   home: MenuItem = {};//para breadcrumb
+  reservation: any;
+  id: any;
 
   constructor(private clientService: ClientService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
 
@@ -84,6 +87,7 @@ export class RegisterClientComponent implements OnInit {
       birthdate: ['', [
       ]],
       dateIssuanceDoc: ['', [
+        Validators.required
       ]]
     });
 
@@ -108,23 +112,38 @@ export class RegisterClientComponent implements OnInit {
       { label: 'Actualizar cliente' }
     ];
 
+    //etiquetas para el breadcrumb cuando es actualziar empleado con una reserva activa
+    this.itemsElseIf = [
+      { label: 'Check-in' },
+      { label: 'Clientes en reserva', url: '' },
+      { label: 'Completar datos cliente' }
+    ];
+
     //icono de casa pra el breadcrumb
     this.home = { icon: 'pi pi-home', routerLink: '/' };
 
   }
 
   cargar(): void {
+
     this.activatedRoute.params.subscribe(
       emp => {
-        let id = emp['doc'];
-        if (id) {
-          this.clientService.getClient(id).subscribe(
+        this.id = emp['doc'];
+        this.reservation = emp['res'];
+
+        if (this.id) {
+          this.clientService.getClient(this.id).subscribe(
             es => this.client = es
           );
 
         }
       }
     );
+
+
+
+    console.log("Documento: " + this.id);
+    console.log("Reserva: " + this.reservation);
 
   }
 

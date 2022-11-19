@@ -28,12 +28,12 @@ export class NavBarComponent implements OnInit {
         items: [
           {
             label: 'Registrar',
-            icon: 'fa-solid fa-user-plus',
+            icon: 'fa-solid fa-person-circle-plus',
             url: 'employee/register-employee'
           },
           {
             label: 'Listar',
-            icon: 'fa-solid fa-user-group',
+            icon: 'fa-solid fa-people-group',
             url: 'employee/list-employees'
           }
         ]
@@ -53,7 +53,24 @@ export class NavBarComponent implements OnInit {
             url: 'company/list-companies'
           }
         ]
-      }, {
+      },
+      {
+        label: 'Clientes',
+        icon: 'fa-solid fa-users',
+        items: [
+          {
+            label: 'Registrar',
+            icon: 'fa-solid fa-user-plus',
+            url: 'client/register-client'
+          },
+          {
+            label: 'Listar',
+            icon: 'fa-solid fa-user-group',
+            url: 'client/list-clients'
+          }
+        ]
+      },
+      {
         label: 'Gestión',
         icon: 'fa-solid fa-toolbox',
         items: [

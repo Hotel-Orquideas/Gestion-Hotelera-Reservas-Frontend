@@ -6,7 +6,7 @@ export class Client extends Person{
     city_origin:string;
     country_destination:string;
     city_destination:string;
-    document_expedition_date:Date;
+    dateIssuanceDoc:Date;
     profession:string;
     person:Person = new Person();
 }
