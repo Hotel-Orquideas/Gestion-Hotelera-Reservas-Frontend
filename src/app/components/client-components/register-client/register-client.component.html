@@ -1,1 +1,229 @@
-<p>register-client works!</p>
+<p-breadcrumb [model]="items" [home]="home" *ngIf="!client.id else elseBreadCrumb"></p-breadcrumb>
+<ng-template #elseBreadCrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+</ng-template>
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4" *ngIf="!client.id else elseTittle">
+                        Registrar Cliente
+                    </span>
+                    <ng-template #elseTittle>
+                        <span class="h4">
+                            Actualizar Cliente
+                        </span>
+                    </ng-template>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/employee/list-employees"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <form class="mt-4" [formGroup]="formRegister">
+                        <div class="row">
+                            <div class="col">
+
+                                <p class="float-start">Nombre (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-user-large"></i></span>
+                                    <input formControlName="name" type="text" pInputText class="form-control"
+                                        placeholder="Nombre" [(ngModel)]="client.name" [(ngModel)]="client.person.name">
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <p class="float-start">Apellido (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-user-large"></i></span>
+                                    <input formControlName="lastName" type="text" pInputText class="form-control"
+                                        placeholder="Apellido" [(ngModel)]="client.lastName"
+                                        [(ngModel)]="client.person.lastName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="float-start">Tipo de Documento (*)</p>
+                                <select formControlName="documentType" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="client.typeDocument"
+                                    [(ngModel)]="client.person.typeDocument">
+                                    <option [selected]="true">Seleccione una opción</option>
+                                    <option value="CC">Cédula de Ciudadanía</option>
+                                    <option value="PA">Pasaporte</option>
+                                    <option value="TI">Tarjeta de Identidad</option>
+                                    <option value="CE">Cédula de Extranjería</option>
+                                </select>
+
+                            </div>
+                            <div class="col">
+                                <p class="float-start">Número de Documento (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-hashtag"></i></span>
+                                    <p-inputNumber type="text" formControlName="document" pKeyFilter="int"
+                                        placeholder="Número de documento" [(ngModel)]="client.document"
+                                        [(ngModel)]="client.person.document"
+                                        *ngIf="!client.id else elseInputNumDocument">
+                                    </p-inputNumber>
+
+                                    <ng-template #elseInputNumDocument>
+                                        <p-inputNumber [disabled]="true" type="text" formControlName="document"
+                                            pKeyFilter="int" placeholder="Número de documento"
+                                            [(ngModel)]="client.document" [(ngModel)]="client.person.document">
+                                        </p-inputNumber>
+
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Fecha Expedición Documento (*)</p>
+                                <p-calendar formControlName="dateIssuanceDoc" [minDate]="minDate" [maxDate]="maxDate"
+                                    [(ngModel)]='client.dateIssuanceDoc' [showIcon]="true"
+                                    inputId="icon"></p-calendar>
+                            </div>
+
+                        </div>
+                        <div class="row mt-4">
+
+                            <div class="col">
+                                <p class="float-start">Teléfono (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-solid fa-mobile-retro"></i></span>
+
+                                    <input formControlName="phoneNumber" type="text" pInputText class="form-control"
+                                        pKeyFilter="int" placeholder="Teléfono" [(ngModel)]="client.phoneNumber"
+                                        [(ngModel)]="client.person.phoneNumber">
+
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Correo Electrónico (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="email" type="email" pInputText class="form-control"
+                                        placeholder="Email" [(ngModel)]="client.email"
+                                        [(ngModel)]="client.person.email">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Profesión (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="profession" type="text" pInputText class="form-control"
+                                        placeholder="Ej: Locutor" [(ngModel)]="client.profession">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row mt-4">
+
+                            <div class="col">
+                                <p class="float-start">Género (*)</p>
+
+                                <select formControlName="genre" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="client.genre"
+                                    [(ngModel)]="client.person.genre">
+                                    <option [selected]="true">Seleccione una opción</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="O">Otro</option>
+                                </select>
+
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Tipo de Sangre(*)</p>
+
+                                <select formControlName="bloodType" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="client.bloodType"
+                                    [(ngModel)]="client.person.bloodType">
+                                    <option [selected]="true">Seleccione una opción</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+
+                            </div>
+                            <div class="col">
+                                <p class="float-start">Fecha de Nacimiento (*)</p>
+                                <p-calendar formControlName="birthdate" [minDate]="minDate" [maxDate]="maxDate"
+                                    [(ngModel)]='client.birthdate' [(ngModel)]='client.birthdate' [showIcon]="true"
+                                    inputId="icon"></p-calendar>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+
+                            <div class="col">
+                                <p class="float-start">País de Origen (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="country_origin" type="text" pInputText class="form-control"
+                                        placeholder="Ej: Colombia" [(ngModel)]="client.country_origin">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Ciudad de Origen (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="city_origin" type="text" pInputText class="form-control"
+                                        placeholder="Ej: Tunja" [(ngModel)]="client.city_origin">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-4">
+
+                            <div class="col">
+                                <p class="float-start">País de Destino (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="country_destination" type="text" pInputText class="form-control"
+                                        placeholder="Ej: Colombia" [(ngModel)]="client.country_destination">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Ciudad de Destino (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                                    <input formControlName="city_destination" type="text" pInputText class="form-control"
+                                        placeholder="Ej: Sogamoso" [(ngModel)]="client.city_destination">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()" *ngIf="!client.id else elseBlock">Registrar</button>
+                    </div>
+
+
+                    <ng-template #elseBlock>
+                        <div class="mt-4">
+                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                (click)="update()">Actualizar</button>
+                        </div>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

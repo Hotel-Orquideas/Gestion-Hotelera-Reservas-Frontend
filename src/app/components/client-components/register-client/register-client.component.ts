@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClientService } from 'src/app/services/client-service/client.service';
+import { Client } from '../list-clients/client';
+import { MenuItem } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-register-client',
@@ -7,9 +14,152 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterClientComponent implements OnInit {
 
-  constructor() { }
+  public formRegister: FormGroup = new FormGroup<any>('');//para formulario registrar
+
+
+  client: Client = new Client();
+  documentTypes: any = new Array;//para option
+  genres: any = new Array;//para option
+  rhs: any = new Array;//para option
+  minDate: Date = new Date;
+  maxDate: Date = new Date;
+  items: MenuItem[] = new Array;//para breadcrumb
+  itemsElse: MenuItem[] = new Array;//para breadcrumb cuando es actualizar cliente
+  home: MenuItem = {};//para breadcrumb
+
+  constructor(private clientService: ClientService, private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+
+    //validaciones básicas para el formulario de registrar
+    this.formRegister = this.formBuilder.group({
+      name: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]],
+      lastName: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]],
+      documentType: ['', [
+        Validators.required,
+      ]],
+      document: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(11)
+      ]],
+      phoneNumber: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(15)
+      ]],
+      country_origin: ['', [
+        Validators.required
+      ]],
+      city_origin: ['', [
+        Validators.required
+      ]],
+      country_destination: ['', [
+        Validators.required
+      ]],
+      city_destination: ['', [
+        Validators.required
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      genre: ['', [
+        Validators.required
+      ]],
+      bloodType: ['', [
+        Validators.required
+      ]],
+      profession: ['', [
+        Validators.required
+      ]],
+      birthdate: ['', [
+      ]],
+      dateIssuanceDoc: ['', [
+      ]]
+    });
+
+    this.cargar(); //llena el formulario si existe documento en el parametro url
+
+
+    //condiciones fecha, no puede tener menos de 18 años, no puede tener más de 60 años
+    this.minDate.setFullYear(new Date().getFullYear() - 120);
+    this.maxDate.setFullYear(new Date().getFullYear() - 0);
+
+
+    //etiquetas para el breadcrumb
+    this.items = [
+      { label: 'Cliente' },
+      { label: 'Registrar cliente' }
+    ];
+
+    //etiquetas para el breadcrumb cuando es actualziar empleado
+    this.itemsElse = [
+      { label: 'Cliente' },
+      { label: 'Clientes registrados', url: 'client/list-clients' },
+      { label: 'Actualizar cliente' }
+    ];
+
+    //icono de casa pra el breadcrumb
+    this.home = { icon: 'pi pi-home', routerLink: '/' };
+
+  }
+
+  cargar(): void {
+    this.activatedRoute.params.subscribe(
+      emp => {
+        let id = emp['doc'];
+        if (id) {
+          this.clientService.getClient(id).subscribe(
+            es => this.client = es
+          );
+
+        }
+      }
+    );
+
+  }
+
+  register(): void {
+    //pongo esto porque el componente p-inputNumber siempre retorna un número y no string
+    this.client.person.document = this.client.person.document + '';
+    this.client.document = this.client.document + '';
+
+
+    this.clientService.registerClient(this.client).subscribe(
+      res => {
+        this.toastr.success('El cliente se ha registrado satisfactoriamente.', 'Registro cliente', {
+          closeButton: true,
+          progressBar: true
+        });
+        this.router.navigate(['/client/list-clients'])
+      }
+    );
+  }
+
+  update(): void {
+
+    //pongo esto porque el componente p-inputNumber siempre retorna un número y no string
+    this.client.person.document = this.client.person.document + '';
+    this.client.document = this.client.document + '';
+
+    this.clientService.updateClient(this.client).subscribe(
+      emp => {
+        this.toastr.info('El Cliente se ha actualizado satisfactoriamente.', 'Actualziar cliente', {
+          closeButton: true,
+          progressBar: true
+        });
+        this.router.navigate(['/client/list-clients'])
+      }
+    );
   }
 
 }
