@@ -83,6 +83,11 @@ export class NavBarComponent implements OnInit {
             label: 'Listar',
             icon: 'fa-solid fa-user-group',
             url: 'client/list-clients'
+          },
+          {
+            label: 'Vincular a empresa',
+            icon:'fa-solid fa-people-pulling',
+            url:'clientCompany/register-clientCompany'
           }
         ]
       },
