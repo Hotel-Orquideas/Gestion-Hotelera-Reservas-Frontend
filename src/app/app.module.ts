@@ -60,6 +60,9 @@ import { ViewClientComponent } from './components/client-components/view-client/
 import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
 import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
 import { RegisterClientCompanyComponent } from './components/clientCompany-components/register-client-company/register-client-company.component';
+import { RegisterBookingComponent } from './components/booking-components/register-booking/register-booking.component';
+import { ListBookingsComponent } from './components/booking-components/list-bookings/list-bookings.component';
+import { ViewBookingComponent } from './components/booking-components/view-booking/view-booking.component';
 
 
 
@@ -92,7 +95,10 @@ import { RegisterClientCompanyComponent } from './components/clientCompany-compo
     ViewClientComponent,
     RegisterPromotionComponent,
     ListPromotionsComponent,
-    RegisterClientCompanyComponent
+    RegisterClientCompanyComponent,
+    RegisterBookingComponent,
+    ListBookingsComponent,
+    ViewBookingComponent
   ],
   imports: [
     BrowserModule,
