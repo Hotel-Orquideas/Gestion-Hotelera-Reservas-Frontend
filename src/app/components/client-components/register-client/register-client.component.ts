@@ -94,7 +94,7 @@ export class RegisterClientComponent implements OnInit {
     this.cargar(); //llena el formulario si existe documento en el parametro url
 
 
-    //condiciones fecha, no puede tener menos de 18 años, no puede tener más de 60 años
+    //condiciones fecha, no hay mayores a 120 años y la fecha de expedición de cedula pudo ser hoy.
     this.minDate.setFullYear(new Date().getFullYear() - 120);
     this.maxDate.setFullYear(new Date().getFullYear() - 0);
 
