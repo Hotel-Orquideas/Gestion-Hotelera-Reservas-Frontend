@@ -1,1 +1,162 @@
-<p>view-client works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+<div class="container mt-4 col-lg-6">
+    <div class="card">
+        <div class="card-body">
+
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Cliente: {{client.person.name}} {{client.person.lastName}}
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-secondary mr-2"
+                        [routerLink]="['/client/register-client', client.person.document]"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <div class="row">
+                <div class="col-8 offset-lg-2">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div style="text-align: center;">
+                                <span class="h4">
+                                    Datos
+                                </span>
+                            </div>
+
+                            <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+
+                            <div>
+                                <div class="row flex align-items-center mb-3">
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Tipo de documento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.person.typeDocument}}
+                                    </div>
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Número de documento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.person.document}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Expedición documento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.dateIssuanceDoc | date: 'dd/MM/yyyy'}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Teléfono: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.person.phoneNumber}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Correo: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.person.email}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Fecha de nacimiento: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.person.birthdate | date: 'dd/MM/yyyy'}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Tipo de sangre: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.person.bloodType}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Género: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{genreInText(client.person.genre)}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Origen: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.country_origin}} - {{client.city_origin}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2 text-primary"></i>
+                                        <span class="h6">Destino: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{client.country_destination}} - {{client.city_destination}}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -78,11 +78,13 @@ export class ViewEmployeeComponent implements OnInit {
     genreInText(genre:string):string{
       
       if(genre=="F"){
-        return "Femenino"
+        return "Femenino";
       }else if(genre=="M"){
-        return "Masculino"
+        return "Masculino";
+      }else if(genre=="O"){
+        return "Otro";
       }else{
-        return "Sin género - error"
+        return "Sin género - error";
       }
 
     }
