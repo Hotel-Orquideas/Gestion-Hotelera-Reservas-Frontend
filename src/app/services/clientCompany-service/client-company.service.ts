@@ -18,7 +18,7 @@ export class ClientCompanyService {
    * @param clientCompany 
    * @returns 
    */
-     registerPromotion(clientCompany:ClientCompany):Observable<ClientCompany>{
+     registerClientCompany(clientCompany:ClientCompany):Observable<ClientCompany>{
       return this.http.post<ClientCompany>(this.urlEndPoint+'/'+clientCompany.companyId+'/'+clientCompany.clientId,clientCompany);
     }
 

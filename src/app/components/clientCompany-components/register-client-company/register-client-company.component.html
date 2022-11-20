@@ -1,1 +1,67 @@
-<p>register-client-company works!</p>
+<p-breadcrumb [model]="items" [home]="home" *ngIf="!clientCompany.clientId else elseBreadCrumb"></p-breadcrumb>
+<ng-template #elseBreadCrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+</ng-template>
+
+<div class="container pt-4" >
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4" *ngIf="!clientCompany.clientId else elseTittle">
+                        Registrar cliente en Empresa
+                    </span>
+                    <ng-template #elseTittle>
+                        <span class="h4">
+                            Actualizar cliente en Empresa
+                        </span>
+                    </ng-template>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <!--Pendiente volver-->
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/home"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <form class="mt-4" [formGroup]="formRegister">
+                        <div class="row">
+                            <div class="col">
+                                <p class="float-start">Empresa (*)</p>
+                                <select (click)="existsCompanies()" formControlName="companyId" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="clientCompany.companyId">
+                                    <option *ngFor="let company of companies"
+                                        value="{{company.id}}">{{company.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Empresa (*)</p>
+                                <select (click)="existsClients()" formControlName="clientId" class="form-select form-select-lg"
+                                    aria-label="Default select example" [(ngModel)]="clientCompany.clientId">
+                                    <option *ngFor="let client of clients"
+                                        value="{{client.id}}">{{client.name}} {{client.lastName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()" *ngIf="!clientCompany.clientId else elseBlock">Registrar</button>
+                    </div>
+
+                    <!--Queda pendiete el (click) en update-->
+                    <ng-template #elseBlock>
+                        <div class="mt-4">
+                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                               >Actualizar</button>
+                        </div>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
