@@ -34,13 +34,13 @@
 
                 <ng-template pTemplate="right">
                     <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
-                        routerLink="/employee/list-employees" *ngIf="!client.id else elseButtonBack"></button>
+                        routerLink="/client/list-clients" *ngIf="!client.id else elseButtonBack"></button>
 
                     <ng-template #elseButtonBack>
                         
                         <ng-container *ngIf="!reservation else elseIfButtonBack">
                             <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
-                        routerLink="/employee/list-employees"></button>
+                        routerLink="/client/list-clients"></button>
                         </ng-container>
 
                     </ng-template>
@@ -117,7 +117,7 @@
 
                             <div class="col">
                                 <p class="float-start">Fecha Expedición Documento (*)</p>
-                                <p-calendar formControlName="dateIssuanceDoc" [minDate]="minDate" [maxDate]="maxDate"
+                                <p-calendar formControlName="dateIssuanceDoc" dataType="Date" [minDate]="minDate" [maxDate]="maxDate"
                                     [(ngModel)]='client.dateIssuanceDoc' [showIcon]="true" inputId="icon"></p-calendar>
                             </div>
 
@@ -205,7 +205,7 @@
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="fa-solid fa-globe"></i></span>
                                     <input formControlName="country_origin" type="text" pInputText class="form-control"
-                                        placeholder="Ej: Colombia" [(ngModel)]="client.country_origin">
+                                        placeholder="Ej: Colombia" [(ngModel)]="client.countryOrigin">
                                 </div>
                             </div>
 
@@ -214,7 +214,7 @@
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="fa-solid fa-map-location"></i></span>
                                     <input formControlName="city_origin" type="text" pInputText class="form-control"
-                                        placeholder="Ej: Tunja" [(ngModel)]="client.city_origin">
+                                        placeholder="Ej: Tunja" [(ngModel)]="client.cityOrigin">
                                 </div>
                             </div>
 
@@ -227,7 +227,7 @@
                                     <span class="p-inputgroup-addon"><i class="fa-solid fa-earth-americas"></i></span>
                                     <input formControlName="country_destination" type="text" pInputText
                                         class="form-control" placeholder="Ej: Colombia"
-                                        [(ngModel)]="client.country_destination">
+                                        [(ngModel)]="client.countryDestination">
                                 </div>
                             </div>
 
@@ -237,7 +237,7 @@
                                     <span class="p-inputgroup-addon"><i class="fa-solid fa-map-location-dot"></i></span>
                                     <input formControlName="city_destination" type="text" pInputText
                                         class="form-control" placeholder="Ej: Sogamoso"
-                                        [(ngModel)]="client.city_destination">
+                                        [(ngModel)]="client.cityDestination">
                                 </div>
                             </div>
 

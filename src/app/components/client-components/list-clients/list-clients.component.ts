@@ -49,10 +49,11 @@ export class ListClientsComponent implements OnInit {
       { field: "person.phoneNumber", header: 'Telefono' },
       { field: "person.email", header: 'Correo' },
       { field: "person.bloodType", header: 'TipoSangre' },
-      { field: "person.country_origin", header: 'PaisOrigen' },
-      { field: "person.city_origin", header: 'CiudadOrigen' },
-      { field: "person.country_destination", header: 'PaisDestino' },
-      { field: "person.city_destination", header: 'CiudadDestino' }
+      { field: "countryOrigin", header: 'PaisOrigen' },
+      { field: "cityOrigin", header: 'CiudadOrigen' },
+      { field: "countryDestination", header: 'PaisDestino' },
+      { field: "cityDestination", header: 'CiudadDestino' },
+      { field: "profession", header: 'Profesion' }
 
 
     ];
@@ -91,13 +92,22 @@ export class ListClientsComponent implements OnInit {
       header: 'Confirmación para eliminar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Cliente eliminado correctamente', life: 3000 });
+        
         this.clientService.deleteClient(doc).subscribe(
           cl => {
             this.clientService.getClients().subscribe(
               response => this.clients = response
             )
+            this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Cliente eliminado correctamente', life: 3000 });
 
+          },
+          error => {
+            //mejorar este mensaje - mostrando las tarifas y habitaciones que dependen de este
+            this.messageService.add({
+              severity: 'error', summary: 'Error al eliminar',
+              detail: "Error "+ error.status,
+              life: 3000
+            })
           }
 
         );
@@ -157,10 +167,10 @@ export class ListClientsComponent implements OnInit {
         tipoDocumento: this.clients[i].person.typeDocument,
         Documento: this.clients[i].person.document,
         Nacimiento: this.clients[i].person.birthdate,
-        PaisOrigen: this.clients[i].country_origin,
-        CiudadOrigen: this.clients[i].city_origin,
-        PaisDestino: this.clients[i].country_destination,
-        CiudadDestino: this.clients[i].city_destination,
+        PaisOrigen: this.clients[i].countryOrigin,
+        CiudadOrigen: this.clients[i].cityOrigin,
+        PaisDestino: this.clients[i].countryDestination,
+        CiudadDestino: this.clients[i].cityDestination,
         Profesion: this.clients[i].profession,
         Telefono: this.clients[i].person.phoneNumber,
         Correo: this.clients[i].person.email,

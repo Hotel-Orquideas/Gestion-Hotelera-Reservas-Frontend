@@ -34,17 +34,20 @@ export class RegisterClientComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    this.cargar(); //llena el formulario si existe documento en el parametro url
+
     //validaciones básicas para el formulario de registrar
     this.formRegister = this.formBuilder.group({
       name: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(15)
+        Validators.maxLength(40)
       ]],
       lastName: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(15)
+        Validators.maxLength(40)
       ]],
       documentType: ['', [
         Validators.required,
@@ -91,7 +94,7 @@ export class RegisterClientComponent implements OnInit {
       ]]
     });
 
-    this.cargar(); //llena el formulario si existe documento en el parametro url
+    
 
 
     //condiciones fecha, no hay mayores a 120 años y la fecha de expedición de cedula pudo ser hoy.

@@ -58,10 +58,10 @@ export class ClientService {
       "email":`${client.person.email}`,
       "bloodType":`${client.person.bloodType}`,
       "dateIssuanceDoc":`${client.dateIssuanceDoc}`,
-      "countryOrigin":`${client.country_origin}`,
-      "countryDestination":`${client.country_destination}`,
-      "cityOrigin":`${client.city_origin}`,
-      "cityDestination":`${client.city_destination}`,
+      "countryOrigin":`${client.countryOrigin}`,
+      "countryDestination":`${client.countryDestination}`,
+      "cityOrigin":`${client.cityOrigin}`,
+      "cityDestination":`${client.cityDestination}`,
       "profession":`${client.profession}`,
     };
 
@@ -73,7 +73,7 @@ export class ClientService {
    * @param client
    */
   deleteClient(doc:string):Observable<Client>{
-    return this.http.patch<Client>(this.urlEndPoint+'/'+doc, null);
+    return this.http.patch<Client>(this.urlEndPoint+'/'+doc,'');
   }
 
 }
