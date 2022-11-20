@@ -1,4 +1,4 @@
-<p-breadcrumb [model]="items" [home]="home" *ngIf="!clientCompany.clientId else elseBreadCrumb"></p-breadcrumb>
+<p-breadcrumb [model]="items" [home]="home" *ngIf="true else elseBreadCrumb"></p-breadcrumb>
 <ng-template #elseBreadCrumb>
     <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
 </ng-template>
@@ -8,7 +8,7 @@
         <div class="col-lg-10 offset-lg-1">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                    <span class="h4" *ngIf="!clientCompany.clientId else elseTittle">
+                    <span class="h4" *ngIf="true else elseTittle">
                         Registrar cliente en Empresa
                     </span>
                     <ng-template #elseTittle>
@@ -38,18 +38,18 @@
                             </div>
 
                             <div class="col">
-                                <p class="float-start">Empresa (*)</p>
+                                <p class="float-start">Cliente (*)</p>
                                 <select (click)="existsClients()" formControlName="clientId" class="form-select form-select-lg"
                                     aria-label="Default select example" [(ngModel)]="clientCompany.clientId">
                                     <option *ngFor="let client of clients"
-                                        value="{{client.id}}">{{client.name}} {{client.lastName}}</option>
+                                        value="{{client.id}}">{{client.person.name}} {{client.person.lastName}}</option>
                                 </select>
                             </div>
                         </div>
                     </form>
                     <div class="mt-4">
                         <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
-                            (click)="register()" *ngIf="!clientCompany.clientId else elseBlock">Registrar</button>
+                            (click)="register()" *ngIf="true else elseBlock">Registrar</button>
                     </div>
 
                     <!--Queda pendiete el (click) en update-->

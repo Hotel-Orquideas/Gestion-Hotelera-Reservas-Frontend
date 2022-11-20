@@ -25,6 +25,7 @@ import { RegisterClientComponent } from './components/client-components/register
 import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
 import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
 import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
+import { RegisterClientCompanyComponent } from './components/clientCompany-components/register-client-company/register-client-company.component';
 
 const routes: Routes = [
  
@@ -59,8 +60,8 @@ const routes: Routes = [
   {path:'promotion/list-promotions', component:ListPromotionsComponent, canActivate:[AuthGuard]},
   {path:'promotion/register-promotion', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
   {path:'promotion/register-promotion/:id', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
-  {path:'clientCompany/register-clientCompany/', component:RegisterClientComponent, canActivate:[AuthGuard]},
-  {path:'clientCompany/register-clientCompany/:clientId', component:RegisterClientComponent, canActivate:[AuthGuard]},
+  {path:'clientCompany/register-clientCompany', component:RegisterClientCompanyComponent, canActivate:[AuthGuard]},
+  {path:'clientCompany/register-clientCompany:clientId', component:RegisterClientCompanyComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
