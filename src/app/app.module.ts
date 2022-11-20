@@ -59,6 +59,7 @@ import { RegisterClientComponent } from './components/client-components/register
 import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
 import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
 import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
+import { RegisterClientCompanyComponent } from './components/clientCompany-components/register-client-company/register-client-company.component';
 
 
 
@@ -90,7 +91,8 @@ import { ListPromotionsComponent } from './components/promotion-components/list-
     RegisterClientComponent,
     ViewClientComponent,
     RegisterPromotionComponent,
-    ListPromotionsComponent
+    ListPromotionsComponent,
+    RegisterClientCompanyComponent
   ],
   imports: [
     BrowserModule,
