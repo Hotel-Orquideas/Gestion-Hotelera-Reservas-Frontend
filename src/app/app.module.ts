@@ -57,8 +57,8 @@ import { HomeComponent } from './components/home-components/home/home.component'
 import { ListClientsComponent } from './components/client-components/list-clients/list-clients.component';
 import { RegisterClientComponent } from './components/client-components/register-client/register-client.component';
 import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
-import { RegisterPromotionComponent } from './components/promotions/register-promotion/register-promotion.component';
-import { ListPromotionsComponent } from './components/promotions/list-promotions/list-promotions.component';
+import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
+import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
 
 
 

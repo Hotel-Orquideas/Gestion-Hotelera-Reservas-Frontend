@@ -51,6 +51,22 @@ export class NavBarComponent implements OnInit {
             label: 'Listar',
             icon: 'fa-solid fa-city',
             url: 'company/list-companies'
+          },
+          {
+            label:'Promociones',
+            icon:'fa-solid fa-percent',
+            items:[
+              {
+                label:'Listar promociones',
+                icon:'fa-solid fa-splotch',
+                url: 'promotion/list-promotions'
+              },
+              {
+                label:'Registrar promoción',
+                icon:'fa-solid fa-circle-dollar-to-slot',
+                url: 'promotion/register-promotion'
+              }
+            ]
           }
         ]
       },
