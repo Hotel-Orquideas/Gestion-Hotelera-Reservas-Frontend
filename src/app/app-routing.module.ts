@@ -23,6 +23,8 @@ import { NologinGuard } from './guards/nologin.guard';
 import { ListClientsComponent } from './components/client-components/list-clients/list-clients.component';
 import { RegisterClientComponent } from './components/client-components/register-client/register-client.component';
 import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
+import { ListPromotionsComponent } from './components/promotions/list-promotions/list-promotions.component';
+import { RegisterPromotionComponent } from './components/promotions/register-promotion/register-promotion.component';
 
 const routes: Routes = [
  
@@ -54,6 +56,9 @@ const routes: Routes = [
   {path:'client/register-client/:doc', component:RegisterClientComponent, canActivate:[AuthGuard]},
   {path:'client/register-client/:res/:doc', component:RegisterClientComponent, canActivate:[AuthGuard]},
   {path:'client/view-client/:doc', component:ViewClientComponent, canActivate:[AuthGuard]},
+  {path:'promotion/list-promotions', component:ListPromotionsComponent, canActivate:[AuthGuard]},
+  {path:'promotion/register-promotion', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
+  {path:'promotion/register-promotion/:id', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
