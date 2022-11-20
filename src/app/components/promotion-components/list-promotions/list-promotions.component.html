@@ -67,8 +67,8 @@
                         <th pSortableColumn="percentage">
                             Descuento <p-sortIcon field="percentage"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="company.name">
-                            Empresa <p-sortIcon field="company.name"></p-sortIcon>
+                        <th pSortableColumn="company.id">
+                            Empresa <p-sortIcon field="company.id"></p-sortIcon>
                         </th>
                         <th pSortableColumn="expirationDate">
                             Expiración <p-sortIcon field="expirationDate"></p-sortIcon>
@@ -82,7 +82,7 @@
 
                         <td>{{promotion.description}}</td>
                         <td>{{promotion.percentage}}%</td>
-                        <td>{{promotion.company.name}}</td>
+                        <td>{{nameCompany(promotion.companyId)}}</td>
                         <td>{{promotion.expirationDate | date: 'dd/MM/yyyy'}}</td>
 
                         <td>

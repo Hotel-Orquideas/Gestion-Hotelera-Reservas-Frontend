@@ -6,5 +6,4 @@ export class Promotion{
     percentage:number;
     expirationDate:Date;
     companyId:number;
-    company:Company = new Company;
 }

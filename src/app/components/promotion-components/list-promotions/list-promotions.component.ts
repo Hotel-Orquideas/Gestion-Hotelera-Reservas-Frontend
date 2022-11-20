@@ -23,6 +23,7 @@ export class ListPromotionsComponent implements OnInit {
 
   promotions: Promotion[] = new Array;
   companies: Company[] = new Array();
+  comp:Company;
   promo = new Array(); //para poder exportar en excel
   cols: any[] = new Array;//para exportar en CSV
   headSimple: any[] = new Array;//para exportar pdf
@@ -122,7 +123,7 @@ export class ListPromotionsComponent implements OnInit {
       let promotion1 = [
         this.promotions[i].description,
         this.promotions[i].percentage,
-        this.promotions[i].company.name,
+        this.nameCompany(this.promotions[i].companyId),
         this.promotions[i].expirationDate
       ];
       this.dataTable.push(promotion1);
@@ -159,7 +160,7 @@ export class ListPromotionsComponent implements OnInit {
       this.promo.push({
         Descripcion: this.promotions[i].description,
         Descuento: this.promotions[i].percentage,
-        Empresa: this.promotions[i].company.name,
+        Empresa: this.nameCompany(this.promotions[i].companyId),
         Expiracion:this.promotions[i].expirationDate
       });
     }
@@ -190,6 +191,18 @@ export class ListPromotionsComponent implements OnInit {
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 
+  }
+
+  nameCompany(id:number):string{
+    let name:string="";
+    for (var i = 0; i < this.companies.length; i++) {
+      if(this.companies[i].id==id){
+        name=this.companies[i].name;
+      }
+    }
+
+
+    return name;
   }
 
 }

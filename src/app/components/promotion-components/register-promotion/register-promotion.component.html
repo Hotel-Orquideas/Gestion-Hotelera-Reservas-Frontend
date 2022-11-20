@@ -38,9 +38,13 @@
                             </div>
 
                             <div class="col">
-                                <p class="float-start">Fecha de expiración (*)</p>
-                                <p-calendar formControlName="expirationDate" [minDate]="minDate" [maxDate]="maxDate"
+                                <p class="float-start me-6">Fecha de expiración (*)</p>
+                                <p style="color: white;">e</p>
+                                <div style="position:absolute;">
+                                    <p-calendar formControlName="expirationDate" [minDate]="minDate" [maxDate]="maxDate"
                                     [(ngModel)]='promotion.expirationDate' [showIcon]="true" inputId="icon"></p-calendar>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -48,8 +52,9 @@
                                 <p class="float-start">Valor Descuento (*)</p>
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="fa-regular fa-money-bill-1"></i></span>
-                                    <p-inputNumber formControlName="value" placeholder="Ej. 5"
-                                        [(ngModel)]="promotion.percentage"></p-inputNumber>
+                                    <p-inputNumber formControlName="percentage" placeholder="Ej. 5"
+                                        [(ngModel)]="promotion.percentage" [min]="1"
+                                        [max]="100"></p-inputNumber>
                                 </div>
                             </div>
                             <div class="col">

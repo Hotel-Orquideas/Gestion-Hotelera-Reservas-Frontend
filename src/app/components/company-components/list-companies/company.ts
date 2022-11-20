@@ -1,6 +1,6 @@
 export class Company{
     id:number;
-    name:string;
+    name:string="";
     nit:string;
     email:string;
     phoneNumber:string;
