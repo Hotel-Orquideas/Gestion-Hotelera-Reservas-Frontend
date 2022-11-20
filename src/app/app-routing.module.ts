@@ -59,6 +59,8 @@ const routes: Routes = [
   {path:'promotion/list-promotions', component:ListPromotionsComponent, canActivate:[AuthGuard]},
   {path:'promotion/register-promotion', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
   {path:'promotion/register-promotion/:id', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
+  {path:'clientCompany/register-clientCompany/', component:RegisterClientComponent, canActivate:[AuthGuard]},
+  {path:'clientCompany/register-clientCompany/:clientId', component:RegisterClientComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
