@@ -1,1 +1,112 @@
-<p>list-promotions works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast></p-toast>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+
+
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Promociones Registradas
+                    </span>
+                </ng-template>
+
+                <!--routerLink="/rate/register-rate" ese estaba, probando con click-->
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-secondary mr-2"
+                        (click)="existsCompanies()"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="Promociones" [value]="promotions"
+                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="['description','percentage','id','company.name', 'expirationDate']">
+
+
+                <ng-template pTemplate="caption">
+
+
+                    <div class="row">
+                        <div class="col-6">
+
+                            <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()"
+                                class="me-2" pTooltip="CSV" tooltipPosition="top"></button>
+
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                                class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
+
+
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
+
+                        </div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Palabra Clave" />
+                            </span>
+                        </div>
+
+                    </div>
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th pSortableColumn="description">
+                            Descripción
+                            <p-sortIcon field="description"></p-sortIcon>
+
+                        </th>
+                        <th pSortableColumn="percentage">
+                            Descuento <p-sortIcon field="percentage"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="company.name">
+                            Empresa <p-sortIcon field="company.name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="expirationDate">
+                            Expiración <p-sortIcon field="expirationDate"></p-sortIcon>
+                        </th>
+                        <th>Acción</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-promotion>
+                    <tr>
+
+                        <td>{{promotion.description}}</td>
+                        <td>{{promotion.percentage}}%</td>
+                        <td>{{promotion.company.name}}</td>
+                        <td>{{promotion.expirationDate | date: 'dd/MM/yyyy'}}</td>
+
+                        <td>
+                            <span class="p-buttonset">
+                                <button type="button" pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar"
+                                    tooltipPosition="top" [routerLink]="['/promotion/register-promotion',promotion.id]"></button>
+
+                                <button type="button" pButton pRipple icon="pi pi-trash"
+                                    class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar"
+                                    tooltipPosition="top" (click)="delete(promotion.id)"></button>
+                            </span>
+                        </td>
+
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">Ninguna promoción encontrada.</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+    </div>
+</div>
