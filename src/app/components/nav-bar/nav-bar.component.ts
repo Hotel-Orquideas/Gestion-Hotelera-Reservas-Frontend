@@ -158,6 +158,22 @@ export class NavBarComponent implements OnInit {
                 url: 'room/list-rooms'
               }
             ]
+          },
+          {
+            label: 'Metodos de pago',
+            icon: 'fa-solid fa-person-shelter',
+            items: [
+              {
+                label: 'Agregar método',
+                icon: 'fa-solid fa-door-closed',
+                url: 'paymentMethod/register-payment-method'
+              },
+              {
+                label: 'Listar métodos',
+                icon: 'fa-solid fa-elevator',
+                url: 'paymentMethod/list-payment-methods'
+              }
+            ]
           }
         ]
       }

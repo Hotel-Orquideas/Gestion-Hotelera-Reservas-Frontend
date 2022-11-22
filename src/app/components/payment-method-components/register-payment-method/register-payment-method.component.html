@@ -1,1 +1,61 @@
-<p>register-payment-method works!</p>
+<p-breadcrumb [model]="items" [home]="home" *ngIf="!paymentMethod.id else elseBreadCrumb"></p-breadcrumb>
+<ng-template #elseBreadCrumb>
+    <p-breadcrumb [model]="itemsElse" [home]="home"></p-breadcrumb>
+</ng-template>
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4" *ngIf="!paymentMethod.id else elseTittle">
+                        Registrar Método de pago
+                    </span>
+                    <ng-template #elseTittle>
+                        <span class="h4">
+                            Actualizar Método de pago
+                        </span>
+                    </ng-template>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/roomType/list-room-types"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <form class="mt-4" [formGroup]="formRegister">
+                        <div class="row">
+                            <div class="col">
+                                <p class="float-start">Nombre (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i
+                                            class="fa-sharp fa-solid fa-spell-check"></i></span>
+                                    <input formControlName="name" type="text" pInputText class="form-control"
+                                        placeholder="Nombre tipo habitación"
+                                        [(ngModel)]="paymentMethod.name">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()" *ngIf="!paymentMethod.id else elseBlock">Registrar</button>
+                    </div>
+
+
+                    <ng-template #elseBlock>
+                        <div class="mt-4">
+                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                (click)="update()">Actualizar</button>
+                        </div>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
