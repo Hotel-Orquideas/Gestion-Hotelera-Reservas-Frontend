@@ -1,1 +1,89 @@
-<p>register-booking works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-12 offset-lg-0">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Realizar reserva
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/booking/list-bookings"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <!--<form class="mt-4" [formGroup]="formRegister">-->
+                    <form class="mt-4">
+                        <div class="row">
+
+                            <div class="col-3">
+                                <p class="float-start me-6">Fecha de llegada (*)</p>
+                                <p style="color: white;">e</p>
+                                <div style="position:absolute;">
+                                    <p-calendar (click)="validateDate()"  [minDate]="todayDate" [maxDate]="maxDateCheckIn"
+                                        [showIcon]="true" inputId="icon" name="check_in_date" [(ngModel)]="check_in_date"></p-calendar>
+                                        
+                                </div>
+
+                            </div>
+
+                            <div class="col-3">
+                                <p class="float-start me-6">Fecha de salida (*)</p>
+                                <p style="color: white;">e</p>
+                                <div style="position:absolute;">
+                                    <p-calendar [disabled]="!check_in_date"  name="check_out_date" [(ngModel)]="check_out_date"  [minDate]="check_in_date" [maxDate]="maxDateCheckOut"
+                                        [showIcon]="true" inputId="icon"></p-calendar>
+                                </div>
+
+                            </div>
+
+                            <div class="col-3">
+                                <p class="float-start">Habitación (*)</p>
+                                <select (click)="getNumberMaxPersonsInRoom(roomId)" name="roomId" [(ngModel)]="roomId" 
+                                    class="form-select form-select-lg" aria-label="Default select example">
+                                    <option  value="1">
+                                        hola
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-3">
+                                <p class="float-start">Cantidad de Personas (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i
+                                            class="fa-solid fa-person-arrow-up-from-line"></i></span>
+                                    <p-inputNumber [disabled]="!roomId"  [showButtons]="true"
+                                        decrementButtonClass="p-button-outlined p-button-secondary"
+                                        incrementButtonClass="p-button-outlined p-button-secondary"
+                                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1"
+                                        [max]="numMaxPersonsPerRoom" placeholder="capacidad">
+                                    </p-inputNumber>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-4">
+
+                        </div>
+                        Checkin: {{check_in_date}}
+                        max: {{numMaxPersonsPerRoom}}
+                        roomId: {{roomId}}
+
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()">Registrar</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

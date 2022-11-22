@@ -39,7 +39,7 @@ export class ViewClientComponent implements OnInit {
         //etiquetas para el breadcrumb
         this.items = [
           { label: 'Cliente' },
-          { label: 'Clientes registradoss', url: 'client/list-clients' },
+          { label: 'Clientes registrados', url: 'client/list-clients' },
           { label: 'Visualizar cliente' }
         ];
     

@@ -85,89 +85,119 @@
           <div class="card">
             <div class="card-body">
 
-              <!--Tabla de clientes vinculados - falta añadir el parametro  [columns] y el parametro [value] -->
-              <p-table #dt styleClass="p-datatable-sm" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
-                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-                              'name',
-                              'nit',
-                              'email',
-                              'phoneNumber',
-                              'legalAgent'
-                            ]">
+              <p-toolbar styleClass="mb-4" *ngIf="!onLoad else loadTable">
+                <ng-template pTemplate="left">
+                  <span class="h4">
+                    Visualizar clientes registrados
+                  </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                  <button pButton pRipple label="Cargar" icon="pi pi-pencil" class="p-button-secondary mr-2"
+                    (click)="loadClientsCompany()"></button>
+                </ng-template>
+
+              </p-toolbar>
+
+              <ng-template #loadTable>
+
+                <!--Tabla de clientes vinculados - falta añadir el parametro  [columns] y el parametro [value] -->
+                <p-table #dt styleClass="p-datatable-sm" [value]="clients" [paginator]="true" [rows]="10"
+                  [showCurrentPageReport]="true"
+                  currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                  [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+                            'client.person.name',
+                            'client.person.lastName',
+                            'client.person.phoneNumber',
+                            'client.countryOrigin'
+                          ]">
 
 
-                <ng-template pTemplate="caption">
+                  <ng-template pTemplate="caption">
 
-                  <div class="row">
-                    <div class="col-6">
-                      <span class="h4">
-                        Clientes vinculados
-                      </span>
+                    <div class="row">
+                      <div class="col-6">
+                        <span class="h4">
+                          Clientes vinculados
+                        </span>
+                      </div>
+                      <div class="col"></div>
+                      <div class="col">
+                        <span class="p-input-icon-left">
+                          <i class="pi pi-search"></i>
+                          <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                            placeholder="Palabra Clave" />
+                        </span>
+                      </div>
+
                     </div>
-                    <div class="col"></div>
-                    <div class="col">
-                      <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                          placeholder="Palabra Clave" />
-                      </span>
-                    </div>
 
-                  </div>
+                  </ng-template>
 
-                </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
 
-                <ng-template pTemplate="header">
-                  <tr>
+                      <th pSortableColumn="client.person.name">
+                        Nombre Completo
+                        <p-sortIcon field="client.person.name"></p-sortIcon>
 
-                    <th pSortableColumn="name">
-                      Nombre
-                      <p-sortIcon field="name"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="client.person.phoneNumber">
+                        Telefono <p-sortIcon field="client.person.phoneNumber"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="client.countryOrigin">
+                        País de Origen <p-sortIcon field="client.countryOrigin"></p-sortIcon>
+                      </th>
+                      <th>Acción</th>
 
-                    </th>
-                    <th pSortableColumn="lastName">
-                      Apellido <p-sortIcon field="lastName"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="phoneNumber">
-                      Telefono <p-sortIcon field="phoneNumber"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="email">
-                      Correo <p-sortIcon field="email"></p-sortIcon>
-                    </th>
-                    <th>Acción</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-client>
+                    <tr>
 
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-client>
-                  <tr>
-
-                    <!--Datos pendientes-->
-                    <td>Nombre</td>
-                    <td>Apellido</td>
-                    <td>Tel</td>
-                    <td>Correo</td>
+                      <!--Datos pendientes-->
+                      <td>{{client.client.person.name}} {{client.client.person.lastName}}</td>
+                      <td>{{client.client.person.phoneNumber}}</td>
+                      <td>{{client.client.countryOrigin}}</td>
 
 
-                    <td>
-                      <!--Acciones pendientes a modificación-->
-                      <i pTooltip="Editar" tooltipPosition="top" class="fa-sharp fa-solid fa-user-pen fa-lg text-info"
-                        style="margin-right: 1em;" [routerLink]=""></i>
-                      <i pTooltip="Visualizar" tooltipPosition="top" class="pi pi-eye text-warning "
-                        style="margin-right: 1em;font-size: 1.3rem" [routerLink]=""></i>
-                      <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger"></i>
-                    </td>
+                      <td>
+                        <!--Acciones pendientes a modificación-->
 
-                  </tr>
-                </ng-template>
+                        <span class="p-buttonset">
+                          <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
+                            class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar" tooltipPosition="top"
+                            [routerLink]="['/client/register-client',client.client.person.document]"></button>
 
-                <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="7">Ningún cliente encontrado.</td>
-                  </tr>
-                </ng-template>
+                          <button type="button" pButton pRipple icon="pi pi-eye"
+                            class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar"
+                            tooltipPosition="top"
+                            [routerLink]="['/client/view-client',client.client.person.document]"></button>
+                        </span>
+                        <!--
+                          <i pTooltip="Editar" tooltipPosition="top"
+                            class="fa-sharp fa-solid fa-user-pen fa-lg text-info" style="margin-right: 1em;"
+                            [routerLink]="['/client/register-client',client.client.person.document]"></i>
+                          <i pTooltip="Visualizar" tooltipPosition="top" class="pi pi-eye text-warning "
+                            style="margin-right: 1em;font-size: 1.3rem"
+                            [routerLink]="['/client/view-client',client.client.person.document]"></i>
+                          <i pTooltip="Eliminar" tooltipPosition="top" class="fa-solid fa-trash-can fa-lg text-danger"></i>-->
+                      </td>
 
-              </p-table>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="7">Ningún cliente encontrado.</td>
+                    </tr>
+                  </ng-template>
+
+                </p-table>
+
+              </ng-template>
+
+
 
             </div>
           </div>

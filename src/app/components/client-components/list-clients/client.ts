@@ -9,4 +9,5 @@ export class Client extends Person{
     dateIssuanceDoc:Date;
     profession:string;
     person:Person = new Person();
+    client:Client;
 }

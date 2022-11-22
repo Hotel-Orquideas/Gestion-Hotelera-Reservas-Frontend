@@ -26,6 +26,9 @@ import { ViewClientComponent } from './components/client-components/view-client/
 import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
 import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
 import { RegisterClientCompanyComponent } from './components/clientCompany-components/register-client-company/register-client-company.component';
+import { ListBookingsComponent } from './components/booking-components/list-bookings/list-bookings.component';
+import { RegisterBookingComponent } from './components/booking-components/register-booking/register-booking.component';
+import { ViewBookingComponent } from './components/booking-components/view-booking/view-booking.component';
 
 const routes: Routes = [
  
@@ -62,6 +65,9 @@ const routes: Routes = [
   {path:'promotion/register-promotion/:id', component:RegisterPromotionComponent, canActivate:[AuthGuard]},
   {path:'clientCompany/register-clientCompany', component:RegisterClientCompanyComponent, canActivate:[AuthGuard]},
   {path:'clientCompany/register-clientCompany:clientId', component:RegisterClientCompanyComponent, canActivate:[AuthGuard]},
+  {path:'booking/list-bookings', component:ListBookingsComponent, canActivate:[AuthGuard]},
+  {path:'booking/register-booking', component:RegisterBookingComponent, canActivate:[AuthGuard]},
+  {path:'booking/view-booking', component:ViewBookingComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
