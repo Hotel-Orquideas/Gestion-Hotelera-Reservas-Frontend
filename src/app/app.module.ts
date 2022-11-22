@@ -63,6 +63,8 @@ import { RegisterClientCompanyComponent } from './components/clientCompany-compo
 import { RegisterBookingComponent } from './components/booking-components/register-booking/register-booking.component';
 import { ListBookingsComponent } from './components/booking-components/list-bookings/list-bookings.component';
 import { ViewBookingComponent } from './components/booking-components/view-booking/view-booking.component';
+import { ListPaymentMethodsComponent } from './components/payment-method-components/list-payment-methods/list-payment-methods.component';
+import { RegisterPaymentMethodComponent } from './components/payment-method-components/register-payment-method/register-payment-method.component';
 
 
 
@@ -98,7 +100,9 @@ import { ViewBookingComponent } from './components/booking-components/view-booki
     RegisterClientCompanyComponent,
     RegisterBookingComponent,
     ListBookingsComponent,
-    ViewBookingComponent
+    ViewBookingComponent,
+    ListPaymentMethodsComponent,
+    RegisterPaymentMethodComponent
   ],
   imports: [
     BrowserModule,
