@@ -161,16 +161,16 @@ export class NavBarComponent implements OnInit {
           },
           {
             label: 'Metodos de pago',
-            icon: 'fa-solid fa-person-shelter',
+            icon: 'fa-regular fa-credit-card',
             items: [
               {
                 label: 'Agregar método',
-                icon: 'fa-solid fa-door-closed',
+                icon: 'fa-solid fa-money-check-dollar',
                 url: 'paymentMethod/register-payment-method'
               },
               {
                 label: 'Listar métodos',
-                icon: 'fa-solid fa-elevator',
+                icon: 'fa-solid fa-file-invoice-dollar',
                 url: 'paymentMethod/list-payment-methods'
               }
             ]

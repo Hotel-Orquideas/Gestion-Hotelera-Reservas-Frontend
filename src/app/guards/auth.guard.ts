@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
   */
   
   canActivate(): boolean{
-    /*
+    
     if(!this.authService.isAuth()){
 
       this.toastr.error('Inicie sesión y vuelva a intentar.', 'Error', {
@@ -37,8 +37,8 @@ export class AuthGuard implements CanActivate {
     }else {
       return true;
     }
-    */
-   return true;
+    
+  
     
 
   }
