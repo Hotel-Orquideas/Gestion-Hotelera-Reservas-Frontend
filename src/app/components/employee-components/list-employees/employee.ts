@@ -8,6 +8,9 @@ export class Employee extends Person{
     password:string="";
     person:Person = new Person();
     roleSender:string="administrador";
+    role={
+        name:''
+    }
 
     /*
     person={

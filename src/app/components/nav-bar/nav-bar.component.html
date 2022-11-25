@@ -6,11 +6,12 @@
   </ng-template>
 
   <ng-template pTemplate="end">
-    <p-avatar style="cursor:pointer" label="WC" styleClass="p-mr-2" size="large" shape="circle" (click)="avatarMenu.toggle($event)"></p-avatar>
-    <p-tieredMenu #avatarMenu [model]="itemsMenuAvatar" [popup]="true"></p-tieredMenu>
+    <p-avatar style="cursor:pointer" [label]="getFirstLetter()" styleClass="p-mr-2" size="large" shape="circle" (click)="avatarMenu.toggle($event); loadRoleName()"></p-avatar>
+    <p-tieredMenu #avatarMenu [model]="itemsMenuAvatar"  [popup]="true"></p-tieredMenu>
   </ng-template>
 
 </p-menubar>
+{{employee.person.name}} {{employee.role.name}}
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">

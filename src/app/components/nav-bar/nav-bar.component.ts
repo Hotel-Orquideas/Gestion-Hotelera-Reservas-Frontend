@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
-import { RoomTypeService } from 'src/app/services/roomType-service/room-type.service';
-
+import decode from 'jwt-decode';
+import { EmployeeService } from 'src/app/services/employee-service/employee.service';
+import { Employee } from '../employee-components/list-employees/employee';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,13 +13,16 @@ import { RoomTypeService } from 'src/app/services/roomType-service/room-type.ser
 export class NavBarComponent implements OnInit {
 
   
-  
+  employee:Employee;
   menuItems: MenuItem[];
   itemsMenuAvatar: MenuItem[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+
+    //cargar los datos del empleado que inicia sesión
+    this.loadEmployeeLogin();
 
     //items del menú principal
     this.menuItems = [
@@ -182,7 +186,7 @@ export class NavBarComponent implements OnInit {
     //items menu 
     this.itemsMenuAvatar = [
       {
-        label: 'Rol: Administrador'
+        label: ''
       },
       {
         separator: true
@@ -201,9 +205,40 @@ export class NavBarComponent implements OnInit {
 
   }
 
+  //se cierra sesión
   logout(){
     localStorage.removeItem("x-token");
     this.router.navigate(['login']);
   }
+
+  //cargamos los datos del empelado que inició sesión (id a partir del token)
+  loadEmployeeLogin(){
+    const token=localStorage.getItem('x-token');
+    const { uid, email} : any  = decode(token);
+
+    this.employeeService.getEmployeeById(parseInt(uid)).subscribe(
+      emp=>{
+        this.employee=emp;
+      }
+    );
+  }
+
+  //tomamos el nombre y el apellido, luego retornamos la primer letra del primer nombre y la del primer apellido
+  getFirstLetter():string{
+
+    const splitName:String[]=this.employee.person.name.split(" ");
+    const splitLastName:String[] = this.employee.person.lastName.split(" ");
+
+    const firstName:String = splitName[0];
+    const firstLastName:String=splitLastName[0];
+
+    return firstName[0]+firstLastName[0];
+  }
+
+  //al items del menuavatar se le asigna el rol cuando se le de click al menu
+  loadRoleName(){
+    this.itemsMenuAvatar[0].label='Rol: '+this.employee.role.name;
+  }
+
 
 }

@@ -44,6 +44,15 @@ export class EmployeeService {
     return this.http.get<Employee>(this.urlEndPoint+'/'+doc, { headers: this.headers });
   }
 
+    /**
+   * Se envía el id a consultar
+   * @param doc
+   * @returns Obtener un solo empleado registrado por id
+   */
+     getEmployeeById(id:number):Observable<Employee>{
+      return this.http.get<Employee>(this.urlEndPoint+'/filterById/'+id, { headers: this.headers });
+    }
+
   /**
    * Actualizar empleado
    * @param employee 
