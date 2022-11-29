@@ -184,4 +184,21 @@ export class RegisterClientComponent implements OnInit {
     );
   }
 
+  complete(): void {
+
+    //pongo esto porque el componente p-inputNumber siempre retorna un número y no string
+    this.client.person.document = this.client.person.document + '';
+    this.client.document = this.client.document + '';
+
+    this.clientService.updateClient(this.client).subscribe(
+      emp => {
+        this.toastr.info('El Cliente se ha actualizado satisfactoriamente.', 'Completar datos cliente', {
+          closeButton: true,
+          progressBar: true
+        });
+        this.router.navigate(['/booking/validate-booking',this.reservation])
+      }
+    );
+  }
+
 }

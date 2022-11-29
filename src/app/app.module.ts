@@ -68,6 +68,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {FieldsetModule} from 'primeng/fieldset';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
+import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import { CalendarBookingsComponent } from './components/booking-components/calen
     ViewBookingComponent,
     ListPaymentMethodsComponent,
     RegisterPaymentMethodComponent,
-    CalendarBookingsComponent
+    CalendarBookingsComponent,
+    ValidateBookingComponent
   ],
   imports: [
     BrowserModule,

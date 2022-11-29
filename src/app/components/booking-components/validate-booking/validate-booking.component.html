@@ -1,0 +1,126 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body" style="text-align: center;">
+
+
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Validar Reserva
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/booking/list-bookings"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <!--
+                [globalFilterFields]="[
+                                'client.person.name',
+                                'client.person.lastName',
+                                'client.person.phoneNumber',
+                                'client.person.document'
+                              ]"
+            -->
+            <p-table #dt styleClass="p-datatable-sm" [value]="clients" [paginator]="true" [rows]="10"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+                'name',
+                'lastName',
+                'phoneNumber',
+                'document',
+                'state'
+              ]">
+
+
+                <ng-template pTemplate="caption">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="h4">
+                                Clientes en reserva
+                            </span>
+                        </div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Palabra Clave" />
+                            </span>
+                        </div>
+
+                    </div>
+
+                </ng-template>
+
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th pSortableColumn="name">
+                            Nombre Completo
+                            <p-sortIcon field="name"></p-sortIcon>
+
+                        </th>
+                        <!--client.person.phoneNumber-->
+                        <th pSortableColumn="phoneNumber">
+                            Telefono <p-sortIcon field="phoneNumber"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="document">
+                            Documento <p-sortIcon field="document"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="state">
+                            Estado <p-sortIcon field="state"></p-sortIcon>
+                        </th>
+                        <th>Acción</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-client>
+                    <tr>
+
+
+                        <td>{{client.name}} {{client.lastName}}</td>
+                        <td>{{client.phoneNumber}}</td>
+                        <td>{{client.document}}</td>
+                        <td>
+                            <p-badge value="{{textInBadge(client.state)}}"
+                                severity="{{colorInBadge(client.state)}}"></p-badge>
+                        </td>
+
+
+
+                        <td>
+
+
+                            <span class="p-buttonset">
+                                <button [disabled]="client.state!='I'" type="button" pButton pRipple
+                                    icon="fa-solid fa-user-pen" class="p-button-info p-button-outlined p-button-sm"
+                                    pTooltip="Completar" tooltipPosition="top"
+                                    [routerLink]="['/client/register-client',this.id,client.document]"></button>
+
+                            </span>
+                        </td>
+
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">Ningún cliente encontrado.</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+
+            <button pButton pRipple label="Realizar checkin" icon="pi pi-check" class="p-button-secondary mt-4"
+            (click)="validateBooking()"></button>
+
+        </div>
+    </div>
+</div>
