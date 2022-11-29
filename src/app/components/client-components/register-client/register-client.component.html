@@ -117,9 +117,10 @@
 
                             <div class="col">
                                 <p class="float-start">Fecha Expedición Documento (*)</p>
-                                <p-calendar formControlName="dateIssuanceDoc" dataType="Date" [minDate]="minDate" [maxDate]="maxDate"
+                                <p-calendar formControlName="dateIssuanceDoc"  [minDate]="minDate" [maxDate]="maxDate"
                                     [(ngModel)]='client.dateIssuanceDoc' [showIcon]="true" inputId="icon"></p-calendar>
                             </div>
+
 
                         </div>
                         <div class="row mt-4">
@@ -194,7 +195,7 @@
                             <div class="col">
                                 <p class="float-start">Fecha de Nacimiento (*)</p>
                                 <p-calendar formControlName="birthdate" [minDate]="minDate" [maxDate]="maxDate"
-                                    [(ngModel)]='client.birthdate' [(ngModel)]='client.birthdate' [showIcon]="true"
+                                    [(ngModel)]='client.birthdate' [(ngModel)]='client.person.birthdate' [showIcon]="true"
                                     inputId="icon"></p-calendar>
                             </div>
                         </div>

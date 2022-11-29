@@ -18,68 +18,379 @@
             </p-toolbar>
             <div class="card text-center">
                 <div class="card-body">
-                    <!--<form class="mt-4" [formGroup]="formRegister">-->
-                    <form class="mt-4">
-                        <div class="row">
 
-                            <div class="col-3">
-                                <p class="float-start me-6">Fecha de llegada (*)</p>
-                                <p style="color: white;">e</p>
-                                <div style="position:absolute;">
-                                    <p-calendar (click)="validateDate()"  [minDate]="todayDate" [maxDate]="maxDateCheckIn"
-                                        [showIcon]="true" inputId="icon" name="check_in_date" [(ngModel)]="check_in_date"></p-calendar>
-                                        
+                    <p class="me-6">¿Reserva con empresa?</p>
+                    <p-inputSwitch [(ngModel)]="valueInputSwitch"></p-inputSwitch>
+
+
+                    <div *ngIf="!valueInputSwitch">
+                        <form class="mt-4" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+
+                            <div class="row">
+                                <p class="float-start">Nombre (*)</p>
+
+                                <div class="col">
+                                    <p class="float-start me-6">Fecha de llegada (*)</p>
+                                    <p style="color: white;">e</p>
+                                    <div style="position:absolute;">
+                                        <p-calendar [minDate]="todayDate" [maxDate]="maxDateCheckIn" [showIcon]="true"
+                                            inputId="icon" formControlName="checkInDate" (click)="validateDate()"
+                                            [(ngModel)]="checkInDate">
+                                        </p-calendar>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col">
+                                    <p class="float-start me-6">Fecha de salida (*)</p>
+                                    <p style="color: white;">e</p>
+                                    <div style="position:absolute;">
+                                        <p-calendar [disabled]="!checkInDate" formControlName="checkOutDate"
+                                            [(ngModel)]="checkOutDate" [minDate]="checkInDate"
+                                            [maxDate]="maxDateCheckOut" [showIcon]="true" inputId="icon"></p-calendar>
+                                    </div>
+
+                                </div>
+
+                                <div class="col">
+                                    <p class="float-start">Cantidad de Habitaciones (*)</p>
+                                    <div class="p-inputgroup">
+                                        <span class="p-inputgroup-addon"><i
+                                                class="fa-solid fa-arrow-down-1-9"></i></span>
+                                        <p-inputNumber formControlName="numberOfRooms" [disabled]="!checkOutDate"
+                                            [showButtons]="true"
+                                            decrementButtonClass="p-button-outlined p-button-secondary"
+                                            incrementButtonClass="p-button-outlined p-button-secondary"
+                                            incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1"
+                                            [max]="rooms2.length" placeholder="Ej. 3" [(ngModel)]="numberOfRooms">
+                                        </p-inputNumber>
+                                    </div>
                                 </div>
 
                             </div>
 
-                            <div class="col-3">
-                                <p class="float-start me-6">Fecha de salida (*)</p>
-                                <p style="color: white;">e</p>
-                                <div style="position:absolute;">
-                                    <p-calendar [disabled]="!check_in_date"  name="check_out_date" [(ngModel)]="check_out_date"  [minDate]="check_in_date" [maxDate]="maxDateCheckOut"
-                                        [showIcon]="true" inputId="icon"></p-calendar>
+                            <div class="mt-4" *ngIf="numberOfRooms">
+
+                                <p-accordion [multiple]="false">
+                                    <p-accordionTab *ngFor="let num of numSequence(numberOfRooms); index as i"
+                                        header="Habitación {{i+1}}">
+
+                                        <div class="row">
+
+                                            <div class="col">
+                                                <p class="float-start">Habitación (*)</p>
+                                                <select [disabled]="!checkOutDate" formControlName="roomId"
+                                                    [(ngModel)]="roomIds[i]" class="form-select form-select-lg"
+                                                    aria-label="Default select example">
+                                                    <option *ngFor="let r2 of rooms2" value="{{r2.id}}">
+                                                        {{r2.nombre}}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col">
+                                                <p class="float-start">Cantidad de Personas (*)</p>
+                                                <div class="p-inputgroup">
+                                                    <span class="p-inputgroup-addon"><i
+                                                            class="fa-solid fa-person-arrow-up-from-line"></i></span>
+                                                    <p-inputNumber [disabled]="!roomIds[i]" [showButtons]="true"
+                                                        decrementButtonClass="p-button-outlined p-button-secondary"
+                                                        incrementButtonClass="p-button-outlined p-button-secondary"
+                                                        incrementButtonIcon="pi pi-plus"
+                                                        decrementButtonIcon="pi pi-minus" [min]="1"
+                                                        [max]="getNumberMaxPersonsInRoom(roomIds[i])"
+                                                        placeholder="capacidad" formControlName="numMaxPersonsPerRoom"
+                                                        [(ngModel)]="numMaxPersonsPerRoom[i]">
+                                                    </p-inputNumber>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </p-accordionTab>
+                                </p-accordion>
+                            </div>
+
+                            <div class="col mt-4">
+                                <button type="button" [disabled]="numMaxPersonsPerRoom.length==0"
+                                    class="btn btn-dark btn-lg" role="button"
+                                    (click)="addSummClients()">Continuar</button>
+                            </div>
+
+                            <div class="mt-4" formArrayName="clientsBooking">
+
+                                <div class="mt-2" *ngFor="let clientInBooking of clientsBooking.controls; let j=index">
+
+                                    <p-accordion [multiple]="false">
+                                        <p-accordionTab header="Persona {{j+1}}">
+
+                                            <div [formGroupName]="j">
+
+                                                <div class="row mt-2">
+                                                    <div class="col">
+                                                        <div class="p-inputgroup">
+                                                            <input type="text" pInputText placeholder="Buscar cliente"
+                                                                class="p-inputtext-sm" formControlName="searchDocument"
+                                                                [(ngModel)]="searchDocumentNumber[j]">
+                                                            <p-button [loading]="loading"
+                                                                (onClick)="loadButton(); searchClient(j,searchDocumentNumber[j])"
+                                                                icon="pi pi-search" styleClass="p-button-sm">
+                                                            </p-button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row mt-4">
+                                                    <div class="col">
+
+                                                        <p class="float-start">Nombre (*)</p>
+                                                        <div class="p-inputgroup">
+                                                            <span class="p-inputgroup-addon"><i
+                                                                    class="fa-sharp fa-solid fa-spell-check"></i></span>
+                                                            <input formControlName="name" [(ngModel)]="names[j]"
+                                                                type="text" pInputText placeholder="ej. william">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col">
+
+                                                        <p class="float-start">Apellido (*)</p>
+                                                        <div class="p-inputgroup">
+                                                            <span class="p-inputgroup-addon"><i
+                                                                    class="fa-sharp fa-solid fa-spell-check"></i></span>
+                                                            <input formControlName="lastName" [(ngModel)]="lastNames[j]"
+                                                                type="text" pInputText placeholder="ej. william">
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row mt-4">
+
+                                                    <div class="col">
+
+                                                        <p class="float-start">Número de Documento (*)</p>
+                                                        <div class="p-inputgroup">
+                                                            <span class="p-inputgroup-addon"><i
+                                                                    class="fa-solid fa-hashtag"></i></span>
+                                                            <p-inputNumber [disabled]="clientsSearched[j]" type="text"
+                                                                formControlName="document" [(ngModel)]="documents[j]"
+                                                                pKeyFilter="int" placeholder="Número de documento">
+                                                            </p-inputNumber>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col">
+
+                                                        <p class="float-start">Teléfono (*)</p>
+                                                        <div class="p-inputgroup">
+                                                            <span class="p-inputgroup-addon"><i
+                                                                    class="fa-solid fa-mobile-retro"></i></span>
+
+                                                            <input formControlName="phoneNumber"
+                                                                [(ngModel)]="phoneNumbers[j]" type="text" pInputText
+                                                                class="form-control" pKeyFilter="int"
+                                                                placeholder="Ej. 3002781911">
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </p-accordionTab>
+                                    </p-accordion>
+
+                                </div>
+                            </div>
+
+                            {{this.formRegister.value | json}}
+                            nobre 1 {{this.names[0]}}
+                            nobre 2 {{this.names[1]}}
+                            leng-de-numaxperroom {{numMaxPersonsPerRoom.length}}
+                            Documento a buscar {{searchDocumentNumber}}
+                            <div class="mt-4">
+                                <button [disabled]="formRegister.invalid" type="submit" class="btn btn-dark btn-lg"
+                                    role="button">Registrar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div *ngIf="valueInputSwitch">
+
+                        <form class="mt-4" [formGroup]="formRegisterWithCompany" (ngSubmit)="onSubmitWithCompany()">
+
+                            <div class="row">
+
+                                <div class="col">
+                                    <p class="float-start me-6">Fecha de llegada (*)</p>
+                                    <div class="float-start" style="position:relative;">
+                                        <p-calendar [minDate]="todayDate" [maxDate]="maxDateCheckIn" [showIcon]="true"
+                                            inputId="icon" (click)="validateDate()" formControlName="checkInDate"
+                                            [(ngModel)]="checkInDate">
+                                        </p-calendar>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col">
+                                    <p class="float-start me-6">Fecha de salida (*)</p>
+                                    <div class="float-start" style="position:relative;">
+                                        <p-calendar [disabled]="!checkInDate" formControlName="checkOutDate"
+                                            [(ngModel)]="checkOutDate" [minDate]="checkInDate"
+                                            [maxDate]="maxDateCheckOut" [showIcon]="true" inputId="icon"></p-calendar>
+                                    </div>
+
+                                </div>
+
+                                <div class="col">
+                                    <p class="float-start me-6">Empresa (*)</p>
+                                    <div class="float-start" style="position:relative;">
+                                        <p-dropdown [options]="companies" formControlName="companySelected"
+                                            [(ngModel)]="companySelected" optionLabel="name" [filter]="true"
+                                            filterBy="name" emptyMessage="No hay empresas registradas."
+                                            emptyFilterMessage="Empresa no encontrada." [showClear]="true"
+                                            placeholder="Seleccione una empresa">
+
+                                        </p-dropdown>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col">
+                                    <p class="float-start">Cantidad de Habitaciones (*)</p>
+                                    <div class="p-inputgroup">
+                                        <span class="p-inputgroup-addon"><i
+                                                class="fa-solid fa-arrow-down-1-9"></i></span>
+                                        <p-inputNumber formControlName="numberOfRooms" [disabled]="!checkOutDate"
+                                            [showButtons]="true"
+                                            decrementButtonClass="p-button-outlined p-button-secondary"
+                                            incrementButtonClass="p-button-outlined p-button-secondary"
+                                            incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1"
+                                            [max]="rooms2.length" placeholder="Ej. 3" [(ngModel)]="numberOfRooms">
+                                        </p-inputNumber>
+                                    </div>
                                 </div>
 
                             </div>
 
-                            <div class="col-3">
-                                <p class="float-start">Habitación (*)</p>
-                                <select (click)="getNumberMaxPersonsInRoom(roomId)" name="roomId" [(ngModel)]="roomId" 
-                                    class="form-select form-select-lg" aria-label="Default select example">
-                                    <option  value="1">
-                                        hola
-                                    </option>
-                                </select>
+                            <div class="mt-4" *ngIf="numberOfRooms">
+
+                                <p-accordion [multiple]="false">
+                                    <p-accordionTab *ngFor="let num of numSequence(numberOfRooms); index as i"
+                                        header="Habitación {{i+1}}">
+
+                                        <div class="row">
+
+                                            <div class="col">
+                                                <p class="float-start">Habitación (*)</p>
+                                                <select [disabled]="!checkOutDate" formControlName="roomId"
+                                                    [(ngModel)]="roomIds[i]" class="form-select form-select-lg"
+                                                    aria-label="Default select example">
+                                                    <option *ngFor="let r2 of rooms2" value="{{r2.id}}">
+                                                        {{r2.nombre}}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col">
+                                                <p class="float-start">Cantidad de Personas (*)</p>
+                                                <div class="p-inputgroup">
+                                                    <span class="p-inputgroup-addon"><i
+                                                            class="fa-solid fa-person-arrow-up-from-line"></i></span>
+                                                    <p-inputNumber [disabled]="!roomIds[i]" [showButtons]="true"
+                                                        decrementButtonClass="p-button-outlined p-button-secondary"
+                                                        incrementButtonClass="p-button-outlined p-button-secondary"
+                                                        incrementButtonIcon="pi pi-plus"
+                                                        decrementButtonIcon="pi pi-minus" [min]="1"
+                                                        [max]="getNumberMaxPersonsInRoom(roomIds[i])"
+                                                        placeholder="capacidad" formControlName="numMaxPersonsPerRoom"
+                                                        [(ngModel)]="numMaxPersonsPerRoom[i]">
+                                                    </p-inputNumber>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </p-accordionTab>
+                                </p-accordion>
                             </div>
 
-                            <div class="col-3">
-                                <p class="float-start">Cantidad de Personas (*)</p>
-                                <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i
-                                            class="fa-solid fa-person-arrow-up-from-line"></i></span>
-                                    <p-inputNumber [disabled]="!roomId"  [showButtons]="true"
-                                        decrementButtonClass="p-button-outlined p-button-secondary"
-                                        incrementButtonClass="p-button-outlined p-button-secondary"
-                                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1"
-                                        [max]="numMaxPersonsPerRoom" placeholder="capacidad">
-                                    </p-inputNumber>
+                            <div class="col mt-4">
+                                <button type="button" [disabled]="numMaxPersonsPerRoom.length==0"
+                                    class="btn btn-dark btn-lg" role="button"
+                                    (click)="addSummClientsWithCompany()">Continuar</button>
+                            </div>
+
+                            <div class="mt-4" formArrayName="clientsBooking">
+
+                                <div class="mt-2"
+                                    *ngFor="let clientInBooking of clientsBookingWithCompany.controls; let j=index">
+
+                                    <p-accordion [multiple]="false">
+                                        <p-accordionTab header="Persona {{j+1}}">
+
+                                            <div [formGroupName]="j">
+
+                                                <div class="row mt-4">
+
+                                                    <div class="col">
+                                                        <p class="float-start me-6 w-100">Persona (*)</p>
+                                                        <div class="float-start w-100" style="position:relative;">
+                                                            <p-dropdown [options]="clientsInCompany"
+                                                                formControlName="client"
+                                                                [(ngModel)]="clientsSelected[j]" optionLabel="name"
+                                                                [filter]="true" filterBy="name"
+                                                                emptyMessage="No hay clientes en esta empresa."
+                                                                emptyFilterMessage="Cliente no encontrada."
+                                                                [showClear]="true" placeholder="Seleccione una cliente">
+
+                                                            </p-dropdown>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </p-accordionTab>
+                                    </p-accordion>
+
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="row mt-4">
+                            <div class="mt-4">
+                                <button [disabled]="formRegisterWithCompany.invalid" type="submit"
+                                    class="btn btn-dark btn-lg" role="button">Registrar</button>
+                            </div>
 
-                        </div>
-                        Checkin: {{check_in_date}}
-                        max: {{numMaxPersonsPerRoom}}
-                        roomId: {{roomId}}
+                        </form>
+                        Empresa seleccionada : {{companySelected | json}}
+                        Clientes seleccionados: {{clientsSelected | json}}
+                        habitaciones seleccionadas: {{roomIds}}
+                        valor del formulario: {{this.formRegisterWithCompany.value | json}}
+                        formulario invalido: {{formRegisterWithCompany.invalid}}
+                    </div>
 
-                    </form>
+                    <!--
                     <div class="mt-4">
                         <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()">Registrar</button>
                     </div>
+                 -->
+
 
 
                 </div>

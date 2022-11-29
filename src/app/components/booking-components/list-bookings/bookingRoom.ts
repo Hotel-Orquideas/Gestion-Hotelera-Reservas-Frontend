@@ -1,4 +1,4 @@
 export class BookingRoom{
-    idReservation:number;
+    idBooking:number;
     idRoom:number;
 }

@@ -12,21 +12,30 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-    /**
-   * Se obtiene una lista de todas las reservas
-   * @returns lista de reservas
+  /**
+ * Se obtiene una lista de todas las reservas
+ * @returns lista de reservas
+ */
+  getBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(this.urlEndPoint);
+  }
+
+  /**
+   * Registrar una reserva en la base de datos
+   * @param booking 
+   * @returns 
    */
-     getBookings():Observable<Booking[]>{
-      return this.http.get<Booking[]>(this.urlEndPoint);
-    }
-  
-    /**
-     * Registrar una reserva en la base de datos
-     * @param booking 
-     * @returns 
-     */
-    registerBooking(booking:Booking):Observable<Booking>{
-      
-      return this.http.post<Booking>(this.urlEndPoint,booking);
-    }
+  registerBooking(booking: Booking): Observable<Booking> {
+
+    return this.http.post<Booking>(this.urlEndPoint, booking);
+  }
+
+  /**
+* Se envía el id a consultar
+* @param id
+* @returns Obtener una sola reserva
+*/
+  getBooking(id: number): Observable<Booking> {
+    return this.http.get<Booking>(this.urlEndPoint + '/' + id);
+  }
 }

@@ -17,6 +17,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterRoomTypeComponent } from './components/roomType-components/register-room-type/register-room-type.component';
 import { ListRoomTypesComponent } from './components/roomType-components/list-room-types/list-room-types.component';
 import { ViewEmployeeComponent } from './components/employee-components/view-employee/view-employee.component';
+import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
+import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
+import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
+import { ListRoomsComponent } from './components/room-components/list-rooms/list-rooms.component';
+import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
+import { LoginComponent } from './components/login-components/login/login.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { HomeComponent } from './components/home-components/home/home.component';
+import { ListClientsComponent } from './components/client-components/list-clients/list-clients.component';
+import { RegisterClientComponent } from './components/client-components/register-client/register-client.component';
+import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
+import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
+import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
+import { RegisterClientCompanyComponent } from './components/clientCompany-components/register-client-company/register-client-company.component';
+import { RegisterBookingComponent } from './components/booking-components/register-booking/register-booking.component';
+import { ListBookingsComponent } from './components/booking-components/list-bookings/list-bookings.component';
+import { ViewBookingComponent } from './components/booking-components/view-booking/view-booking.component';
+import { ListPaymentMethodsComponent } from './components/payment-method-components/list-payment-methods/list-payment-methods.component';
+import { RegisterPaymentMethodComponent } from './components/payment-method-components/register-payment-method/register-payment-method.component';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -45,29 +64,10 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {DialogModule} from 'primeng/dialog';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {RatingModule} from 'primeng/rating';
-
-import { RegisterRateComponent } from './components/rate-components/register-rate/register-rate.component';
-import { ListRatesComponent } from './components/rate-components/list-rates/list-rates.component';
-import { RegisterRoomComponent } from './components/room-components/register-room/register-room.component';
-import { ListRoomsComponent } from './components/room-components/list-rooms/list-rooms.component';
-import { ViewRoomComponent } from './components/room-components/view-room/view-room.component';
-import { LoginComponent } from './components/login-components/login/login.component';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { HomeComponent } from './components/home-components/home/home.component';
-import { ListClientsComponent } from './components/client-components/list-clients/list-clients.component';
-import { RegisterClientComponent } from './components/client-components/register-client/register-client.component';
-import { ViewClientComponent } from './components/client-components/view-client/view-client.component';
-import { RegisterPromotionComponent } from './components/promotion-components/register-promotion/register-promotion.component';
-import { ListPromotionsComponent } from './components/promotion-components/list-promotions/list-promotions.component';
-import { RegisterClientCompanyComponent } from './components/clientCompany-components/register-client-company/register-client-company.component';
-import { RegisterBookingComponent } from './components/booking-components/register-booking/register-booking.component';
-import { ListBookingsComponent } from './components/booking-components/list-bookings/list-bookings.component';
-import { ViewBookingComponent } from './components/booking-components/view-booking/view-booking.component';
-import { ListPaymentMethodsComponent } from './components/payment-method-components/list-payment-methods/list-payment-methods.component';
-import { RegisterPaymentMethodComponent } from './components/payment-method-components/register-payment-method/register-payment-method.component';
-
-
-
+import {AccordionModule} from 'primeng/accordion';
+import {FieldsetModule} from 'primeng/fieldset';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
 
 
 @NgModule({
@@ -102,7 +102,8 @@ import { RegisterPaymentMethodComponent } from './components/payment-method-comp
     ListBookingsComponent,
     ViewBookingComponent,
     ListPaymentMethodsComponent,
-    RegisterPaymentMethodComponent
+    RegisterPaymentMethodComponent,
+    CalendarBookingsComponent
   ],
   imports: [
     BrowserModule,
@@ -136,7 +137,10 @@ import { RegisterPaymentMethodComponent } from './components/payment-method-comp
     ContextMenuModule,
     DialogModule,
     ProgressBarModule,
-    RatingModule
+    RatingModule,
+    AccordionModule,
+    FieldsetModule,
+    InputSwitchModule
   ],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},

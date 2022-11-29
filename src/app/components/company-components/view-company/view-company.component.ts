@@ -32,11 +32,21 @@ export class ViewCompanyComponent implements OnInit {
       emp => {
         let nit = emp['nit'];
         if (nit) {
+          //obtener empresa
           this.companyService.getCompany(nit).subscribe(
             es => this.company = es
           );
+
+          //obtener clientes en empresa o empleados en empresa
+          this.clientCompanyService.getClients(nit).subscribe(
+            cl=> {
+              console.log(cl);
+              this.clients=cl;}
+          );
         }
       }
+
+      
     );
 
     //etiquetas para el breadcrumb
@@ -50,17 +60,5 @@ export class ViewCompanyComponent implements OnInit {
     this.home = { icon: 'pi pi-home', routerLink: '/' };
   }
 
-  loadClientsCompany():void{
-    this.onLoad=true;
-    console.log("id de la empresa: "+ this.company.id)
-    this.clientCompanyService.getClients(this.company.id).subscribe(
-      cl=> {
-        console.log(cl);
-        this.clients=cl;}
-    );
-
-    console.log(this.clients[0]);
-
-  }
 
 }

@@ -4,4 +4,5 @@ export class Room{
     state: string;
     roomTypeId: number;
     hotelId: number;
+    room:Room;
 }

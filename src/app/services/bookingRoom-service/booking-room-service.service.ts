@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BookingRoom } from 'src/app/components/booking-components/list-bookings/bookingRoom';
+import { Room } from 'src/app/components/room-components/list-rooms/room';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -16,8 +17,8 @@ export class BookingRoomServiceService {
    * Se obtiene una lista de todas las habitaciones en una reserva
    * @returns lista de habitaciones en una reserva
    */
-       getBookingRooms(idReservation:number):Observable<BookingRoom[]>{
-        return this.http.get<BookingRoom[]>(this.urlEndPoint+'/'+idReservation);
+       getRooms(idBooking:number):Observable<Room[]>{
+        return this.http.get<Room[]>(this.urlEndPoint+'/'+idBooking);
       }
     
       /**
@@ -27,7 +28,7 @@ export class BookingRoomServiceService {
        */
       registerBookingRoom(bookingRoom:BookingRoom):Observable<BookingRoom>{
         
-        return this.http.post<BookingRoom>(this.urlEndPoint+'/'+bookingRoom.idReservation+'/'+bookingRoom.idRoom,bookingRoom);
+        return this.http.post<BookingRoom>(this.urlEndPoint+'/'+bookingRoom.idBooking+'/'+bookingRoom.idRoom,bookingRoom);
       }
 
 }

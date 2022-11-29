@@ -3,13 +3,13 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/login-service/auth.service';
-import decode  from 'jwt-decode';
+import decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router){ }
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   /*
   canActivate(route: ActivatedRouteSnapshot): boolean{
@@ -22,28 +22,32 @@ export class AuthGuard implements CanActivate {
     return true
   }
   */
-  
-  canActivate(): boolean{
+
+  canActivate(): boolean {
+
+    /*
     
-    if(!this.authService.isAuth()){
+    if (!this.authService.isAuth()) {
 
       this.toastr.error('Inicie sesión y vuelva a intentar.', 'Error', {
         closeButton: true,
         progressBar: true
       });
       this.router.navigate(['/login'])
-      
+
       return false;
-    }else {
+    } else {
       return true;
     }
-    
-  
-    
+    */
+
+    return true;
+
+
 
   }
-  
 
 
-  
+
+
 }

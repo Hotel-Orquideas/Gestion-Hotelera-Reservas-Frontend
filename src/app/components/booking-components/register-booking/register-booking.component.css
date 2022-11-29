@@ -1,0 +1,26 @@
+:host ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: #44714b;
+}
+
+:host ::ng-deep .p-inputswitch.p-inputswitch-checked:hover .p-inputswitch-slider {
+    background: #1a4b22;
+}
+
+:host ::ng-deep .p-calendar.p-calendar-w-btn .p-button {
+    background-color: #44714b;
+    border-color: #1a4b22;
+}
+
+:host ::ng-deep .p-calendar.p-calendar-w-btn .p-button:hover {
+    background-color: #1a4b22;
+    border-color: #44714b;
+}
+
+:host ::ng-deep .p-calendar.p-calendar-w-btn .p-inputtext:hover {
+    border-color: #44714b;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 17rem;
+    text-align: left;
+}

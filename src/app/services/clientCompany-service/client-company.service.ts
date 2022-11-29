@@ -18,8 +18,8 @@ export class ClientCompanyService {
  * Se obtiene una lista de todos los clientes registrados en una empresa
  * @returns lista de clientes en empresa
  */
-  getClients(idCompany:number): Observable<Client[]> {
-    return this.http.get<Client[]>(this.urlEndPoint+'/'+idCompany);
+  getClients(nitCompany:string): Observable<Client[]> {
+    return this.http.get<Client[]>(this.urlEndPoint+'/'+nitCompany);
   }
 
   /**
