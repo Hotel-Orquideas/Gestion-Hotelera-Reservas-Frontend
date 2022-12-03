@@ -1,4 +1,4 @@
-<p-breadcrumb [model]="items" [home]="home" *ngIf=" (!client.id) else elseBreadCrumb"></p-breadcrumb>
+<p-breadcrumb [model]="items" [home]="home" *ngIf=" (!id) else elseBreadCrumb"></p-breadcrumb>
 
 <ng-template #elseBreadCrumb>
     <ng-container *ngIf="!reservation else elseIfBreadCrumb">
@@ -15,7 +15,7 @@
         <div class="col-lg-10 offset-lg-1">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                    <span class="h4" *ngIf="!client.id else elseTittle">
+                    <span class="h4" *ngIf="!id else elseTittle">
                         Registrar Cliente
                     </span>
                     <ng-template #elseTittle>
@@ -247,7 +247,7 @@
                     </form>
                     <div class="mt-4">
                         <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
-                            (click)="register()" *ngIf="!client.id else elseBlock">Registrar</button>
+                            (click)="register()" *ngIf="!id else elseBlock">Registrar</button>
                     </div>
 
 

@@ -19,12 +19,12 @@ export class ValidateBookingComponent implements OnInit {
   clients: any[] = [
     {
       "id": 1,
-      "name": "julian",
-      "lastName": "castañeda",
-      "state": "A",
+      "name": "Brayan Andres",
+      "lastName": "Cardenas Rodriguez",
+      "state": "I",
       "email": "julian@mail.es",
-      "phoneNumber": "315",
-      "document": "100"
+      "phoneNumber": "3192002085",
+      "document": "1000063183"
     },
     {
       "id": 2,

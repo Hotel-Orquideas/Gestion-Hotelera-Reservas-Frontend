@@ -1,4 +1,49 @@
 <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<!--para el mensaje cuando no hay servicios registrados-->
+<p-toast></p-toast>
+<!--Dialog para añadir servicio a la reserva-->
+<p-dialog header="Añadir servicio" [maximizable]="true" [(visible)]="showContentAddService">
+
+    <div class="card text-center">
+        <div class="card-body">
+            <form class="mt-4" [formGroup]="formRegisterService">
+
+                <div class="row">
+                    <div class="col">
+                        <p class="float-start">Servicio (*)</p>
+                        <select class="form-select form-select-lg" formControlName="serviceSelected"
+                            [(ngModel)]="serviceSelected">
+                            <option *ngFor="let service of services2" value="{{service.id}}">{{service.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="float-start">Cantidad (*)</p>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="fa-solid fa-arrow-up-1-9"></i></span>
+                            <p-inputNumber [showButtons]="true" formControlName="quantity" [(ngModel)]="quantity"
+                                decrementButtonClass="p-button-outlined p-button-secondary"
+                                incrementButtonClass="p-button-outlined p-button-secondary"
+                                incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1" [max]="20"
+                                placeholder="Ej. 3">
+                            </p-inputNumber>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-plus" label="añadir" (click)="registerServiceInBooking()" styleClass="p-button-secondary">
+        </p-button>
+    </ng-template>
+</p-dialog>
+<!---->
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
@@ -17,13 +62,13 @@
             </p-toolbar>
 
             <div class="row">
-                <div class="col-4">
+                <div>
 
                     <div class="card">
                         <div class="card-body">
                             <div style="text-align: center;">
                                 <span class="h4">
-                                    Datos
+                                    Datos de la reserva
                                 </span>
                             </div>
 
@@ -57,190 +102,320 @@
                     </div>
 
                 </div>
-                <div class="col-8">
+
+            </div>
+
+            <!--Botón de prueba nada mas-->
+            <p-button label="Cambiar estado" (click)="changeState()"
+            icon="pi pi-plus"
+            styleClass="p-button-sm p-button-secondary"></p-button>
+            <!--Botón de prueba nada mas-->
+
+            <div class="row mt-3">
+                <div>
                     <div class="card">
                         <div class="card-body">
 
-                            <!--Tabla de clientes vinculados en una reserva -->
-                            <div>
-                                <p-table #dt styleClass="p-datatable-sm" [value]="clients" [paginator]="true"
-                                    [rows]="10" [showCurrentPageReport]="true"
-                                    currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
-                                    [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-                            'client.person.name',
-                            'client.person.lastName',
-                            'client.person.phoneNumber',
-                            'client.person.email'
-                          ]">
-
-
-                                    <ng-template pTemplate="caption">
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <span class="h4">
-                                                    Clientes en reserva
-                                                </span>
-                                            </div>
-                                            <div class="col"></div>
-                                            <div class="col">
-                                                <span class="p-input-icon-left">
-                                                    <i class="pi pi-search"></i>
-                                                    <input pInputText type="text"
-                                                        (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                                        placeholder="Palabra Clave" />
-                                                </span>
-                                            </div>
-
-                                        </div>
-
-                                    </ng-template>
-
-                                    <ng-template pTemplate="header">
-                                        <tr>
-
-                                            <th pSortableColumn="client.person.name">
-                                                Nombre Completo
-                                                <p-sortIcon field="client.person.name"></p-sortIcon>
-
-                                            </th>
-                                            <th pSortableColumn="client.person.phoneNumber">
-                                                Telefono <p-sortIcon field="client.person.phoneNumber"></p-sortIcon>
-                                            </th>
-                                            <th pSortableColumn="client.person.email">
-                                                Correo <p-sortIcon field="client.person.email"></p-sortIcon>
-                                            </th>
-                                            <th>Acción</th>
-
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="body" let-client>
-                                        <tr>
-
-                                            <!--Datos pendientes-->
-                                            <td>{{client.client.person.name}} {{client.client.person.lastName}}</td>
-                                            <td>{{client.client.person.phoneNumber}}</td>
-                                            <td>{{client.client.person.email}}</td>
-
-
-                                            <td>
-                                                <!--Acciones pendientes a modificación-->
-
-                                                <span class="p-buttonset">
-                                                    <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
-                                                        class="p-button-info p-button-outlined p-button-sm"
-                                                        pTooltip="Editar" tooltipPosition="top"
-                                                        [routerLink]="['/client/register-client',client.client.person.document]"></button>
-
-                                                    <button type="button" pButton pRipple icon="pi pi-eye"
-                                                        class="p-button-warning p-button-outlined p-button-sm"
-                                                        pTooltip="Visualizar" tooltipPosition="top"
-                                                        [routerLink]="['/client/view-client',client.client.person.document]"></button>
-                                                </span>
-
-                                            </td>
-
-                                        </tr>
-                                    </ng-template>
-
-                                    <ng-template pTemplate="emptymessage">
-                                        <tr>
-                                            <td colspan="7">Ningún cliente encontrado.</td>
-                                        </tr>
-                                    </ng-template>
-
-                                </p-table>
+                            <div style="text-align: center;">
+                                <span class="h4">
+                                    Información detallada
+                                </span>
                             </div>
 
+                            <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
 
-                            <!--Tabla de habitaciones vinculadas en una reserva -->
-                            <div class="mt-4">
-                                <p-table #dt styleClass="p-datatable-sm" [value]="rooms" [paginator]="true" [rows]="10"
-                                    [showCurrentPageReport]="true"
-                                    currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
-                                    [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-                                'number',
-                                'state',
-                                'roomTypeId',
-                                ]">
+                            <!--Empieza el tabview para ver tablas de la reserva-->
+                            <p-tabView>
 
-
-                                    <ng-template pTemplate="caption">
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <span class="h4">
-                                                    Habitaciones en reserva
-                                                </span>
-                                            </div>
-                                            <div class="col"></div>
-                                            <div class="col">
-                                                <span class="p-input-icon-left">
-                                                    <i class="pi pi-search"></i>
-                                                    <input pInputText type="text"
-                                                        (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                                        placeholder="Palabra Clave" />
-                                                </span>
-                                            </div>
-
-                                        </div>
-
+                                <p-tabPanel>
+                                    <ng-template pTemplate="header">
+                                        <i class="fa-solid fa-people-group me-2"></i>
+                                        <span>Clientes en reserva</span>
                                     </ng-template>
+
+                                    <!--Tabla de clientes vinculados en una reserva -->
+                                    <div>
+                                        <p-table #dt styleClass="p-datatable-sm" [value]="clients" [paginator]="true"
+                                            [rows]="10" [showCurrentPageReport]="true"
+                                            currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                                            [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+                                            'client.person.name',
+                                            'client.person.lastName',
+                                            'client.person.phoneNumber',
+                                            'client.person.email'
+                                            ]">
+
+
+                                            <ng-template pTemplate="caption">
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <span class="h4">
+                                                            Clientes en reserva
+                                                        </span>
+                                                    </div>
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        <span class="p-input-icon-left">
+                                                            <i class="pi pi-search"></i>
+                                                            <input pInputText type="text"
+                                                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                                                placeholder="Palabra Clave" />
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+
+                                            </ng-template>
+
+                                            <ng-template pTemplate="header">
+                                                <tr>
+
+                                                    <th pSortableColumn="client.person.name">
+                                                        Nombre Completo
+                                                        <p-sortIcon field="client.person.name"></p-sortIcon>
+
+                                                    </th>
+                                                    <th pSortableColumn="client.person.phoneNumber">
+                                                        Telefono <p-sortIcon field="client.person.phoneNumber">
+                                                        </p-sortIcon>
+                                                    </th>
+                                                    <th pSortableColumn="client.person.email">
+                                                        Correo <p-sortIcon field="client.person.email"></p-sortIcon>
+                                                    </th>
+                                                    <th>Acción</th>
+
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-client>
+                                                <tr>
+
+
+                                                    <td>{{client.client.person.name}} {{client.client.person.lastName}}
+                                                    </td>
+                                                    <td>{{client.client.person.phoneNumber}}</td>
+                                                    <td>{{client.client.person.email}}</td>
+
+
+                                                    <td>
+                                                        <!--Acciones pendientes a modificación-->
+
+                                                        <span class="p-buttonset">
+                                                            <button type="button" pButton pRipple
+                                                                icon="fa-solid fa-user-pen"
+                                                                class="p-button-info p-button-outlined p-button-sm"
+                                                                pTooltip="Editar" tooltipPosition="top"
+                                                                [routerLink]="['/client/register-client',client.client.person.document]"></button>
+
+                                                            <button type="button" pButton pRipple icon="pi pi-eye"
+                                                                class="p-button-warning p-button-outlined p-button-sm"
+                                                                pTooltip="Visualizar" tooltipPosition="top"
+                                                                [routerLink]="['/client/view-client',client.client.person.document]"></button>
+                                                        </span>
+
+                                                    </td>
+
+                                                </tr>
+                                            </ng-template>
+
+                                            <ng-template pTemplate="emptymessage">
+                                                <tr>
+                                                    <td colspan="7">Ningún cliente encontrado.</td>
+                                                </tr>
+                                            </ng-template>
+
+                                        </p-table>
+                                    </div>
+                                    <!--Fin tabla de clientes vinculados en una reserva -->
+
+                                </p-tabPanel>
+
+                                <p-tabPanel>
 
                                     <ng-template pTemplate="header">
-                                        <tr>
-
-                                            <th pSortableColumn="number">
-                                                Numero
-                                                <p-sortIcon field="number"></p-sortIcon>
-
-                                            </th>
-                                            <th pSortableColumn="roomTypeId">
-                                                Tipo de habitación <p-sortIcon field="roomTypeId"></p-sortIcon>
-                                            </th>
-                                            <th>Acción</th>
-
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="body" let-room>
-                                        <tr>
-
-
-                                            <td>{{room.room.number}}</td>
-                                            <td>{{nameRoomType(room.rom.roomTypeId)}}</td>
-
-                                            <td>
-                                                <!--Acciones pendientes a modificación-->
-
-                                                <span class="p-buttonset">
-                                                    <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
-                                                        class="p-button-info p-button-outlined p-button-sm"
-                                                        pTooltip="Editar" tooltipPosition="top"
-                                                        [routerLink]="['/room/register-room',room.room.id]"></button>
-
-                                                    <button type="button" pButton pRipple icon="pi pi-eye"
-                                                        class="p-button-warning p-button-outlined p-button-sm"
-                                                        pTooltip="Visualizar" tooltipPosition="top"
-                                                        [routerLink]="['/room/view-room',room.room.id]"></button>
-                                                </span>
-
-                                            </td>
-
-                                        </tr>
+                                        <i class="fa-solid fa-door-closed me-2"></i>
+                                        <span>Habitaciones en reserva</span>
                                     </ng-template>
 
-                                    <ng-template pTemplate="emptymessage">
-                                        <tr>
-                                            <td colspan="7">Ninguna habitación encontrada.</td>
-                                        </tr>
+                                    <!--Tabla de habitaciones vinculadas en una reserva -->
+                                    <div>
+                                        <p-table #dt styleClass="p-datatable-sm" [value]="rooms" [paginator]="true"
+                                            [rows]="10" [showCurrentPageReport]="true"
+                                            currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                                            [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+                                            'number',
+                                            'state',
+                                            'roomTypeId',
+                                            ]">
+
+
+                                            <ng-template pTemplate="caption">
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <span class="h4">
+                                                            Habitaciones en reserva
+                                                        </span>
+                                                    </div>
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        <span class="p-input-icon-left">
+                                                            <i class="pi pi-search"></i>
+                                                            <input pInputText type="text"
+                                                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                                                placeholder="Palabra Clave" />
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+
+                                            </ng-template>
+
+                                            <ng-template pTemplate="header">
+                                                <tr>
+
+                                                    <th pSortableColumn="number">
+                                                        Numero
+                                                        <p-sortIcon field="number"></p-sortIcon>
+
+                                                    </th>
+                                                    <th pSortableColumn="roomTypeId">
+                                                        Tipo de habitación <p-sortIcon field="roomTypeId"></p-sortIcon>
+                                                    </th>
+                                                    <th>Acción</th>
+
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-room>
+                                                <tr>
+
+
+                                                    <td>{{room.room.number}}</td>
+                                                    <td>{{nameRoomType(room.rom.roomTypeId)}}</td>
+
+                                                    <td>
+                                                        <!--Acciones pendientes a modificación-->
+
+                                                        <span class="p-buttonset">
+                                                            <button type="button" pButton pRipple
+                                                                icon="fa-solid fa-user-pen"
+                                                                class="p-button-info p-button-outlined p-button-sm"
+                                                                pTooltip="Editar" tooltipPosition="top"
+                                                                [routerLink]="['/room/register-room',room.room.id]"></button>
+
+                                                            <button type="button" pButton pRipple icon="pi pi-eye"
+                                                                class="p-button-warning p-button-outlined p-button-sm"
+                                                                pTooltip="Visualizar" tooltipPosition="top"
+                                                                [routerLink]="['/room/view-room',room.room.id]"></button>
+                                                        </span>
+
+                                                    </td>
+
+                                                </tr>
+                                            </ng-template>
+
+                                            <ng-template pTemplate="emptymessage">
+                                                <tr>
+                                                    <td colspan="7">Ninguna habitación encontrada.</td>
+                                                </tr>
+                                            </ng-template>
+
+                                        </p-table>
+                                    </div>
+                                    <!--Fin tabla de habitaciones vinculadas en una reserva -->
+
+                                </p-tabPanel>
+
+                                <p-tabPanel *ngIf="this.booking2.state=='I'">
+
+                                    <ng-template pTemplate="header">
+                                        <i class="fa-solid fa-bell-concierge me-2"></i>
+                                        <span>Servicios en reserva</span>
                                     </ng-template>
 
-                                </p-table>
-                            </div>
+                                    <!--Tabla de servicios en una reserva -->
+                                    <div>
+                                        <p-table #dt styleClass="p-datatable-sm" [value]="servicesTable"
+                                            [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                                            currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                                            [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+                                                                                'name',
+                                                                                'quantity',
+                                                                                'total',
+                                                                                ]">
+
+
+                                            <ng-template pTemplate="caption">
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <span class="h4">
+                                                            Servicios solicitados
+                                                        </span>
+                                                    </div>
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        <p-button label="Agregar" (click)="showAddService()"
+                                                            icon="pi pi-plus"
+                                                            styleClass="p-button-sm p-button-secondary"></p-button>
+                                                    </div>
+
+                                                </div>
+
+                                            </ng-template>
+
+                                            <ng-template pTemplate="header">
+                                                <tr>
+
+                                                    <th pSortableColumn="name">
+                                                        Nombre
+                                                        <p-sortIcon field="name"></p-sortIcon>
+
+                                                    </th>
+                                                    <th pSortableColumn="quantity">
+                                                        Cantidad <p-sortIcon field="quantity"></p-sortIcon>
+                                                    </th>
+
+                                                    <th pSortableColumn="total">Total <p-sortIcon field="quantity">
+                                                        </p-sortIcon>
+                                                    </th>
+
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-service>
+                                                <tr>
+
+
+                                                    <td>{{service.name}}</td>
+                                                    <td>{{service.quantity}}</td>
+                                                    <td>{{service.total | currency:'USD':'symbol':'1.0'}}</td>
 
 
 
+                                                </tr>
+                                            </ng-template>
 
+                                            <ng-template pTemplate="emptymessage">
+                                                <tr>
+                                                    <td colspan="7">Ningún servicio encontrado.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p-button label="Agregar" (click)="showAddService()"
+                                                            icon="pi pi-plus"
+                                                            styleClass="p-button-sm p-button-secondary"></p-button>
+                                                    </td>
+                                                </tr>
+                                            </ng-template>
+
+                                        </p-table>
+                                    </div>
+                                    <!--Fin tabla de servicios  en una reserva -->
+
+                                </p-tabPanel>
+
+                            </p-tabView>
+                            <!--Termina el tabview-->
 
 
 

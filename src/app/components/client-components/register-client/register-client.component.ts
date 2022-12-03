@@ -133,6 +133,8 @@ export class RegisterClientComponent implements OnInit {
       emp => {
         this.id = emp['doc'];
         this.reservation = emp['res'];
+        console.log("reservation: "+ this.reservation);
+        console.log("id: "+ this.id);
 
         if (this.id) {
           this.clientService.getClient(this.id).subscribe(

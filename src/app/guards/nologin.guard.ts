@@ -24,9 +24,8 @@ export class NologinGuard implements CanActivate {
       return false;
     }else{
       return true;
-    }
-    */
-   return true;
+    }*/
+    return true;
 
 
   }

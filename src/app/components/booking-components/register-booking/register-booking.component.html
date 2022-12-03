@@ -213,12 +213,13 @@
 
                                 </div>
                             </div>
-
+                            <!--
                             {{this.formRegister.value | json}}
                             nobre 1 {{this.names[0]}}
                             nobre 2 {{this.names[1]}}
                             leng-de-numaxperroom {{numMaxPersonsPerRoom.length}}
                             Documento a buscar {{searchDocumentNumber}}
+                            -->
                             <div class="mt-4">
                                 <button [disabled]="formRegister.invalid" type="submit" class="btn btn-dark btn-lg"
                                     role="button">Registrar</button>
@@ -377,11 +378,13 @@
                             </div>
 
                         </form>
+                        <!--
                         Empresa seleccionada : {{companySelected | json}}
                         Clientes seleccionados: {{clientsSelected | json}}
                         habitaciones seleccionadas: {{roomIds}}
                         valor del formulario: {{this.formRegisterWithCompany.value | json}}
                         formulario invalido: {{formRegisterWithCompany.invalid}}
+                        -->
                     </div>
 
                     <!--

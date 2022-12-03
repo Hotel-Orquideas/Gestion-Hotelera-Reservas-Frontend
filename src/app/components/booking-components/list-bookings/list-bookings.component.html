@@ -79,14 +79,14 @@
           <tr>
 
             <td>{{booking.id}}</td>
-            <td>{{booking.checkInDate}}</td>
-            <td>{{booking.checkOutDate}}</td>
+            <td>{{booking.checkInDate | date:'dd/mm/yyyy'}}</td>
+            <td>{{booking.checkOutDate | date:'dd/mm/yyyy'}}</td>
             <td>
               <span class="p-buttonset">
                 <!--Falta ajustar para hacer el checkin (la ruta)-->
                 <button type="button" pButton pRipple icon="fa-regular fa-calendar-check"
                   class="p-button-info p-button-outlined p-button-sm" pTooltip="CheckIn" tooltipPosition="top"
-                  routerLink="home"></button>
+                  [routerLink]="['/booking/validate-booking',booking.id]"></button>
 
                 <button type="button" pButton pRipple icon="pi pi-eye"
                   class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar"

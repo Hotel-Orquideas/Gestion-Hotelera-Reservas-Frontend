@@ -67,6 +67,9 @@ import {RatingModule} from 'primeng/rating';
 import {AccordionModule} from 'primeng/accordion';
 import {FieldsetModule} from 'primeng/fieldset';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {TabViewModule} from 'primeng/tabview';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+
 import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
 import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
 
@@ -142,7 +145,9 @@ import { ValidateBookingComponent } from './components/booking-components/valida
     RatingModule,
     AccordionModule,
     FieldsetModule,
-    InputSwitchModule
+    InputSwitchModule,
+    TabViewModule,
+    DynamicDialogModule
   ],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},

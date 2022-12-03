@@ -1,0 +1,54 @@
+/*estilos para los item del menú principales (hover)*/
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem:hover>.p-menuitem-link .p-menuitem-icon {
+    color: #44714b;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem:hover>.p-menuitem-link .p-menuitem-text {
+    color: #44714b;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem:hover>.p-menuitem-link .p-submenu-icon {
+    color: #44714b;
+}
+
+/*Estilos para los item del submenu cuando está activo o se hace click en uno principal (hover)*/
+
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem.p-menuitem-active:hover>.p-menuitem-link {
+    background: #dbdbdb;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem.p-menuitem-active:hover>.p-menuitem-link .p-menuitem-icon {
+    color: #1a4b22;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem.p-menuitem-active:hover>.p-menuitem-link .p-menuitem-text {
+    color: #1a4b22;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list>.p-menuitem.p-menuitem-active:hover>.p-menuitem-link .p-submenu-icon {
+    color: #1a4b22;
+}
+
+/*Estilo para el submenu*/
+
+:host ::ng-deep .p-menubar .p-menuitem.p-menuitem-active>.p-menuitem-link {
+    background: #f0f0f0;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem.p-menuitem-active>.p-menuitem-link .p-menuitem-icon {
+    color: #1a4b22;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem.p-menuitem-active>.p-menuitem-link .p-menuitem-text {
+    color: #1a4b22;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem.p-menuitem-active>.p-menuitem-link .p-submenu-icon {
+    color: #1a4b22;
+}
+
+/*estilos para el circulo del avatar*/
+:host ::ng-deep .p-avatar.p-avatar-circle:hover {
+    background: #9aae9d;
+    transition: 0.5s;
+}

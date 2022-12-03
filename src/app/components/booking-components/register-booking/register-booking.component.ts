@@ -29,7 +29,7 @@ export class RegisterBookingComponent implements OnInit {
   searchDocumentNumber: String[] = new Array;//arreglo con los documentos que se han buscado, para así saber los encontrados y no volveros a registrar
 
 
-  booking: Booking;
+  booking: Booking=new Booking();
   bookings: Booking[];
   clients: any = [
     {
@@ -120,8 +120,8 @@ export class RegisterBookingComponent implements OnInit {
   ]
   companySelected: any; //para guardar la empresa que se ha seleccionado en la lista desplegable
 
-  clientsSelected: any[]=new Array;//para guardar los clientes seleccionados
-  clientsSearched:boolean[]=new Array; //para saber si se ha buscado el cliente y bloquear los espacios del formulario cuando se encuentre
+  clientsSelected: any[] = new Array;//para guardar los clientes seleccionados
+  clientsSearched: boolean[] = new Array; //para saber si se ha buscado el cliente y bloquear los espacios del formulario cuando se encuentre
   clientsInCompany: any = [
     {
       "id": 1,
@@ -331,6 +331,10 @@ export class RegisterBookingComponent implements OnInit {
   onSubmit() {
     this.clientsToAdd = this.formRegister.value.clientsBooking;
     console.log(this.clientsToAdd);
+    console.log(this.checkInDate);
+    this.booking.checkInDate = this.checkInDate;
+    this.booking.checkOutDate = this.checkOutDate;
+    this.register();
   }
 
   //cuando se haga click en el boton registrar se viene a este metodo si la reserva es con empresa
@@ -371,6 +375,13 @@ export class RegisterBookingComponent implements OnInit {
           progressBar: true
         });
         this.router.navigate(['/booking/list-bookings'])
+      },
+      error => {
+        this.toastr.error('Hubo un evento inesperado: '+ error.status, 'Error', {
+          closeButton: true,
+          progressBar: true
+        });
+        
       }
     );
   }
