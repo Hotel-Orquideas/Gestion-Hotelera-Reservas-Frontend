@@ -86,8 +86,13 @@ export class NavBarComponent implements OnInit {
           },
           {
             label: 'Listar reservas',
-            icon: 'fa-regular fa-calendar-check',
+            icon: 'fa-solid fa-calendar-week',
             url: 'booking/list-bookings'
+          },
+          {
+            label: 'Reservas en CheckIn',
+            icon: 'fa-regular fa-calendar-check',
+            url: 'booking/list-bookings-checkin'
           },
           {
             label: 'Calendario',

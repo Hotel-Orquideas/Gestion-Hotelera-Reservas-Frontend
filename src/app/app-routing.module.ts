@@ -33,6 +33,7 @@ import { ListPaymentMethodsComponent } from './components/payment-method-compone
 import { RegisterPaymentMethodComponent } from './components/payment-method-components/register-payment-method/register-payment-method.component';
 import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
 import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
+import { ListBookingsCheckinComponent } from './components/booking-components/list-bookings-checkin/list-bookings-checkin.component';
 
 const routes: Routes = [
  
@@ -70,6 +71,7 @@ const routes: Routes = [
   {path:'clientCompany/register-clientCompany', component:RegisterClientCompanyComponent, canActivate:[AuthGuard]},
   {path:'clientCompany/register-clientCompany:clientId', component:RegisterClientCompanyComponent, canActivate:[AuthGuard]},
   {path:'booking/list-bookings', component:ListBookingsComponent, canActivate:[AuthGuard]},
+  {path:'booking/list-bookings-checkin', component:ListBookingsCheckinComponent, canActivate:[AuthGuard]},
   {path:'booking/calendar-bookings', component:CalendarBookingsComponent, canActivate:[AuthGuard]},
   {path:'booking/register-booking', component:RegisterBookingComponent, canActivate:[AuthGuard]},
   {path:'booking/view-booking/:id', component:ViewBookingComponent, canActivate:[AuthGuard]},

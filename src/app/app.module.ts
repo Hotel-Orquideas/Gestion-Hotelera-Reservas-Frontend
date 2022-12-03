@@ -72,6 +72,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
 import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
+import { ListBookingsCheckinComponent } from './components/booking-components/list-bookings-checkin/list-bookings-checkin.component';
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import { ValidateBookingComponent } from './components/booking-components/valida
     ListPaymentMethodsComponent,
     RegisterPaymentMethodComponent,
     CalendarBookingsComponent,
-    ValidateBookingComponent
+    ValidateBookingComponent,
+    ListBookingsCheckinComponent
   ],
   imports: [
     BrowserModule,
