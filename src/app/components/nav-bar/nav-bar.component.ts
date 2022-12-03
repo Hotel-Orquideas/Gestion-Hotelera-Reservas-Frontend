@@ -76,6 +76,27 @@ export class NavBarComponent implements OnInit {
         ]
       },
       {
+        label: 'Clientes',
+        icon: 'fa-solid fa-users',
+        items: [
+          {
+            label: 'Registrar',
+            icon: 'fa-solid fa-user-plus',
+            url: 'client/register-client'
+          },
+          {
+            label: 'Listar',
+            icon: 'fa-solid fa-user-group',
+            url: 'client/list-clients'
+          },
+          {
+            label: 'Vincular a empresa',
+            icon: 'fa-solid fa-people-pulling',
+            url: 'clientCompany/register-clientCompany'
+          }
+        ]
+      },
+      {
         label: 'Reservas',
         icon: 'fa-solid fa-calendar-week',
         items: [
@@ -102,23 +123,18 @@ export class NavBarComponent implements OnInit {
         ]
       },
       {
-        label: 'Clientes',
-        icon: 'fa-solid fa-users',
-        items: [
+        label:'Pagos',
+        icon:'fa-solid fa-file-invoice',
+        items:[
           {
-            label: 'Registrar',
-            icon: 'fa-solid fa-user-plus',
-            url: 'client/register-client'
+            label:'Listar facturas',
+            icon:'fa-solid fa-file-invoice-dollar',
+            url:'bill/list-bills'
           },
           {
-            label: 'Listar',
-            icon: 'fa-solid fa-user-group',
-            url: 'client/list-clients'
-          },
-          {
-            label: 'Vincular a empresa',
-            icon: 'fa-solid fa-people-pulling',
-            url: 'clientCompany/register-clientCompany'
+            label:'Registrar pago',
+            icon:'fa-regular fa-money-bill-1',
+            url:'bill/register-payment-history'
           }
         ]
       },

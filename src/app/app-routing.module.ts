@@ -34,6 +34,10 @@ import { RegisterPaymentMethodComponent } from './components/payment-method-comp
 import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
 import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
 import { ListBookingsCheckinComponent } from './components/booking-components/list-bookings-checkin/list-bookings-checkin.component';
+import { ListBillsComponent } from './components/bill-components/list-bills/list-bills.component';
+import { ListBillsDetailsComponent } from './components/bill-components/list-bills-details/list-bills-details.component';
+import { ListPaymentsHistoryComponent } from './components/bill-components/list-payments-history/list-payments-history.component';
+import { RegisterPaymentHistoryComponent } from './components/bill-components/register-payment-history/register-payment-history.component';
 
 const routes: Routes = [
  
@@ -79,6 +83,10 @@ const routes: Routes = [
   {path:'paymentMethod/list-payment-methods',component:ListPaymentMethodsComponent, canActivate:[AuthGuard]},
   {path:'paymentMethod/register-payment-method/:id',component:RegisterPaymentMethodComponent, canActivate:[AuthGuard]},
   {path:'paymentMethod/register-payment-method',component:RegisterPaymentMethodComponent, canActivate:[AuthGuard]},
+  {path:'bill/list-bills', component:ListBillsComponent, canActivate:[AuthGuard]},
+  {path:'bill/list-bill-details/:idBill', component:ListBillsDetailsComponent, canActivate:[AuthGuard]},
+  {path:'bill/list-payments-history/:idBill', component:ListPaymentsHistoryComponent, canActivate:[AuthGuard]},
+  {path:'bill/register-payment-history', component:RegisterPaymentHistoryComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
