@@ -1,0 +1,112 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast></p-toast>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+
+
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Reservas en CheckIn
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/booking/list-bookings-checkin"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="reservas-checkin" [value]="bookings2"
+                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10,20,30,50,100]" 
+                [globalFilterFields]="[
+                'id',
+                'checkInDate',
+                'checkOutDate'
+                ]">
+
+
+                <ng-template pTemplate="caption">
+
+                    <div class="row">
+                        <div class="col-6">
+
+                            <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()"
+                                class="me-2" pTooltip="CSV" tooltipPosition="top"></button>
+
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                                class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
+
+
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
+
+                        </div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Palabra Clave" />
+                            </span>
+                        </div>
+
+                    </div>
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th pSortableColumn="id">
+                            Representante
+                            <p-sortIcon field="id"></p-sortIcon>
+
+                        </th>
+                        <th pSortableColumn="checkInDate">
+                            Llegada <p-sortIcon field="checkInDate"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="checkOutDate">
+                            Salida <p-sortIcon field="checkOutDate"></p-sortIcon>
+                        </th>
+                        <th>Acción</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-booking>
+                    <tr *ngIf="booking.state!='OT'">
+
+                        <td>{{booking.id}}</td>
+                        <td>{{booking.checkInDate | date:'dd/mm/yyyy'}}</td>
+                        <td>{{booking.checkOutDate | date:'dd/mm/yyyy'}}</td>
+                        <td>
+                            <span class="p-buttonset">
+                                
+                                <button type="button" pButton pRipple icon="pi pi-eye"
+                                    class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar"
+                                    tooltipPosition="top" [routerLink]="['/booking/view-booking',booking.id]"></button>
+
+                                <button type="button" pButton pRipple icon="fa-solid fa-door-open"
+                                    class="p-button-info p-button-outlined p-button-sm" pTooltip="CheckOut"
+                                    tooltipPosition="top"
+                                    (click)="setCheckOut(booking.id)"></button>
+
+                            </span>
+
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">Reservas no encontradas.</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+    </div>
+</div>
