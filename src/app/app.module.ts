@@ -74,8 +74,6 @@ import { CalendarBookingsComponent } from './components/booking-components/calen
 import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
 import { ListBookingsCheckinComponent } from './components/booking-components/list-bookings-checkin/list-bookings-checkin.component';
 import { ListBillsComponent } from './components/bill-components/list-bills/list-bills.component';
-import { LitBillsDetailsComponent } from './components/bill-components/lit-bills-details/lit-bills-details.component';
-import { RegisterBillDetailsComponent } from './components/bill-components/register-bill-details/register-bill-details.component';
 import { ListBillsDetailsComponent } from './components/bill-components/list-bills-details/list-bills-details.component';
 import { ListPaymentsHistoryComponent } from './components/bill-components/list-payments-history/list-payments-history.component';
 import { RegisterPaymentHistoryComponent } from './components/bill-components/register-payment-history/register-payment-history.component';
@@ -118,8 +116,6 @@ import { RegisterPaymentHistoryComponent } from './components/bill-components/re
     ValidateBookingComponent,
     ListBookingsCheckinComponent,
     ListBillsComponent,
-    LitBillsDetailsComponent,
-    RegisterBillDetailsComponent,
     ListBillsDetailsComponent,
     ListPaymentsHistoryComponent,
     RegisterPaymentHistoryComponent
