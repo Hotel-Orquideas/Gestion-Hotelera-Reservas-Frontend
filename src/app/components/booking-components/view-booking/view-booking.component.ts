@@ -144,7 +144,7 @@ export class ViewBookingComponent implements OnInit {
     ];
 
     //icono de casa pra el breadcrumb
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
+    this.home = { icon: 'pi pi-home', routerLink: '/home' };
   }
 
   //obtener el nombre de un tipo de habitación

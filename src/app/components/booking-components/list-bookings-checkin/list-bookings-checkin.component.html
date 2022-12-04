@@ -19,11 +19,10 @@
                 </ng-template>
             </p-toolbar>
 
-            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="reservas-checkin" [value]="bookings2"
-                [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="reservas-checkin"
+                [value]="bookings2" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
-                [rowsPerPageOptions]="[10,20,30,50,100]" 
-                [globalFilterFields]="[
+                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
                 'id',
                 'checkInDate',
                 'checkOutDate'
@@ -85,17 +84,17 @@
                         <td>{{booking.checkOutDate | date:'dd/mm/yyyy'}}</td>
                         <td>
                             <span class="p-buttonset">
-                                
+
                                 <button type="button" pButton pRipple icon="pi pi-eye"
                                     class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar"
                                     tooltipPosition="top" [routerLink]="['/booking/view-booking',booking.id]"></button>
 
                                 <button type="button" pButton pRipple icon="fa-solid fa-door-open"
                                     class="p-button-info p-button-outlined p-button-sm" pTooltip="CheckOut"
-                                    tooltipPosition="top"
-                                    (click)="setCheckOut(booking.id)"></button>
+                                    tooltipPosition="top" (click)="setCheckOut(booking.id)"></button>
 
                             </span>
+                        </td>
 
                     </tr>
                 </ng-template>

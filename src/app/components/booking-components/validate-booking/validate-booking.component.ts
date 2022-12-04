@@ -82,7 +82,7 @@ export class ValidateBookingComponent implements OnInit {
     ];
 
     //icono de casa pra el breadcrumb
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
+    this.home = { icon: 'pi pi-home', routerLink: '/home' };
 
   }
 

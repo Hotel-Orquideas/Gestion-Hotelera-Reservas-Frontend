@@ -1,1 +1,57 @@
-<p>register-payment-history works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Registrar Pago a Factura
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/bill/list-bills"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="card text-center">
+                <div class="card-body">
+                    <form class="mt-4" [formGroup]="formRegister">
+                        <div class="row">
+                            <div class="col">
+                                <p class="float-start">Método de pago (*)</p>
+                                <select formControlName="paymentMethod" class="form-select form-select-lg"
+                                    [(ngModel)]="paymentHistory.paymentMethodId">
+                                    <option *ngFor="let paymentMethod of paymentMethods" value="{{paymentMethod.id}}">
+                                        {{paymentMethod.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <p class="float-start">Valor a pagar (*)</p>
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="fa-regular fa-money-bill-1"></i></span>
+                                    <p-inputNumber formControlName="valueToPay" placeholder="Ej. 10000"
+                                        [(ngModel)]="paymentHistory.valueToPay"
+                                        [min]="1"
+                                        [max]="bill.balanceDue"></p-inputNumber>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                    <div class="mt-4">
+                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            (click)="register()">Registrar</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

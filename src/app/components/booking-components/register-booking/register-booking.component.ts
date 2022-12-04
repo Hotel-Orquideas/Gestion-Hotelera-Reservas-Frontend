@@ -155,16 +155,6 @@ export class RegisterBookingComponent implements OnInit {
     //para darle efecto al hacer click a los botones
     this.primengConfig.ripple = true;
 
-    /*      name: ['', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20)
-      ]],
-      numMaxGuests: ['', [
-        Validators.required,
-      ]],
-      */
-
     //validaciones básicas para el formulario de registrar sin empresa
     this.formRegister = this.formBuilder.group({
       numMaxPersonsPerRoom: ['', [
@@ -218,7 +208,7 @@ export class RegisterBookingComponent implements OnInit {
 
 
     //icono de casa pra el breadcrumb
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
+    this.home = { icon: 'pi pi-home', routerLink: '/home' };
 
     this.maxDateCheckIn.setFullYear(this.todayDate.getFullYear());
     this.maxDateCheckIn.setMonth(this.todayDate.getMonth() + 6);

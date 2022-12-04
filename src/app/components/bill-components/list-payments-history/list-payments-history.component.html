@@ -1,1 +1,98 @@
-<p>list-payments-history works!</p>
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+
+
+            <p-toolbar styleClass="mb-4">
+
+                <ng-template pTemplate="left">
+                    <span class="h4">
+                        Historial de pagos
+                    </span>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
+                        routerLink="/bill/list-bills"></button>
+                </ng-template>
+
+            </p-toolbar>
+
+            <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="historial-pagos-factura"
+                [value]="paymentsHistory" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
+                'paymentMethod.name',
+                'valueToPay',
+                'dateOfPay'
+                ]">
+
+
+                <ng-template pTemplate="caption">
+
+                    <div class="row">
+                        <div class="col-6">
+
+                            <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()"
+                                class="me-2" pTooltip="CSV" tooltipPosition="top"></button>
+
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                                class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
+
+
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
+
+                        </div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Palabra Clave" />
+                            </span>
+                        </div>
+
+                    </div>
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th pSortableColumn="paymentMethod.name">
+                            Método de pago
+                            <p-sortIcon field="paymentMethod.name"></p-sortIcon>
+
+                        </th>
+                        <th pSortableColumn="valueToPay">
+                            Valor pagado <p-sortIcon field="valueToPay"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="dateOfPay">
+                            Fecha de pago <p-sortIcon field="dateOfPay"></p-sortIcon>
+                        </th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-paymentHistory>
+                    <tr>
+
+                        <td>{{paymentHistory.paymentMethod.name}}</td>
+                        <td>{{paymentHistory.valueToPay | currency:'USD':'symbol':'1.0'}}</td>
+                        <td>{{paymentHistory.dateOfPay | date:'dd/mm/yyyy'}}</td>
+
+
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">pagos no encontrados.</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+    </div>
+</div>

@@ -130,11 +130,6 @@ export class NavBarComponent implements OnInit {
             label:'Listar facturas',
             icon:'fa-solid fa-file-invoice-dollar',
             url:'bill/list-bills'
-          },
-          {
-            label:'Registrar pago',
-            icon:'fa-regular fa-money-bill-1',
-            url:'bill/register-payment-history'
           }
         ]
       },

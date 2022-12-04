@@ -86,7 +86,7 @@ const routes: Routes = [
   {path:'bill/list-bills', component:ListBillsComponent, canActivate:[AuthGuard]},
   {path:'bill/list-bill-details/:idBill', component:ListBillsDetailsComponent, canActivate:[AuthGuard]},
   {path:'bill/list-payments-history/:idBill', component:ListPaymentsHistoryComponent, canActivate:[AuthGuard]},
-  {path:'bill/register-payment-history', component:RegisterPaymentHistoryComponent, canActivate:[AuthGuard]},
+  {path:'bill/register-payment-history/:idBill', component:RegisterPaymentHistoryComponent, canActivate:[AuthGuard]},
   {path:'error-not-found',component:ErrorNotFoundComponent},
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'**', redirectTo:'error-not-found', pathMatch:'full'}
