@@ -16,14 +16,16 @@
                 <ng-template pTemplate="right">
                     <button pButton pRipple label="Volver" icon="pi pi-arrow-left" class="p-button-secondary mr-2"
                         routerLink="/booking/list-bookings-checkin"></button>
+
                 </ng-template>
             </p-toolbar>
 
             <p-table #dt styleClass="p-datatable-sm" [columns]="cols" exportFilename="reservas-checkin"
-                [value]="bookings2" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                [value]="bookings" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
                 [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-                'id',
+                'client.person.name',
+                'client.person.lastName',
                 'checkInDate',
                 'checkOutDate'
                 ]">
@@ -77,11 +79,11 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-booking>
-                    <tr *ngIf="booking.state!='OT'">
+                    <tr>
 
-                        <td>{{booking.id}}</td>
-                        <td>{{booking.checkInDate | date:'dd/mm/yyyy'}}</td>
-                        <td>{{booking.checkOutDate | date:'dd/mm/yyyy'}}</td>
+                        <td>{{booking.client.person.name}} {{booking.client.person.lastName}}</td>
+                        <td>{{booking.checkInDate | date}}</td>
+                        <td>{{booking.checkOutDate | date}}</td>
                         <td>
                             <span class="p-buttonset">
 

@@ -22,13 +22,13 @@ export class BookingRoomServiceService {
       }
     
       /**
-       * Registrar una habitación en una reserva
+       * Registrar habitaciones en una reserva
        * @param bookingRoom 
        * @returns 
        */
-      registerBookingRoom(bookingRoom:BookingRoom):Observable<BookingRoom>{
-        
-        return this.http.post<BookingRoom>(this.urlEndPoint+'/'+bookingRoom.idBooking+'/'+bookingRoom.idRoom,bookingRoom);
+      registerBookingRooms(bookingId:number,rooms:any):Observable<any>{
+        console.log("rooms"+ rooms[0].id);
+        return this.http.post<any>(this.urlEndPoint+'/'+bookingId,rooms);
       }
 
 }

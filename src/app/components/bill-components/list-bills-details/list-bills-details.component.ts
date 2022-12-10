@@ -74,7 +74,7 @@ export class ListBillsDetailsComponent implements OnInit {
       let bd = [
         this.billDetails[i].description,
         this.billDetails[i].date,
-        this.billDetails[i].price,
+        this.billDetails[i].value,
       ];
       this.dataTable.push(bd);
     }
@@ -111,7 +111,7 @@ export class ListBillsDetailsComponent implements OnInit {
       this.bd.push({
         Descripcion: this.billDetails[i].description,
         Fecha: this.billDetails[i].date,
-        Total: this.billDetails[i].price
+        Total: this.billDetails[i].value
       });
     }
     return this.bd;

@@ -6,6 +6,7 @@ import { MenuItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { Client } from '../../client-components/list-clients/client';
 import { ClientCompanyService } from 'src/app/services/clientCompany-service/client-company.service';
+import { ClientCompany } from '../../clientCompany-components/clientCompany';
 
 @Component({
   selector: 'app-view-company',
@@ -16,7 +17,7 @@ export class ViewCompanyComponent implements OnInit {
 
   onLoad:boolean = false;
   company: Company;
-  clients:Client[] = new Array;
+  clients:ClientCompany[] = new Array;
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
 

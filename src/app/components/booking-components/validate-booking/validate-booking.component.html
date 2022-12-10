@@ -29,10 +29,10 @@
                 [showCurrentPageReport]="true"
                 currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
                 [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-                'name',
-                'lastName',
-                'phoneNumber',
-                'document',
+                'person.name',
+                'person.lastName',
+                'person.phoneNumber',
+                'person.document',
                 'state'
               ]">
 
@@ -85,12 +85,12 @@
                     <tr>
 
 
-                        <td>{{client.name}} {{client.lastName}}</td>
-                        <td>{{client.phoneNumber}}</td>
-                        <td>{{client.document}}</td>
+                        <td>{{client.client.person.name}} {{client.client.person.lastName}}</td>
+                        <td>{{client.client.person.phoneNumber}}</td>
+                        <td>{{client.client.person.document}}</td>
                         <td>
-                            <p-badge value="{{textInBadge(client.state)}}"
-                                severity="{{colorInBadge(client.state)}}"></p-badge>
+                            <p-badge value="{{textInBadge(client.client.state)}}"
+                                severity="{{colorInBadge(client.client.state)}}"></p-badge>
                         </td>
 
 
@@ -99,10 +99,10 @@
 
 
                             <span class="p-buttonset">
-                                <button [disabled]="client.state!='I'" type="button" pButton pRipple
+                                <button [disabled]="client.client.state!='I'" type="button" pButton pRipple
                                     icon="fa-solid fa-user-pen" class="p-button-info p-button-outlined p-button-sm"
                                     pTooltip="Completar" tooltipPosition="top"
-                                    [routerLink]="['/client/register-client',this.id,client.document]"></button>
+                                    [routerLink]="['/client/register-client',this.id,client.client.person.document]"></button>
 
                             </span>
                         </td>

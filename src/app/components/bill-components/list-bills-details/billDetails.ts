@@ -3,5 +3,5 @@ export class BillDetails{
     idBill:number;
     description:string;
     date:Date;
-    price:number;
+    value:number;
 }

@@ -26,6 +26,9 @@
           'id',
           'checkInDate',
           'checkOutDate',
+          'client.person.name',
+          'client.person.lastName',
+          'company.name'
         ]">
 
 
@@ -78,9 +81,10 @@
         <ng-template pTemplate="body" let-booking>
           <tr>
 
-            <td>{{booking.id}}</td>
-            <td>{{booking.checkInDate | date:'dd/mm/yyyy'}}</td>
-            <td>{{booking.checkOutDate | date:'dd/mm/yyyy'}}</td>
+            <td *ngIf="!(booking.client==null)">{{booking.client.person.name}} {{booking.client.person.lastName}}</td>
+            <td *ngIf="!(booking.company==null)">{{booking.company.name}}</td>
+            <td>{{booking.checkInDate | date}}</td>
+            <td>{{booking.checkOutDate | date}}</td>
             <td>
               <span class="p-buttonset">
                 <!--Falta ajustar para hacer el checkin (la ruta)-->

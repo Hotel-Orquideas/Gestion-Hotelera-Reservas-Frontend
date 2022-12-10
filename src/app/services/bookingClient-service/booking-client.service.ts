@@ -17,7 +17,17 @@ export class BookingClientService {
  * Se obtiene una lista de todos los clientes registrados en una reserva
  * @returns lista de clientes en reserva
  */
-   getClients(idBooking:number): Observable<Client[]> {
-    return this.http.get<Client[]>(this.urlEndPoint+'/'+idBooking);
+  getClients(idBooking: number): Observable<Client[]> {
+    return this.http.get<Client[]>(this.urlEndPoint + '/' + idBooking);
+  }
+
+  /**
+ * Registrar clientes en una reserva
+ * @param client 
+ * @returns 
+ */
+  registerBookingClients(bookingId: number, clients: any): Observable<any> {
+    console.log("document "+clients[0].document);
+    return this.http.post<any>(this.urlEndPoint + '/' + bookingId, clients);
   }
 }

@@ -15,6 +15,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../service-components/list-services/service';
 import { ServiceService } from 'src/app/services/service-service/service.service';
 import { MessageService } from 'primeng/api';
+import { Booking2 } from '../list-bookings/booking2';
+import { RoomService } from './roomService';
+import { RoomServiceService } from 'src/app/services/room-service-service/room-service.service';
+import { Bill } from '../../bill-components/list-bills/bill';
+import { BillService } from 'src/app/services/bill-service/bill.service';
+import { BillDetails } from '../../bill-components/list-bills-details/billDetails';
+import { BillDetailService } from 'src/app/services/bill-service/bill-detail.service';
+
 
 @Component({
   selector: 'app-view-booking',
@@ -24,85 +32,59 @@ import { MessageService } from 'primeng/api';
 })
 export class ViewBookingComponent implements OnInit {
 
-  booking: Booking;
+  booking: Booking2 = new Booking2();
   clients: Client[] = new Array;
   rooms: Room[] = new Array;
-  roomTypes: RoomType[] = new Array(); // para traer todos los tipos de habitaciones
+  roomServices: RoomService[] = new Array();//para listar todos los servicios en la reserva
+  roomService: RoomService = new RoomService();//para registar un nuevo servicio
   services: Service[] = new Array() //para traer todos los servicios cuando se solicite
+  bills:Bill[]=new Array(); //para poder buscar la factura del cliente de esta reserva
+  newBillDetail:BillDetails = new BillDetails;
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
   showContentAddService: boolean = false;//para el p-dialog
-  llegadaPrueba: Date = new Date;
-  salidaPrueba: Date = new Date;
   public formRegisterService: FormGroup = new FormGroup<any>('');//para formulario registrar servicio a reserva
 
-  //para hacer pruebas
-  services2: any = [
-    {
-      "id": 4,
-      "name": "servicio4"
-    },
-    {
-      "id": 5,
-      "name": "servicio5"
-    },
-    {
-      "id": 6,
-      "name": "servicio6"
-    }
-  ];
-  servicesTable: any = [
-    {
-      "id": 1,
-      "name": "servicio1",
-      "quantity": 1,
-      "total": 5000
-    },
-    {
-      "id": 2,
-      "name": "servicio2",
-      "quantity": 2,
-      "total": 10000
-    },
-    {
-      "id": 3,
-      "name": "servicio3",
-      "quantity": 3,
-      "total": 15000
-    },
-  ];
-  serviceSelected: any;
-  quantity: any;
+  serviceSelected: number;
+  quantity: number;
 
-  booking2:any={
-    "state":"A"
-  };
-
-
-  constructor(private serviceService: ServiceService, private roomTypeService: RoomTypeService, private bookingService: BookingService, private bookingRoomServiceService: BookingRoomServiceService, private bookingClientService: BookingClientService, private activatedRoute: ActivatedRoute, private primengConfig: PrimeNGConfig, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private billDetailService:BillDetailService,private billService:BillService,private roomServiceService: RoomServiceService, private serviceService: ServiceService, private roomTypeService: RoomTypeService, private bookingService: BookingService, private bookingRoomServiceService: BookingRoomServiceService, private bookingClientService: BookingClientService, private activatedRoute: ActivatedRoute, private primengConfig: PrimeNGConfig, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit(): void {
     //para darle efecto al hacer click a los botones
     this.primengConfig.ripple = true;
-
-    //para obtener los tipos de habitación
-    this.roomTypeService.getRoomTypes().subscribe(
-      roomType => this.roomTypes = roomType
-    );
 
     //obtener todos los servicios
     this.serviceService.getServices().subscribe(
       service => this.services = service
     );
 
+    
     this.activatedRoute.params.subscribe(
 
       emp => {
         let id = emp['id'];
+        console.log("id: " + id)
         if (id) {
           //obtener reserva
           this.bookingService.getBooking(id).subscribe(
-            es => this.booking = es,
+            es => {
+              this.booking = es;
+
+              if (this.booking.state == 'B') {
+
+                //traemos todos los servicios en la reserva
+                this.roomServiceService.getRoomServices(id).subscribe(
+                  rs => this.roomServices = rs
+                );
+
+                //obtener todas las facturas (esto solo para poder buscar la factura del cliente y añadirle servicio)
+                this.billService.getBills().subscribe(
+                  bill => this.bills = bill
+                );
+
+              }
+            },
             error => console.log(error)
           );
 
@@ -132,6 +114,9 @@ export class ViewBookingComponent implements OnInit {
       ]],
       serviceSelected: ['', [
         Validators.required
+      ]],
+      roomSelected: ['', [
+        Validators.required
       ]]
     });
 
@@ -147,20 +132,6 @@ export class ViewBookingComponent implements OnInit {
     this.home = { icon: 'pi pi-home', routerLink: '/home' };
   }
 
-  //obtener el nombre de un tipo de habitación
-  nameRoomType(id: number): string {
-    let nameRoomType: string;
-    for (let i = 0; i < this.roomTypes.length; i++) {
-
-      if (this.roomTypes[i].id === id) {
-        nameRoomType = this.roomTypes[i].name;
-      }
-
-    }
-
-    return nameRoomType
-
-  }
 
   showAddService() {
     this.showContentAddService = true;
@@ -181,27 +152,53 @@ export class ViewBookingComponent implements OnInit {
   }
 
   registerServiceInBooking() {
-    let nameSelected:string="";
-    for (const serv of this.services2) {
-      if(serv.id==this.serviceSelected){
-        nameSelected=serv.name;
+    this.roomService.bookingRoomBookingId = this.booking.id;
+    this.roomServiceService.registerRoomService(this.roomService).subscribe(
+      res => {
+        //traemos todos los servicios en la reserva
+        this.roomServiceService.getRoomServices(this.booking.id).subscribe(
+          rs => this.roomServices = rs
+        );
+        this.messageService.add({ severity: 'success', summary: 'Agregado', detail: 'El servicio se ha agregado correctamente.', life: 3000 });
+        this.showContentAddService = false;
+
+      }
+    );
+
+    //en base al formulario añado los datos en el detalle de la factura
+    
+    for (let i = 0; i < this.services.length; i++) {
+      
+      if(this.roomService.serviceId==this.services[i].id){
+        this.newBillDetail.value=this.services[i].pricePerUnit*this.roomService.quantity;
+        this.newBillDetail.description=this.services[i].name;
       }
       
     }
-    this.servicesTable.push(
-      {
-        "id": this.serviceSelected,
-        "name": nameSelected,
-        "quantity": this.quantity,
-        "total": 20000
-      }
-    );
-    this.messageService.add({ severity: 'success', summary: 'Agregado', detail: 'El servicio se ha agregado correctamente.', life: 3000 });
-    this.showContentAddService = false;
+    
+    this.billDetailService.registerBillDetail(this.searchIdBill(),this.newBillDetail).subscribe();
+
+
   }
 
-  changeState(){
-    this.booking2.state='I';
+  //se busca la factura si viene con cliente o si viene con empresa -- terminar
+  searchIdBill(){
+    let billId:number=0;
+    for (let i = 0; i < this.bills.length; i++) {
+      try {
+
+        if(this.booking.client.person.document==this.bills[i].client.person.document){
+          billId=this.bills[i].id;
+        }
+        
+      } catch (error) {
+        
+      }
+
+      
+    }
+    
+    return billId;
   }
 
 }

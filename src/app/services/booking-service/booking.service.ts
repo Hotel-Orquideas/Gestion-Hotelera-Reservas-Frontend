@@ -25,7 +25,7 @@ export class BookingService {
 * @returns lista de reservas
 */
   getBookingsCheckIn(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.urlEndPoint+'/checkin');
+    return this.http.get<Booking[]>(this.urlEndPoint+'/checkin/'+0);
   }
 
   /**
@@ -33,9 +33,9 @@ export class BookingService {
    * @param booking 
    * @returns 
    */
-  registerBooking(booking: Booking): Observable<Booking> {
+  registerBooking(booking: Booking): Observable<any> {
 
-    return this.http.post<Booking>(this.urlEndPoint, booking);
+    return this.http.post<any>(this.urlEndPoint, booking);
   }
 
   /**
@@ -48,11 +48,11 @@ export class BookingService {
   }
 
   /**
-   * Mejorar esta consulta con el backend
+   * cambia el estado de la reserva según sea el estado que se envía
    * @param id 
    * @returns 
    */
-  setCheckOutBooking(id:number):Observable<Booking>{
-    return this.http.post<Booking>(this.urlEndPoint,id)
+  updateStateBooking(id:number, state:string):Observable<Booking>{
+    return this.http.put<Booking>(this.urlEndPoint+'/'+id+'/'+state,null);
   }
 }

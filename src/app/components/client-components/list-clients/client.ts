@@ -2,6 +2,7 @@ import { Person } from "../../employee-components/list-employees/person";
 
 export class Client extends Person{
     id:number;
+    state:string;
     countryOrigin:string;
     cityOrigin:string;
     countryDestination:string;

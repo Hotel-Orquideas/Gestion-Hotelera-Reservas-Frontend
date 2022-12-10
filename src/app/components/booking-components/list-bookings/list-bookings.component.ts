@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Booking } from './booking';
+import { Booking2 } from './booking2';
 import { MenuItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import * as FileSaver from 'file-saver';
@@ -18,7 +19,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ListBookingsComponent implements OnInit {
 
-  bookings: Booking[] = new Array;
+  bookings: Booking2[] = new Array;
   bkings = new Array(); //para poder exportar en excel
   cols: any[] = new Array;
   headSimple: any[] = new Array;//para exportar pdf

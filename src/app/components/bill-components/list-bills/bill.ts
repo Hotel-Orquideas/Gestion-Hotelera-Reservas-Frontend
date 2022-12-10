@@ -1,3 +1,5 @@
+import { Client } from "../../client-components/list-clients/client";
+
 export class Bill{
     id:number;
     date:Date;
@@ -5,4 +7,5 @@ export class Bill{
     balanceDue:number; //saldo por pagar. Ejemplo: el total es 100 mil, se hace un pago de 20 mil, este valor debería ser 80 mil
     clientId:number;
     companyId:number;
+    client:Client;
 }

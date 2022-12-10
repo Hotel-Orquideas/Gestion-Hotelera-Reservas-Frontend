@@ -1,5 +1,5 @@
 <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
-
+<p-toast></p-toast>
 
 <div class="container pt-4">
     <div class="row">
@@ -24,15 +24,14 @@
 
 
                     <div *ngIf="!valueInputSwitch">
-                        <form class="mt-4" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+                        <form class="mt-4" [formGroup]="formRegister">
 
                             <div class="row">
                                 <p class="float-start">Nombre (*)</p>
 
                                 <div class="col">
-                                    <p class="float-start me-6">Fecha de llegada (*)</p>
-                                    <p style="color: white;">e</p>
-                                    <div style="position:absolute;">
+                                    <p class="float-start">Fecha de llegada reserva(*)</p>
+                                    <div class="float-start" style="position:relative;">
                                         <p-calendar [minDate]="todayDate" [maxDate]="maxDateCheckIn" [showIcon]="true"
                                             inputId="icon" formControlName="checkInDate" (click)="validateDate()"
                                             [(ngModel)]="checkInDate">
@@ -43,9 +42,8 @@
                                 </div>
 
                                 <div class="col">
-                                    <p class="float-start me-6">Fecha de salida (*)</p>
-                                    <p style="color: white;">e</p>
-                                    <div style="position:absolute;">
+                                    <p class="float-start">Fecha de salida reserva(*)</p>
+                                    <div class="float-start">
                                         <p-calendar [disabled]="!checkInDate" formControlName="checkOutDate"
                                             [(ngModel)]="checkOutDate" [minDate]="checkInDate"
                                             [maxDate]="maxDateCheckOut" [showIcon]="true" inputId="icon"></p-calendar>
@@ -63,7 +61,7 @@
                                             decrementButtonClass="p-button-outlined p-button-secondary"
                                             incrementButtonClass="p-button-outlined p-button-secondary"
                                             incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1"
-                                            [max]="rooms2.length" placeholder="Ej. 3" [(ngModel)]="numberOfRooms">
+                                            [max]="rooms.length" placeholder="Ej. 3" [(ngModel)]="numberOfRooms">
                                         </p-inputNumber>
                                     </div>
                                 </div>
@@ -83,8 +81,8 @@
                                                 <select [disabled]="!checkOutDate" formControlName="roomId"
                                                     [(ngModel)]="roomIds[i]" class="form-select form-select-lg"
                                                     aria-label="Default select example">
-                                                    <option *ngFor="let r2 of rooms2" value="{{r2.id}}">
-                                                        {{r2.nombre}}
+                                                    <option *ngFor="let r2 of rooms" value="{{r2.id}}">
+                                                        {{r2.number}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -113,7 +111,7 @@
                             </div>
 
                             <div class="col mt-4">
-                                <button type="button" [disabled]="numMaxPersonsPerRoom.length==0"
+                                <button type="button" *ngIf="!(numMaxPersonsPerRoom.length==0)"
                                     class="btn btn-dark btn-lg" role="button"
                                     (click)="addSummClients()">Continuar</button>
                             </div>
@@ -134,7 +132,7 @@
                                                                 class="p-inputtext-sm" formControlName="searchDocument"
                                                                 [(ngModel)]="searchDocumentNumber[j]">
                                                             <p-button [loading]="loading"
-                                                                (onClick)="loadButton(); searchClient(j,searchDocumentNumber[j])"
+                                                                (onClick)="searchClient(j,searchDocumentNumber[j])"
                                                                 icon="pi pi-search" styleClass="p-button-sm">
                                                             </p-button>
                                                         </div>
@@ -212,24 +210,26 @@
                                     </p-accordion>
 
                                 </div>
+
+                                <p-button styleClass="p-button-success mt-2"
+                                    *ngIf="this.formRegister.value.clientsBooking.length>=1" [loading]="loading2"
+                                    label="Registrar Clientes" role="button" icon="fa-solid fa-person-circle-plus"
+                                    (click)="addClientsDb();obtainTotal()"></p-button>
+
                             </div>
-                            <!--
-                            {{this.formRegister.value | json}}
-                            nobre 1 {{this.names[0]}}
-                            nobre 2 {{this.names[1]}}
-                            leng-de-numaxperroom {{numMaxPersonsPerRoom.length}}
-                            Documento a buscar {{searchDocumentNumber}}
-                            -->
+
                             <div class="mt-4">
-                                <button [disabled]="formRegister.invalid" type="submit" class="btn btn-dark btn-lg"
-                                    role="button">Registrar</button>
+
+                                <p-button styleClass="p-button-secondary" [disabled]="formRegister.invalid"
+                                    [loading]="loading3" label="Registrar Reserva" (click)="register()"
+                                    role="button"></p-button>
                             </div>
                         </form>
                     </div>
 
                     <div *ngIf="valueInputSwitch">
 
-                        <form class="mt-4" [formGroup]="formRegisterWithCompany" (ngSubmit)="onSubmitWithCompany()">
+                        <form class="mt-4" [formGroup]="formRegisterWithCompany">
 
                             <div class="row">
 
@@ -258,9 +258,10 @@
                                 <div class="col">
                                     <p class="float-start me-6">Empresa (*)</p>
                                     <div class="float-start" style="position:relative;">
-                                        <p-dropdown [options]="companies" formControlName="companySelected"
-                                            [(ngModel)]="companySelected" optionLabel="name" [filter]="true"
-                                            filterBy="name" emptyMessage="No hay empresas registradas."
+                                        <p-dropdown (onClick)="verifyCompanies()" [options]="companies"
+                                            formControlName="companySelected" [(ngModel)]="companySelected"
+                                            optionLabel="name" [filter]="true" filterBy="name"
+                                            emptyMessage="No hay empresas registradas."
                                             emptyFilterMessage="Empresa no encontrada." [showClear]="true"
                                             placeholder="Seleccione una empresa">
 
@@ -280,7 +281,7 @@
                                             decrementButtonClass="p-button-outlined p-button-secondary"
                                             incrementButtonClass="p-button-outlined p-button-secondary"
                                             incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1"
-                                            [max]="rooms2.length" placeholder="Ej. 3" [(ngModel)]="numberOfRooms">
+                                            [max]="rooms.length" placeholder="Ej. 3" [(ngModel)]="numberOfRooms">
                                         </p-inputNumber>
                                     </div>
                                 </div>
@@ -300,8 +301,8 @@
                                                 <select [disabled]="!checkOutDate" formControlName="roomId"
                                                     [(ngModel)]="roomIds[i]" class="form-select form-select-lg"
                                                     aria-label="Default select example">
-                                                    <option *ngFor="let r2 of rooms2" value="{{r2.id}}">
-                                                        {{r2.nombre}}
+                                                    <option *ngFor="let r2 of rooms" value="{{r2.id}}">
+                                                        {{r2.number}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -330,9 +331,9 @@
                             </div>
 
                             <div class="col mt-4">
-                                <button type="button" [disabled]="numMaxPersonsPerRoom.length==0"
+                                <button type="button" *ngIf="!(numMaxPersonsPerRoom.length==0)"
                                     class="btn btn-dark btn-lg" role="button"
-                                    (click)="addSummClientsWithCompany()">Continuar</button>
+                                    (click)="addSummClientsWithCompany();loadClientsInCompany(companySelected.nit)">Continuar</button>
                             </div>
 
                             <div class="mt-4" formArrayName="clientsBooking">
@@ -352,11 +353,19 @@
                                                         <div class="float-start w-100" style="position:relative;">
                                                             <p-dropdown [options]="clientsInCompany"
                                                                 formControlName="client"
-                                                                [(ngModel)]="clientsSelected[j]" optionLabel="name"
-                                                                [filter]="true" filterBy="name"
-                                                                emptyMessage="No hay clientes en esta empresa."
-                                                                emptyFilterMessage="Cliente no encontrada."
-                                                                [showClear]="true" placeholder="Seleccione una cliente">
+                                                                [(ngModel)]="clientsSelected[j]"
+                                                                optionLabel="client.person.name" [filter]="true"
+                                                                filterBy="client.person.name,client.person.lastName"
+                                                                emptyMessage="No hay clientes registrados en esta empresa."
+                                                                emptyFilterMessage="Cliente no encontrado."
+                                                                [showClear]="true" placeholder="Seleccione un cliente">
+
+                                                                <ng-template let-clientCompany pTemplate="item">
+
+                                                                    <div>{{clientCompany.client.person.name}}
+                                                                        {{clientCompany.client.person.lastName}}</div>
+
+                                                                </ng-template>
 
                                                             </p-dropdown>
                                                         </div>
@@ -370,31 +379,24 @@
                                     </p-accordion>
 
                                 </div>
+
+                                <p-button styleClass="p-button-success mt-2"
+                                    *ngIf="this.formRegisterWithCompany.value.clientsBooking.length>=1"
+                                    [loading]="loading2" label="Añadir Clientes" role="button"
+                                    icon="fa-solid fa-person-circle-plus" (click)="obtainTotal()"></p-button>
+
                             </div>
 
                             <div class="mt-4">
-                                <button [disabled]="formRegisterWithCompany.invalid" type="submit"
-                                    class="btn btn-dark btn-lg" role="button">Registrar</button>
+
+                                <p-button styleClass="p-button-secondary" [disabled]="formRegisterWithCompany.invalid"
+                                    [loading]="loading3" label="Registrar Reserva" (click)="registerWithCompany()"
+                                    role="button"></p-button>
                             </div>
 
                         </form>
-                        <!--
-                        Empresa seleccionada : {{companySelected | json}}
-                        Clientes seleccionados: {{clientsSelected | json}}
-                        habitaciones seleccionadas: {{roomIds}}
-                        valor del formulario: {{this.formRegisterWithCompany.value | json}}
-                        formulario invalido: {{formRegisterWithCompany.invalid}}
-                        -->
+
                     </div>
-
-                    <!--
-                    <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
-                            (click)="register()">Registrar</button>
-                    </div>
-                 -->
-
-
 
                 </div>
             </div>

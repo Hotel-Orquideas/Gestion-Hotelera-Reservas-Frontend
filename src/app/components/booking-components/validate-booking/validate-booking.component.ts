@@ -5,7 +5,7 @@ import { BookingClientService } from 'src/app/services/bookingClient-service/boo
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../client-components/list-clients/client';
 import { ToastrService } from 'ngx-toastr';
-import { ThisReceiver } from '@angular/compiler';
+import { BookingService } from 'src/app/services/booking-service/booking.service';
 
 
 @Component({
@@ -16,41 +16,13 @@ import { ThisReceiver } from '@angular/compiler';
 export class ValidateBookingComponent implements OnInit {
 
 
-  clients: any[] = [
-    {
-      "id": 1,
-      "name": "Brayan Andres",
-      "lastName": "Cardenas Rodriguez",
-      "state": "I",
-      "email": "julian@mail.es",
-      "phoneNumber": "3192002085",
-      "document": "1000063183"
-    },
-    {
-      "id": 2,
-      "name": "julian2",
-      "lastName": "castañeda2",
-      "state": "A",
-      "email": "julian2@mail.es",
-      "phoneNumber": "3152",
-      "document": "101"
-    },
-    {
-      "id": 3,
-      "name": "julian3",
-      "lastName": "castañeda3",
-      "state": "A",
-      "email": "julian3@mail.es",
-      "phoneNumber": "3153",
-      "document": "102"
-    }
-  ];
-  validated:boolean=true;
+  clients: Client[] = new Array();
+  validated: boolean = true;
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
   id: any;
 
-  constructor(private bookingClientService: BookingClientService, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService,private primengConfig: PrimeNGConfig) { }
+  constructor(private bookingService: BookingService, private bookingClientService: BookingClientService, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
@@ -113,25 +85,39 @@ export class ValidateBookingComponent implements OnInit {
 
   }
 
-  validateBooking(){
+  validateBooking() {
     for (const cl of this.clients) {
-      if(cl.state!="A"){
-        this.validated=false;
+      if (cl.client.state != "A") {
+        this.validated = false;
       }
     }
 
-    if(this.validated==false){
+    if (this.validated == false) {
 
       this.toastr.info('Aún hay clientes con estado incompleto, complete los datos e intente nuevamente.', 'Validar clientes', {
         closeButton: true,
         progressBar: true
       });
 
-    }else{
-      this.toastr.success('El checkin se ha realizado correctamente.', 'Validar clientes', {
-        closeButton: true,
-        progressBar: true
-      });
+    } else {
+
+      this.bookingService.updateStateBooking(this.id, 'A').subscribe(
+        res => {
+          this.toastr.success('El checkin se ha realizado correctamente.', 'Validar clientes', {
+            closeButton: true,
+            progressBar: true
+          });
+          this.router.navigate(['/booking/list-bookings-checkin']);
+        },
+        error => {
+          this.toastr.error('Ha ocurrido un error inesperado: '+ error.status, 'Error', {
+            closeButton: true,
+            progressBar: true
+          });
+        }
+      );
+
+
     }
 
 

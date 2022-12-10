@@ -69,8 +69,8 @@
                         <th pSortableColumn="date">
                             Fecha <p-sortIcon field="date"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="price">
-                            Total <p-sortIcon field="price"></p-sortIcon>
+                        <th pSortableColumn="value">
+                            Total <p-sortIcon field="value"></p-sortIcon>
                         </th>
 
                     </tr>
@@ -80,7 +80,7 @@
 
                         <td>{{billDetail.description}}</td>
                         <td>{{billDetail.date | date:'dd/mm/yyyy'}}</td>
-                        <td>{{billDetail.price | currency:'USD':'symbol':'1.0'}}</td>
+                        <td>{{billDetail.value | currency:'USD':'symbol':'1.0'}}</td>
 
                     </tr>
                 </ng-template>

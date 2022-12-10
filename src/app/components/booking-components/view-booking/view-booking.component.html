@@ -12,8 +12,19 @@
                     <div class="col">
                         <p class="float-start">Servicio (*)</p>
                         <select class="form-select form-select-lg" formControlName="serviceSelected"
-                            [(ngModel)]="serviceSelected">
-                            <option *ngFor="let service of services2" value="{{service.id}}">{{service.name}}
+                            [(ngModel)]="roomService.serviceId">
+                            <option *ngFor="let service of services" value="{{service.id}}">{{service.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <p class="float-start">Habitación (*)</p>
+                        <select class="form-select form-select-lg" formControlName="roomSelected"
+                            [(ngModel)]="roomService.bookingRoomRoomId">
+                            <option *ngFor="let room of rooms" value="{{room.room.id}}">{{room.room.number}}
                             </option>
                         </select>
                     </div>
@@ -24,7 +35,8 @@
                         <p class="float-start">Cantidad (*)</p>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="fa-solid fa-arrow-up-1-9"></i></span>
-                            <p-inputNumber [showButtons]="true" formControlName="quantity" [(ngModel)]="quantity"
+                            <p-inputNumber [showButtons]="true" formControlName="quantity"
+                                [(ngModel)]="roomService.quantity"
                                 decrementButtonClass="p-button-outlined p-button-secondary"
                                 incrementButtonClass="p-button-outlined p-button-secondary"
                                 incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1" [max]="20"
@@ -39,7 +51,8 @@
     </div>
 
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-plus" label="añadir" (click)="registerServiceInBooking()" styleClass="p-button-secondary">
+        <p-button icon="pi pi-plus" label="añadir" [disabled]="formRegisterService.invalid"
+            (click)="registerServiceInBooking()" styleClass="p-button-secondary">
         </p-button>
     </ng-template>
 </p-dialog>
@@ -78,11 +91,29 @@
                                 <div class="row flex align-items-center mb-3">
                                     <div class="col-md-auto">
                                         <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Representante: </span>
+
+                                    </div>
+
+                                    <div class="col-md-auto" *ngIf="!(booking.client==null)">
+                                        {{booking.client.person.name}} {{booking.client.person.lastName}}
+                                    </div>
+
+
+                                    <div class="col-md-auto" *ngIf="!(booking.company==null)">
+                                        {{booking.company.name}}
+                                    </div>
+
+                                </div>
+
+                                <div class="row flex align-items-center mb-3">
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
                                         <span class="h6">Fecha de llegada: </span>
 
                                     </div>
                                     <div class="col-md-auto">
-                                        {{llegadaPrueba | date: 'dd/MM/yyyy'}}
+                                        {{booking.checkInDate | date}}
                                     </div>
                                 </div>
                                 <div class="row flex align-items-center mb-3">
@@ -93,7 +124,19 @@
 
                                     </div>
                                     <div class="col-md-auto">
-                                        {{salidaPrueba | date: 'dd/MM/yyyy'}}
+                                        {{booking.checkOutDate | date}}
+                                    </div>
+
+                                </div>
+                                <div class="row flex align-items-center mb-3">
+
+                                    <div class="col-md-auto">
+                                        <i class="pi pi-check-circle me-2"></i>
+                                        <span class="h6">Detalles: </span>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        {{booking.details}}
                                     </div>
 
                                 </div>
@@ -104,12 +147,6 @@
                 </div>
 
             </div>
-
-            <!--Botón de prueba nada mas-->
-            <p-button label="Cambiar estado" (click)="changeState()"
-            icon="pi pi-plus"
-            styleClass="p-button-sm p-button-secondary"></p-button>
-            <!--Botón de prueba nada mas-->
 
             <div class="row mt-3">
                 <div>
@@ -132,7 +169,6 @@
                                         <i class="fa-solid fa-people-group me-2"></i>
                                         <span>Clientes en reserva</span>
                                     </ng-template>
-
                                     <!--Tabla de clientes vinculados en una reserva -->
                                     <div>
                                         <p-table #dt styleClass="p-datatable-sm" [value]="clients" [paginator]="true"
@@ -291,7 +327,7 @@
 
 
                                                     <td>{{room.room.number}}</td>
-                                                    <td>{{nameRoomType(room.rom.roomTypeId)}}</td>
+                                                    <td>{{room.room.roomType.name}}</td>
 
                                                     <td>
                                                         <!--Acciones pendientes a modificación-->
@@ -326,7 +362,7 @@
 
                                 </p-tabPanel>
 
-                                <p-tabPanel *ngIf="this.booking2.state=='I'">
+                                <p-tabPanel *ngIf="this.booking.state=='B'">
 
                                     <ng-template pTemplate="header">
                                         <i class="fa-solid fa-bell-concierge me-2"></i>
@@ -335,13 +371,12 @@
 
                                     <!--Tabla de servicios en una reserva -->
                                     <div>
-                                        <p-table #dt styleClass="p-datatable-sm" [value]="servicesTable"
+                                        <p-table #dt styleClass="p-datatable-sm" [value]="roomServices"
                                             [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                                             currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
                                             [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
-                                                                                'name',
-                                                                                'quantity',
-                                                                                'total',
+                                                                                'service.name',
+                                                                                'quantity'
                                                                                 ]">
 
 
@@ -386,9 +421,10 @@
                                                 <tr>
 
 
-                                                    <td>{{service.name}}</td>
+                                                    <td>{{service.service.name}}</td>
                                                     <td>{{service.quantity}}</td>
-                                                    <td>{{service.total | currency:'USD':'symbol':'1.0'}}</td>
+                                                    <td>{{service.service.pricePerUnit*service.quantity |
+                                                        currency:'USD':'symbol':'1.0'}}</td>
 
 
 

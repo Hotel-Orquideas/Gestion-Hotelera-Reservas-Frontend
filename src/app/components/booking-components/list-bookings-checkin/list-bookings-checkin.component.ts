@@ -9,6 +9,10 @@ import { BookingService } from 'src/app/services/booking-service/booking.service
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { Booking2 } from '../list-bookings/booking2';
+import { BookingClientService } from 'src/app/services/bookingClient-service/booking-client.service';
+import { Client } from '../../client-components/list-clients/client';
+import { ClientService } from 'src/app/services/client-service/client.service';
 
 @Component({
   selector: 'app-list-bookings-checkin',
@@ -18,7 +22,8 @@ import { MessageService } from 'primeng/api';
 })
 export class ListBookingsCheckinComponent implements OnInit {
 
-  bookings: Booking[] = new Array;
+  bookings: Booking2[] = new Array;
+  clientsInBookingSelected:Client[]=new Array();//cuando se vaya a hacer checkout se obtienen todos los clientes de la reserva y se cambian a estado I
   bkings = new Array(); //para poder exportar en excel
   cols: any[] = new Array;
   headSimple: any[] = new Array;//para exportar pdf
@@ -49,7 +54,7 @@ export class ListBookingsCheckinComponent implements OnInit {
     },
   ];
 
-  constructor(private bookingService: BookingService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+  constructor(private clientService:ClientService,private bookingClientService:BookingClientService,private bookingService: BookingService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
 
@@ -156,6 +161,7 @@ export class ListBookingsCheckinComponent implements OnInit {
 
   }
 
+
   //función para cambiar el estado de la reserva en inactiva "checkout"
   setCheckOut(bookingId: number) {
 
@@ -164,38 +170,57 @@ export class ListBookingsCheckinComponent implements OnInit {
       header: 'Confirmación CheckOut',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        for (const bk of this.bookings2) {
-          if (bookingId == bk.id) {
-            bk.state = 'OT';
-            this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Se ha hecho el checkOut correctamente', life: 3000 });
+
+        //cambiar el estado de los clientes a I
+        this.bookingClientService.getClients(bookingId).subscribe(
+          client => {
+            this.clientsInBookingSelected =client;
+            
+            this.clientService.changeStateClients(this.listClientsJson(client)).subscribe(
+    
+              res=>{
+                this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Se han sacado los clientes de la reserva correctamente.', life: 3000 });
+              }
+    
+            );
+    
           }
-        }
-        /*
-        this.bookingService.setCheckOutBooking(bookingId).subscribe(
-          bk => {
+        );
+
+        //cambiar estado de la reserva para C
+        this.bookingService.updateStateBooking(bookingId,'B').subscribe(
+          res => {
+            this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Se ha hecho el checkOut correctamente', life: 3000 });
             this.bookingService.getBookingsCheckIn().subscribe(
               response => this.bookings = response
-            )
-            this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'Se ha hecho el checkOut correctamente', life: 3000 });
-
+            );
           },
           error => {
-            
-            this.messageService.add({
-              severity: 'error', summary: 'Error al hacer checkout',
-              detail: "Error " + error.status,
-              life: 3000
-            })
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ha ocurrido un evento inesperado al hacer checkout '+ error.status, life: 3000 });
           }
-
         );
-        */
+
       }, reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Se ha cancelado la operación.', life: 3000 });
         this.bookingService.getBookingsCheckIn();
       }
     });
 
+  }
+
+  //Metodo para enviar una lista con todos los id para poder cambiar de estado a todos.
+  listClientsJson(list:Client[]){
+    let listReturn:any[]=new Array();
+
+    for (let i = 0; i < list.length; i++) {
+      
+      listReturn.push({
+        "id":list[i].client.id
+      });
+  
+    }
+
+    return listReturn;
   }
 
 }

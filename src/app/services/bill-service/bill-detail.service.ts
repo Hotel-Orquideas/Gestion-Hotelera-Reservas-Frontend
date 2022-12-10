@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class BillDetailService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/billDetails';
+  private urlEndPoint: string = 'http://localhost:3005/management/api/billDetail';
 
   constructor(private http:HttpClient) { }
 
@@ -18,6 +18,13 @@ export class BillDetailService {
    * @returns 
    */
   getBillDetails(idBill:number): Observable<BillDetails[]> {
-    return this.http.get<BillDetails[]>(this.urlEndPoint+'/'+idBill);
+    return this.http.get<BillDetails[]>(this.urlEndPoint+'/all/'+idBill);
+  }
+
+  registerBillDetail(bookingId:number,billDetails:BillDetails):Observable<any[]>{
+    console.log(billDetails.description);
+    console.log(billDetails.value);
+    console.log(bookingId);
+    return this.http.post<any[]>(this.urlEndPoint+'/'+bookingId,billDetails);
   }
 }
