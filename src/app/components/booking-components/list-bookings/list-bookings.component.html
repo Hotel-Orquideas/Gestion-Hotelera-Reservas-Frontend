@@ -96,6 +96,10 @@
                   class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
                   [routerLink]="['/booking/view-booking',booking.id]"></button>
 
+                <button type="button" pButton pRipple icon="fa-solid fa-xmark"
+                  class="p-button-danger p-button-outlined p-button-sm" pTooltip="Cancelar reserva" tooltipPosition="top"
+                  (click)="cancelBooking(booking.id)"></button>
+
               </span>
             </td>
 

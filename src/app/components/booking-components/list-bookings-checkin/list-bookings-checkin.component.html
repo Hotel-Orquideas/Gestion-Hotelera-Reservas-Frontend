@@ -81,7 +81,8 @@
                 <ng-template pTemplate="body" let-booking>
                     <tr>
 
-                        <td>{{booking.client.person.name}} {{booking.client.person.lastName}}</td>
+                        <td *ngIf="!(booking.client==null)">{{booking.client.person.name}} {{booking.client.person.lastName}}</td>
+                        <td *ngIf="!(booking.company==null)">{{booking.company.name}}</td>
                         <td>{{booking.checkInDate | date}}</td>
                         <td>{{booking.checkOutDate | date}}</td>
                         <td>

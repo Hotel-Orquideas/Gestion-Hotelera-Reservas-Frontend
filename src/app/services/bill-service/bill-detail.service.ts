@@ -22,9 +22,6 @@ export class BillDetailService {
   }
 
   registerBillDetail(bookingId:number,billDetails:BillDetails):Observable<any[]>{
-    console.log(billDetails.description);
-    console.log(billDetails.value);
-    console.log(bookingId);
     return this.http.post<any[]>(this.urlEndPoint+'/'+bookingId,billDetails);
   }
 }

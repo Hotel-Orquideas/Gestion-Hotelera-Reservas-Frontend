@@ -19,6 +19,9 @@
                 currentPageReportTemplate="Mostrando desde {first} hasta {last} de {totalRecords} registros"
                 [rowsPerPageOptions]="[10,20,30,50,100]" [globalFilterFields]="[
                 'id',
+                'client.person.name',
+                'client.person.lastName',
+                'company.name',
                 'date',
                 'balanceToDue',
                 'total'
@@ -78,9 +81,10 @@
                 <ng-template pTemplate="body" let-bill>
                     <tr>
 
-                        <td>{{bill.id}}</td>
-                        <td>{{bill.date | date:'dd/mm/yyyy'}}</td>
-                        <td>{{bill.balanceToDue | currency:'USD':'symbol':'1.0'}}</td>
+                        <td *ngIf="!(bill.client==null)">{{bill.client.person.name}} {{bill.client.person.lastName}}</td>
+                        <td *ngIf="!(bill.company==null)">{{bill.company.name}}</td>
+                        <td>{{bill.date | date}}</td>
+                        <td>{{bill.balanceDue | currency:'USD':'symbol':'1.0'}}</td>
                         <td>{{bill.total | currency:'USD':'symbol':'1.0'}}</td>
                         <td>
                             <span class="p-buttonset">

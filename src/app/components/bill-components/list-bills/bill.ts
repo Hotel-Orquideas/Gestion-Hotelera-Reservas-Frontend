@@ -1,4 +1,5 @@
 import { Client } from "../../client-components/list-clients/client";
+import { Company } from "../../company-components/list-companies/company";
 
 export class Bill{
     id:number;
@@ -8,4 +9,5 @@ export class Bill{
     clientId:number;
     companyId:number;
     client:Client;
+    company:Company;
 }

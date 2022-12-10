@@ -19,7 +19,7 @@ export class PaymentHistoryService {
  * @returns 
  */
    getPaymentsHistory(idBill: number): Observable<PaymentHistory[]> {
-    return this.http.get<PaymentHistory[]>(this.urlEndPoint + '/' + idBill);
+    return this.http.get<PaymentHistory[]>(this.urlEndPoint + '/all/' + idBill);
   }
 
   /**

@@ -135,4 +135,40 @@ export class ListBookingsComponent implements OnInit {
 
   }
 
+  //metodo para cancelar una reserva
+  cancelBooking(bookingId: number) {
+
+    this.confirmationService.confirm({
+      message: '¿Está seguro que desea cancelar la reserva?',
+      header: 'Confirmación para cancelar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+
+        this.bookingService.updateStateBooking(bookingId, 'B').subscribe(
+          res => {
+
+            this.bookingService.getBookings().subscribe(
+              bookings => {
+                this.bookings = bookings;
+              }
+            );
+
+            this.messageService.add({ severity: 'success', summary: 'Aprobado', detail: 'La reserva se ha cancelado', life: 3000 });
+
+          },
+          error =>{
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ha sucedido un error al cancelar la reserva.', life: 3000 });
+          }
+        );
+
+        
+
+      }, reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Se ha cancelado la operación.', life: 3000 });
+      }
+    });
+
+
+  }
+
 }

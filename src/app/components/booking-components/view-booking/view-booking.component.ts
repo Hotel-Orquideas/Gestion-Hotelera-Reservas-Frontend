@@ -22,6 +22,7 @@ import { Bill } from '../../bill-components/list-bills/bill';
 import { BillService } from 'src/app/services/bill-service/bill.service';
 import { BillDetails } from '../../bill-components/list-bills-details/billDetails';
 import { BillDetailService } from 'src/app/services/bill-service/bill-detail.service';
+import { ignoreElements } from 'rxjs';
 
 
 @Component({
@@ -38,8 +39,8 @@ export class ViewBookingComponent implements OnInit {
   roomServices: RoomService[] = new Array();//para listar todos los servicios en la reserva
   roomService: RoomService = new RoomService();//para registar un nuevo servicio
   services: Service[] = new Array() //para traer todos los servicios cuando se solicite
-  bills:Bill[]=new Array(); //para poder buscar la factura del cliente de esta reserva
-  newBillDetail:BillDetails = new BillDetails;
+  bills: Bill[] = new Array(); //para poder buscar la factura del cliente de esta reserva
+  newBillDetail: BillDetails = new BillDetails;
   items: MenuItem[] = new Array;//para breadcrumb
   home: MenuItem = {};//para breadcrumb
   showContentAddService: boolean = false;//para el p-dialog
@@ -48,7 +49,7 @@ export class ViewBookingComponent implements OnInit {
   serviceSelected: number;
   quantity: number;
 
-  constructor(private billDetailService:BillDetailService,private billService:BillService,private roomServiceService: RoomServiceService, private serviceService: ServiceService, private roomTypeService: RoomTypeService, private bookingService: BookingService, private bookingRoomServiceService: BookingRoomServiceService, private bookingClientService: BookingClientService, private activatedRoute: ActivatedRoute, private primengConfig: PrimeNGConfig, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private billDetailService: BillDetailService, private billService: BillService, private roomServiceService: RoomServiceService, private serviceService: ServiceService, private roomTypeService: RoomTypeService, private bookingService: BookingService, private bookingRoomServiceService: BookingRoomServiceService, private bookingClientService: BookingClientService, private activatedRoute: ActivatedRoute, private primengConfig: PrimeNGConfig, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit(): void {
     //para darle efecto al hacer click a los botones
@@ -59,12 +60,11 @@ export class ViewBookingComponent implements OnInit {
       service => this.services = service
     );
 
-    
+
     this.activatedRoute.params.subscribe(
 
       emp => {
         let id = emp['id'];
-        console.log("id: " + id)
         if (id) {
           //obtener reserva
           this.bookingService.getBooking(id).subscribe(
@@ -162,42 +162,65 @@ export class ViewBookingComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Agregado', detail: 'El servicio se ha agregado correctamente.', life: 3000 });
         this.showContentAddService = false;
 
+        //limpiamos el formulario
+        this.roomService.quantity=undefined;
+        this.roomService.serviceId=undefined;
+        this.roomService.bookingRoomRoomId=undefined;
+
       }
     );
 
     //en base al formulario añado los datos en el detalle de la factura
-    
+
     for (let i = 0; i < this.services.length; i++) {
-      
-      if(this.roomService.serviceId==this.services[i].id){
-        this.newBillDetail.value=this.services[i].pricePerUnit*this.roomService.quantity;
-        this.newBillDetail.description=this.services[i].name;
+
+      if (this.roomService.serviceId == this.services[i].id) {
+        this.newBillDetail.value = this.services[i].pricePerUnit * this.roomService.quantity;
+        this.newBillDetail.description = this.services[i].name;
       }
-      
+
     }
-    
-    this.billDetailService.registerBillDetail(this.searchIdBill(),this.newBillDetail).subscribe();
+
+    this.billDetailService.registerBillDetail(this.searchIdBill(), this.newBillDetail).subscribe();
 
 
   }
 
   //se busca la factura si viene con cliente o si viene con empresa -- terminar
-  searchIdBill(){
-    let billId:number=0;
+  searchIdBill() {
+    let billId: number = 0;
     for (let i = 0; i < this.bills.length; i++) {
-      try {
 
-        if(this.booking.client.person.document==this.bills[i].client.person.document){
-          billId=this.bills[i].id;
+      if (!(this.bills[i].company == null)) {
+
+        try {
+
+          if (this.booking.company.id == this.bills[i].company.id) {
+            billId = this.bills[i].id;
+          }
+
+        } catch (error) {
+
         }
-        
-      } catch (error) {
-        
+
       }
 
-      
+      if (!(this.bills[i].client == null)) {
+
+        try {
+
+          if (this.booking.client.person.document == this.bills[i].client.person.document) {
+            billId = this.bills[i].id;
+          }
+
+        } catch (error) {
+
+        }
+
+      }
+
     }
-    
+
     return billId;
   }
 
