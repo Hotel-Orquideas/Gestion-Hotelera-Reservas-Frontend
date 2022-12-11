@@ -9,11 +9,11 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <span class="h4" *ngIf="!room.id else elseTittle">
-                        Registrar Tarifa
+                        Registrar Habitación
                     </span>
                     <ng-template #elseTittle>
                         <span class="h4">
-                            Actualizar Tarifa
+                            Actualizar Habitación
                         </span>
                     </ng-template>
                 </ng-template>
@@ -70,14 +70,14 @@
 
                     </form>
                     <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                        <button name="buttonRegisterRoom" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()" *ngIf="!room.id else elseBlock">Registrar</button>
                     </div>
 
 
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            <button name="buttonUpdateRoom" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                 (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>

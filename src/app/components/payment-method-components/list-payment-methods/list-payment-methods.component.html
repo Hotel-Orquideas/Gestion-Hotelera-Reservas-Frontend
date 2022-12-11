@@ -81,12 +81,12 @@
 
                         <td>
                             <span class="p-buttonset">
-                                <button type="button" pButton pRipple icon="pi pi-pencil"
+                                <button name="buttonUpdatePaymentMethod" type="button" pButton pRipple icon="pi pi-pencil"
                                     class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar"
                                     tooltipPosition="top"
-                                    [routerLink]="['/roomType/register-room-type',paymentMethod.id]"></button>
+                                    [routerLink]="['/paymentMethod/register-payment-method',paymentMethod.id]"></button>
 
-                                <button type="button" pButton pRipple icon="pi pi-trash"
+                                <button name="buttonDeletePaymentMethod" type="button" pButton pRipple icon="pi pi-trash"
                                     class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar"
                                     tooltipPosition="top" (click)="delete(paymentMethod.id)"></button>
                             </span>

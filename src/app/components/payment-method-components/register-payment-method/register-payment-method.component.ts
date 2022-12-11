@@ -90,7 +90,7 @@ export class RegisterPaymentMethodComponent implements OnInit {
   update(): void {
     this.paymentMethodService.updatePaymentMethod(this.paymentMethod).subscribe(
       emp => {
-        this.toastr.info('El metodo de pago se ha actualizado satisfactoriamente.', 'Actualziar método de pago', {
+        this.toastr.info('El metodo de pago se ha actualizado satisfactoriamente.', 'Actualizar método de pago', {
           closeButton: true,
           progressBar: true
         });

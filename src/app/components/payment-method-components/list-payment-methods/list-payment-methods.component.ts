@@ -88,7 +88,7 @@ export class ListPaymentMethodsComponent implements OnInit {
             //mejorar este mensaje - mostrando las tarifas y habitaciones que dependen de este
             this.messageService.add({
               severity: 'error', summary: 'Error al eliminar',
-              detail: "No es posible eliminar este tipo de habitación debido a que hay tarifas y tipos de habitación que dependen de esta, elimine/edite primero las tarifas y habitaciones y vuelva a intentar",
+              detail: "Error: "+ error.status,
               life: 3000
             })
           }

@@ -93,7 +93,7 @@
 
             <td>
               <span class="p-buttonset">
-                <button type="button" pButton pRipple icon="pi pi-pencil"
+                <button name="buttonUpdateRoom" type="button" pButton pRipple icon="pi pi-pencil"
                   class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar" tooltipPosition="top"
                   [routerLink]="['/room/register-room',room.id]"></button>
 
@@ -101,7 +101,7 @@
                   class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
                   [routerLink]="['/room/view-room',room.id]"></button>
 
-                <button type="button" pButton pRipple icon="pi pi-trash"
+                <button name="buttonDeleteRoom" type="button" pButton pRipple icon="pi pi-trash"
                   class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
                   (click)="delete(room.id)"></button>
               </span>

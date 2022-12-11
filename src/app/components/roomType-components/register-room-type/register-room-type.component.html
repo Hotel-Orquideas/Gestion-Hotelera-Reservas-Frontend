@@ -59,14 +59,14 @@
 
                     </form>
                     <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                        <button name="buttonRegisterRoomType" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()" *ngIf="!roomType.id else elseBlock">Registrar</button>
                     </div>
 
 
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            <button name="buttonUpdateRoomType" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                 (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>

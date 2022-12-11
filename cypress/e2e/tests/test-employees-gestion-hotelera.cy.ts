@@ -1,4 +1,4 @@
-describe('Login Test Gestion Hotelera App', () => {
+describe('Employee Test Gestion Hotelera App', () => {
 
     //se iniciará sesión siempre
     beforeEach(() => {

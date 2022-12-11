@@ -33,7 +33,7 @@
                                     <span class="p-inputgroup-addon"><i
                                             class="fa-sharp fa-solid fa-spell-check"></i></span>
                                     <input formControlName="name" type="text" pInputText class="form-control"
-                                        pKeyFilter="alpha" placeholder="Nombre servicio" [(ngModel)]="service.name">
+                                        placeholder="Nombre servicio" [(ngModel)]="service.name">
                                 </div>
                             </div>
                         </div>
@@ -52,14 +52,14 @@
 
                     </form>
                     <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                        <button name="buttonRegisterService" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()" *ngIf="!service.id else elseBlock">Registrar</button>
                     </div>
 
 
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            <button name="buttonUpdateService" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                 (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>

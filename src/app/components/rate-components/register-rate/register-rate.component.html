@@ -59,14 +59,14 @@
 
                     </form>
                     <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                        <button name="buttonRegisterRate" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()" *ngIf="!rate.id else elseBlock">Registrar</button>
                     </div>
 
 
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            <button name="buttonUpdateRate" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                 (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>

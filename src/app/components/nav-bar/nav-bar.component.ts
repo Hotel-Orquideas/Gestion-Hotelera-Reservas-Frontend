@@ -48,12 +48,12 @@ export class NavBarComponent implements OnInit {
         icon: 'fa-solid fa-building',
         items: [
           {
-            label: 'Registrar',
+            label: 'Registrar empresa',
             icon: 'fa-sharp fa-solid fa-building-circle-arrow-right',
             routerLink: 'company/register-company'
           },
           {
-            label: 'Listar',
+            label: 'Listar empresas',
             icon: 'fa-solid fa-city',
             routerLink: 'company/list-companies'
           },
@@ -80,12 +80,12 @@ export class NavBarComponent implements OnInit {
         icon: 'fa-solid fa-users',
         items: [
           {
-            label: 'Registrar',
+            label: 'Registrar cliente',
             icon: 'fa-solid fa-user-plus',
             routerLink: 'client/register-client'
           },
           {
-            label: 'Listar',
+            label: 'Listar clientes',
             icon: 'fa-solid fa-user-group',
             routerLink: 'client/list-clients'
           },
@@ -115,11 +115,11 @@ export class NavBarComponent implements OnInit {
             icon: 'fa-regular fa-calendar-check',
             routerLink: 'booking/list-bookings-checkin'
           },
-          {
-            label: 'Calendario',
-            icon: 'fa-solid fa-calendar-days',
-            routerLink: 'booking/calendar-bookings'
-          }
+          //{
+          //  label: 'Calendario',
+          //  icon: 'fa-solid fa-calendar-days',
+          //  routerLink: 'booking/calendar-bookings'
+          //}
         ]
       },
       {
@@ -142,12 +142,12 @@ export class NavBarComponent implements OnInit {
             icon: 'fa-solid fa-bell-concierge',
             items: [
               {
-                label: 'Agregar nuevo',
+                label: 'Agregar servicio',
                 icon: 'fa-regular fa-square-plus',
                 routerLink: 'service/register-service'
               },
               {
-                label: 'Listar',
+                label: 'Listar servicios',
                 icon: 'fa-solid fa-hand-holding',
                 routerLink: 'service/list-services'
               }
@@ -179,7 +179,7 @@ export class NavBarComponent implements OnInit {
                 routerLink: 'rate/register-rate',
               },
               {
-                label: 'Listar Tarfas',
+                label: 'Listar Tarifas',
                 icon: 'fa-solid fa-filter-circle-dollar',
                 routerLink: 'rate/list-rates'
               },

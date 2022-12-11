@@ -41,7 +41,7 @@
                                 <p class="float-start me-6">Fecha de expiración (*)</p>
                                 <p style="color: white;">e</p>
                                 <div style="position:absolute;">
-                                    <p-calendar formControlName="expirationDate" [minDate]="minDate" [maxDate]="maxDate"
+                                    <p-calendar placeholder="Fecha" formControlName="expirationDate" [minDate]="minDate" [maxDate]="maxDate"
                                     [(ngModel)]='promotion.expirationDate' [showIcon]="true" inputId="icon"></p-calendar>
                                 </div>
                                 
@@ -70,14 +70,14 @@
 
                     </form>
                     <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                        <button name="buttonRegisterPromotion" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()" *ngIf="!promotion.id else elseBlock">Registrar</button>
                     </div>
 
 
                     <ng-template #elseBlock>
                         <div class="mt-4">
-                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            <button name="buttonUpdatePromotion" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                 (click)="update()">Actualizar</button>
                         </div>
                     </ng-template>

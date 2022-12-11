@@ -37,14 +37,14 @@
           <div class="row">
             <div class="col-6">
 
-              <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()" class="me-2"
+              <button name="buttonDownloadCsvCompanies" type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()" class="me-2"
                 pTooltip="CSV" tooltipPosition="top"></button>
 
               <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
                 class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
 
 
-              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+              <button name="buttonDownloadPdfCompanies" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
                 class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
 
             </div>
@@ -97,7 +97,7 @@
 
             <td>
               <span class="p-buttonset">
-                <button type="button" pButton pRipple icon="pi pi-pencil"
+                <button name="buttonUpdateCompany" type="button" pButton pRipple icon="pi pi-pencil"
                   class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar" tooltipPosition="top"
                   [routerLink]="['/company/register-company',company.nit]"></button>
 
@@ -105,7 +105,7 @@
                   class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar"
                   tooltipPosition="top" [routerLink]="['/company/view-company',company.nit]"></button>
 
-                <button type="button" pButton pRipple icon="pi pi-trash"
+                <button name="buttonDeleteCompany" type="button" pButton pRipple icon="pi pi-trash"
                   class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
                   (click)="delete(company.nit)"></button>
               </span>

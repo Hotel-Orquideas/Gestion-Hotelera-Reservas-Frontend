@@ -117,7 +117,7 @@
 
                             <div class="col">
                                 <p class="float-start">Fecha Expedición Documento (*)</p>
-                                <p-calendar formControlName="dateIssuanceDoc" [minDate]="minDate" [maxDate]="maxDate"
+                                <p-calendar placeholder="Fecha Expedición" formControlName="dateIssuanceDoc" [minDate]="minDate" [maxDate]="maxDate"
                                     [(ngModel)]='client.dateIssuanceDoc' [showIcon]="true" inputId="icon"></p-calendar>
                             </div>
 
@@ -194,7 +194,7 @@
                             </div>
                             <div class="col">
                                 <p class="float-start">Fecha de Nacimiento (*)</p>
-                                <p-calendar formControlName="birthdate" [minDate]="minDate" [maxDate]="maxDate"
+                                <p-calendar placeholder="Fecha Nacimiento" formControlName="birthdate" [minDate]="minDate" [maxDate]="maxDate"
                                     [(ngModel)]='client.birthdate' [(ngModel)]='client.person.birthdate' [showIcon]="true"
                                     inputId="icon"></p-calendar>
                             </div>
@@ -246,7 +246,7 @@
 
                     </form>
                     <div class="mt-4">
-                        <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                        <button name="buttonRegisterClient" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                             (click)="register()" *ngIf="!id else elseBlock">Registrar</button>
                     </div>
 
@@ -255,7 +255,7 @@
 
                         <ng-container *ngIf="!reservation else elseIfBlock">
                             <div class="mt-4">
-                                <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                                <button name="buttonUpdateClient" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                     (click)="update()">Actualizar</button>
                             </div>
                         </ng-container>
@@ -264,7 +264,7 @@
 
                     <ng-template #elseIfBlock>
                         <div class="mt-4">
-                            <button [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
+                            <button name="buttonCompleteClient" [disabled]="formRegister.invalid" class="btn btn-dark btn-lg" role="button"
                                 (click)="complete()">Completar</button>
                         </div>
                     </ng-template>

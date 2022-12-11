@@ -86,12 +86,12 @@
 
                         <td>
                             <span class="p-buttonset">
-                                <button type="button" pButton pRipple icon="pi pi-pencil"
+                                <button name="buttonUpdateService" type="button" pButton pRipple icon="pi pi-pencil"
                                     class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar"
                                     tooltipPosition="top"
                                     [routerLink]="['/service/register-service',service.id]"></button>
 
-                                <button type="button" pButton pRipple icon="pi pi-trash"
+                                <button name="buttonDeleteService" type="button" pButton pRipple icon="pi pi-trash"
                                     class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar"
                                     tooltipPosition="top" (click)="delete(service.id)"></button>
                             </span>
