@@ -37,14 +37,14 @@
           <div class="row">
             <div class="col-6">
 
-              <button type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()" class="me-2"
+              <button name="buttonDownloadCsvEmployees" type="button" pButton pRipple icon="pi pi-file " (click)="dt.exportCSV()" class="me-2"
                 pTooltip="CSV" tooltipPosition="top"></button>
 
               <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
                 class="p-button-success me-2" pTooltip="XLS" tooltipPosition="top"></button>
 
 
-              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+              <button name="buttonDownloadPdfEmployees" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
                 class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="top"></button>
 
             </div>
@@ -98,15 +98,15 @@
 
             <td>
               <span class="p-buttonset">
-                <button type="button" pButton pRipple icon="fa-solid fa-user-pen"
+                <button name="buttonUpdateEmployee" type="button" pButton pRipple icon="fa-solid fa-user-pen"
                   class="p-button-info p-button-outlined p-button-sm" pTooltip="Editar" tooltipPosition="top"
                   [routerLink]="['/employee/register-employee',employee.person.document]"></button>
 
-                <button type="button" pButton pRipple icon="pi pi-eye"
+                <button name="buttonViewEmployee" type="button" pButton pRipple icon="pi pi-eye"
                   class="p-button-warning p-button-outlined p-button-sm" pTooltip="Visualizar" tooltipPosition="top"
                   [routerLink]="['/employee/view-employee',employee.person.document]"></button>
 
-                <button type="button" pButton pRipple icon="pi pi-trash"
+                <button name="buttonDeleteEmployee" type="button" pButton pRipple icon="pi pi-trash"
                   class="p-button-danger p-button-outlined p-button-sm" pTooltip="Eliminar" tooltipPosition="top"
                   (click)="delete(employee.person.document)"></button>
               </span>

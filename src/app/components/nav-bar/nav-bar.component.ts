@@ -34,12 +34,12 @@ export class NavBarComponent implements OnInit {
           {
             label: 'Registrar',
             icon: 'fa-solid fa-person-circle-plus',
-            url: 'employee/register-employee'
+            routerLink:'/employee/register-employee',
           },
           {
             label: 'Listar',
             icon: 'fa-solid fa-people-group',
-            url: 'employee/list-employees'
+            routerLink: 'employee/list-employees'
           }
         ]
       },
@@ -50,12 +50,12 @@ export class NavBarComponent implements OnInit {
           {
             label: 'Registrar',
             icon: 'fa-sharp fa-solid fa-building-circle-arrow-right',
-            url: 'company/register-company'
+            routerLink: 'company/register-company'
           },
           {
             label: 'Listar',
             icon: 'fa-solid fa-city',
-            url: 'company/list-companies'
+            routerLink: 'company/list-companies'
           },
           {
             label: 'Promociones',
@@ -64,12 +64,12 @@ export class NavBarComponent implements OnInit {
               {
                 label: 'Listar promociones',
                 icon: 'fa-solid fa-splotch',
-                url: 'promotion/list-promotions'
+                routerLink: 'promotion/list-promotions'
               },
               {
                 label: 'Registrar promoción',
                 icon: 'fa-solid fa-circle-dollar-to-slot',
-                url: 'promotion/register-promotion'
+                routerLink: 'promotion/register-promotion'
               }
             ]
           }
@@ -82,17 +82,17 @@ export class NavBarComponent implements OnInit {
           {
             label: 'Registrar',
             icon: 'fa-solid fa-user-plus',
-            url: 'client/register-client'
+            routerLink: 'client/register-client'
           },
           {
             label: 'Listar',
             icon: 'fa-solid fa-user-group',
-            url: 'client/list-clients'
+            routerLink: 'client/list-clients'
           },
           {
             label: 'Vincular a empresa',
             icon: 'fa-solid fa-people-pulling',
-            url: 'clientCompany/register-clientCompany'
+            routerLink: 'clientCompany/register-clientCompany'
           }
         ]
       },
@@ -103,22 +103,22 @@ export class NavBarComponent implements OnInit {
           {
             label: 'Reservar',
             icon: 'fa-regular fa-calendar-plus',
-            url: 'booking/register-booking'
+            routerLink: 'booking/register-booking'
           },
           {
             label: 'Listar reservas',
             icon: 'fa-solid fa-calendar-week',
-            url: 'booking/list-bookings'
+            routerLink: 'booking/list-bookings'
           },
           {
             label: 'Reservas en CheckIn',
             icon: 'fa-regular fa-calendar-check',
-            url: 'booking/list-bookings-checkin'
+            routerLink: 'booking/list-bookings-checkin'
           },
           {
             label: 'Calendario',
             icon: 'fa-solid fa-calendar-days',
-            url: 'booking/calendar-bookings'
+            routerLink: 'booking/calendar-bookings'
           }
         ]
       },
@@ -129,7 +129,7 @@ export class NavBarComponent implements OnInit {
           {
             label:'Listar facturas',
             icon:'fa-solid fa-file-invoice-dollar',
-            url:'bill/list-bills'
+            routerLink:'bill/list-bills'
           }
         ]
       },
@@ -144,12 +144,12 @@ export class NavBarComponent implements OnInit {
               {
                 label: 'Agregar nuevo',
                 icon: 'fa-regular fa-square-plus',
-                url: 'service/register-service'
+                routerLink: 'service/register-service'
               },
               {
                 label: 'Listar',
                 icon: 'fa-solid fa-hand-holding',
-                url: 'service/list-services'
+                routerLink: 'service/list-services'
               }
             ]
           },
@@ -160,12 +160,12 @@ export class NavBarComponent implements OnInit {
               {
                 label: 'Agregar tipo',
                 icon: 'fa-solid fa-file-circle-plus',
-                url: 'roomType/register-room-type'
+                routerLink: 'roomType/register-room-type'
               },
               {
                 label: 'Listar tipos',
                 icon: 'fa-solid fa-clipboard-list',
-                url: 'roomType/list-room-types'
+                routerLink: 'roomType/list-room-types'
               }
             ]
           },
@@ -176,12 +176,12 @@ export class NavBarComponent implements OnInit {
               {
                 label: 'Agregar Tarifa',
                 icon: 'fa-solid fa-file-invoice-dollar',
-                url: 'rate/register-rate',
+                routerLink: 'rate/register-rate',
               },
               {
                 label: 'Listar Tarfas',
                 icon: 'fa-solid fa-filter-circle-dollar',
-                url: 'rate/list-rates'
+                routerLink: 'rate/list-rates'
               },
             ]
           },
@@ -192,12 +192,12 @@ export class NavBarComponent implements OnInit {
               {
                 label: 'Agregar Habitación',
                 icon: 'fa-solid fa-door-closed',
-                url: 'room/register-room'
+                routerLink: 'room/register-room'
               },
               {
                 label: 'Listar Habitaciones',
                 icon: 'fa-solid fa-elevator',
-                url: 'room/list-rooms'
+                routerLink: 'room/list-rooms'
               }
             ]
           },
@@ -208,12 +208,12 @@ export class NavBarComponent implements OnInit {
               {
                 label: 'Agregar método',
                 icon: 'fa-solid fa-money-check-dollar',
-                url: 'paymentMethod/register-payment-method'
+                routerLink: 'paymentMethod/register-payment-method'
               },
               {
                 label: 'Listar métodos',
                 icon: 'fa-solid fa-file-invoice-dollar',
-                url: 'paymentMethod/list-payment-methods'
+                routerLink: 'paymentMethod/list-payment-methods'
               }
             ]
           }

@@ -41,12 +41,12 @@ export class RegisterEmployeeComponent implements OnInit {
       name: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(15)
+        Validators.maxLength(40)
       ]],
       lastName: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(15)
+        Validators.maxLength(40)
       ]],
       documentType: ['', [
         Validators.required,
