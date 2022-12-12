@@ -224,15 +224,18 @@ export class NavBarComponent implements OnInit {
     //items menu 
     this.itemsMenuAvatar = [
       {
+        label:''
+      },
+      {
         label: ''
       },
       {
         separator: true
       },
-      {
-        label: 'Configuración',
-        icon: 'fa-solid fa-gear'
-      },
+     // {
+       // label: 'Configuración',
+      //  icon: 'fa-solid fa-gear'
+     // },
       {
         label: 'Cerrar Sesión',
         icon: 'fa-solid fa-arrow-right-from-bracket',
@@ -281,7 +284,19 @@ export class NavBarComponent implements OnInit {
 
   //al items del menuavatar se le asigna el rol cuando se le de click al menu
   loadRoleName() {
-    this.itemsMenuAvatar[0].label = 'Rol: ' + this.employee.role.name;
+    this.itemsMenuAvatar[1].label = 'Rol: ' + this.employee.role.name;
+  }
+  
+  loadEmployeeName(){
+
+    const splitName: String[] = this.employee.person.name.split(" ");
+    const splitLastName: String[] = this.employee.person.lastName.split(" ");
+
+    const firstName: String = splitName[0];
+    const lastName: String = splitLastName[0];
+
+    this.itemsMenuAvatar[0].label= firstName + ' ' + lastName
+
   }
 
 

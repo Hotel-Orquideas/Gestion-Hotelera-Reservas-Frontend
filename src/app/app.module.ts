@@ -69,6 +69,8 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {TabViewModule} from 'primeng/tabview';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {CardModule} from 'primeng/card';
+
 
 import { CalendarBookingsComponent } from './components/booking-components/calendar-bookings/calendar-bookings.component';
 import { ValidateBookingComponent } from './components/booking-components/validate-booking/validate-booking.component';
@@ -157,7 +159,8 @@ import { RegisterPaymentHistoryComponent } from './components/bill-components/re
     FieldsetModule,
     InputSwitchModule,
     TabViewModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    CardModule
   ],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},

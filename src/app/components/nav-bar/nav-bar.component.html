@@ -7,7 +7,7 @@
 
   <ng-template pTemplate="end" *ngIf="true">
     <p-avatar style="cursor:pointer" [label]="getFirstLetter()" styleClass="p-mr-2" size="large" shape="circle"
-      (click)="avatarMenu.toggle($event); loadRoleName()"></p-avatar>
+      (click)="avatarMenu.toggle($event); loadRoleName(); loadEmployeeName()"></p-avatar>
     <p-tieredMenu #avatarMenu [model]="itemsMenuAvatar" [popup]="true"></p-tieredMenu>
   </ng-template>
 

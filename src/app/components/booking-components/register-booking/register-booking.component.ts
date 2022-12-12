@@ -34,7 +34,7 @@ export class RegisterBookingComponent implements OnInit {
   public formRegister: FormGroup = new FormGroup<any>('');//para formulario registrar sin empresa
   public formRegisterWithCompany: FormGroup = new FormGroup<any>('');//para formulario registrar con empresa
 
-  valueInputSwitch: boolean = true;//para guardar el valor del inputSwitch
+  valueInputSwitch: boolean = false;//para guardar el valor del inputSwitch
   loading: boolean = false;//para guardar el estado de load del botón de buscar
   loading2: boolean = false;//para poner el botón de registrar clientes en cargando
   loading3: boolean = false;//para poner el boton de registrar reserva en cargando

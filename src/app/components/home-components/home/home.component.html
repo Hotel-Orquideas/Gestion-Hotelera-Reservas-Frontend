@@ -1,1 +1,63 @@
-<p>home works!</p>
+<div class="container pt-4">
+
+    <div class="col-lg-10 offset-lg-2">
+
+        <div class="row mt-4">
+            <div class="col-2 me-4">
+
+                <p-card header="Colaboradores" [style]="{width: '200px'}" styleClass="shadow-2">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="../../../../assets/employees-home.png">
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-button [style]="{marginLeft: '40px'}" [routerLink]="['/employee/list-employees']" label="Ir" icon="pi pi-check"></p-button>
+                    </ng-template>
+                </p-card>
+
+            </div>
+
+            <div class="col-2 me-4">
+
+                <p-card header="Clientes" [style]="{width: '200px'}" styleClass="shadow-2">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="../../../../assets/clients-home.png">
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-button [style]="{marginLeft: '40px'}" [routerLink]="['/client/list-clients']" label="Ir" icon="pi pi-check"></p-button>
+                    </ng-template>
+                </p-card>
+
+            </div>
+
+            <div class="col-2 me-4">
+
+                <p-card header="Reservas" [style]="{width: '200px'}" styleClass="shadow-2">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="../../../../assets/booking-homejpg.jpg">
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-button [style]="{marginLeft: '40px'}" label="Ir" [routerLink]="['/booking/list-bookings']" icon="pi pi-check"></p-button>
+                    </ng-template>
+                </p-card>
+
+            </div>
+
+            <div class="col-2 me-4">
+
+                <p-card header="Facturas" [style]="{width: '200px'}" styleClass="shadow-2">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" src="../../../../assets/bill-home.jpg">
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-button [style]="{marginLeft: '40px'}"  [routerLink]="['/bill/list-bills']" label="Ir" icon="pi pi-check"></p-button>
+                    </ng-template>
+                </p-card>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
