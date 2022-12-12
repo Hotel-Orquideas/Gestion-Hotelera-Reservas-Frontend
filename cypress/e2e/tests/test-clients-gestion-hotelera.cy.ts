@@ -6,7 +6,6 @@ describe('Employee Test Gestion Hotelera App', () => {
         cy.get('input#email').first().type('andresAdmin@gmail.com');
         cy.get('input#password').type('Abcde12345');
         cy.contains('Iniciar sesión').click();
-        cy.contains('home works');
     });
 
   
@@ -16,14 +15,14 @@ describe('Employee Test Gestion Hotelera App', () => {
         cy.contains('Registrar Cliente');
 
         //se llena formulario
-        cy.get('input[placeholder="Nombre"]').type('Nombre3');
-        cy.get('input[placeholder="Apellido"]').type('Apellido3');
+        cy.get('input[placeholder="Nombre"]').type('Nombre10');
+        cy.get('input[placeholder="Apellido"]').type('Apellido10');
         cy.get('select[formcontrolname="documentType"]').select('CC');
-        cy.get('input[placeholder="Número de documento"]').type('1000000003');
+        cy.get('input[placeholder="Número de documento"]').type('1000000010');
         cy.get('input[placeholder="Fecha Expedición"]').last().type('08/06/1990');
-        cy.get('input[placeholder="Teléfono"]').type('3000000003');
-        cy.get('input[placeholder="Email"]').type('nombre3.apellido3@mail.com');
-        cy.get('input[placeholder="Ej: Locutor"]').type('Profesión3');
+        cy.get('input[placeholder="Teléfono"]').type('3000000010');
+        cy.get('input[placeholder="Email"]').type('nombre10.apellido3@mail.com');
+        cy.get('input[placeholder="Ej: Locutor"]').type('Profesión10');
         cy.get('select[formcontrolname="genre"]').select('M');
         cy.get('select[formcontrolname="bloodType"]').select('O+');
         cy.get('input[placeholder="Fecha Nacimiento"]').type('08/06/1980');

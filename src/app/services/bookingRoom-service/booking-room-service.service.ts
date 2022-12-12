@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookingRoomServiceService {
 
-  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/bookingRoom';
+  private urlEndPoint: string = 'https://backend-gestion-hotelera.fly.dev/management/api/bookingRoom';
 
   constructor(private http:HttpClient) { }
 

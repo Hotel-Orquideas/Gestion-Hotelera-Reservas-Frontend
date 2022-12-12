@@ -9,7 +9,7 @@ import { Company } from 'src/app/components/company-components/list-companies/co
 
 export class CompanyService {
 
-  private urlEndPoint:string= 'http://54.90.71.67:3005/management/api/company';
+  private urlEndPoint:string= 'https://backend-gestion-hotelera.fly.dev/management/api/company';
 
   constructor(private http:HttpClient) { }
 

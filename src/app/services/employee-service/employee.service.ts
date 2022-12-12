@@ -11,7 +11,7 @@ export class EmployeeService {
 
   token=localStorage.getItem('x-token'); //se trae el token
   headers = new HttpHeaders({"x-token": this.token}); //se crea el header
-  private urlEndPoint:string= 'http://54.90.71.67:3005/management/api/employee';
+  private urlEndPoint:string= 'https://backend-gestion-hotelera.fly.dev/management/api/employee';
 
   constructor(private http:HttpClient) {
    }

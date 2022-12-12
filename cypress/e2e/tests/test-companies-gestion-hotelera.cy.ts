@@ -6,7 +6,6 @@ describe('Company Test Gestion Hotelera App', () => {
         cy.get('input#email').first().type('andresAdmin@gmail.com');
         cy.get('input#password').type('Abcde12345');
         cy.contains('Iniciar sesión').click();
-        cy.contains('home works');
     });
 
     it('Botón desactivado para registar empresa', () => {
@@ -22,20 +21,20 @@ describe('Company Test Gestion Hotelera App', () => {
         cy.contains('Registrar empresa').click();
         cy.contains('Registrar Empresa');
         //se llena formulario
-        cy.get('input[placeholder="NIT"]').type('12349418-T');
-        cy.get('input[placeholder="Nombre empresa"]').type('Empresa S.A.S');
-        cy.get('input[placeholder="Nombre representante"]').type('Representante');
-        cy.get('input[placeholder="Teléfono"]').type('3000000001');
-        cy.get('input[placeholder="Email"]').type('empresa.sas1@mail.com');
+        cy.get('input[placeholder="NIT"]').type('12349410-T');
+        cy.get('input[placeholder="Nombre empresa"]').type('Empresa2 S.A.S');
+        cy.get('input[placeholder="Nombre representante"]').type('Representante2');
+        cy.get('input[placeholder="Teléfono"]').type('3000000002');
+        cy.get('input[placeholder="Email"]').type('empresa.sas2@mail.com');
         cy.get('button[name="buttonRegisterCompany"]').should('be.enabled').click();//primero se comprueba que el botón esté enable, luego si hace el click
         
         //cuando pase a listar empresas
         cy.contains('Registro empresa');
-        cy.contains('12349418-T');
-        cy.contains('Empresa S.A.S');
-        cy.contains('Representante');
-        cy.contains('3000000001');
-        cy.contains('empresa.sas1@mail.com');
+        cy.contains('12349410-T');
+        cy.contains('Empresa2 S.A.S');
+        cy.contains('Representante2');
+        cy.contains('3000000002');
+        cy.contains('empresa.sas2@mail.com');
 
     })
     

@@ -6,7 +6,6 @@ describe('Company Test Gestion Hotelera App', () => {
         cy.get('input#email').first().type('andresAdmin@gmail.com');
         cy.get('input#password').type('Abcde12345');
         cy.contains('Iniciar sesión').click();
-        cy.contains('home works');
     });
 
 

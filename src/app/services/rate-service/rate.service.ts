@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class RateService {
 
-  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/rate';
+  private urlEndPoint: string = 'https://backend-gestion-hotelera.fly.dev/management/api/rate';
 
   constructor(private http: HttpClient) { }
 

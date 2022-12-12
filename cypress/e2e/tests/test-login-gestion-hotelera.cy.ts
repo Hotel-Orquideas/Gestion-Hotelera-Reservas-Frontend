@@ -25,14 +25,12 @@ describe('Login Test Gestion Hotelera App', () => {
     cy.get('input#email').first().type('andresAdmin@gmail.com');
     cy.get('input#password').type('Abcde12345');
     cy.contains('Iniciar sesión').click();
-    cy.contains('home works');
   })
 
   it('No puede acceder a login después de iniciar sesión', () => {
     cy.get('input#email').first().type('andresAdmin@gmail.com');
     cy.get('input#password').type('Abcde12345');
     cy.contains('Iniciar sesión').click();
-    cy.contains('home works');
     cy.visit('http://localhost:4200/login')
     cy.contains('Error');
   })
@@ -41,7 +39,6 @@ describe('Login Test Gestion Hotelera App', () => {
     cy.get('input#email').first().type('andresAdmin@gmail.com');
     cy.get('input#password').type('Abcde12345');
     cy.contains('Iniciar sesión').click();
-    cy.contains('home works');
     cy.get('p-avatar.p-element.ng-star-inserted').click();
     cy.contains('Cerrar Sesión').click();
     cy.contains('Iniciar sesión');

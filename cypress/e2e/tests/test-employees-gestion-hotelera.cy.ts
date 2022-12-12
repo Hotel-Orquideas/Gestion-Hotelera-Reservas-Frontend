@@ -6,7 +6,6 @@ describe('Employee Test Gestion Hotelera App', () => {
         cy.get('input#email').first().type('andresAdmin@gmail.com');
         cy.get('input#password').type('Abcde12345');
         cy.contains('Iniciar sesión').click();
-        cy.contains('home works');
     });
 
     it('Botón desactivado para registar colaborador', () => {
@@ -22,13 +21,13 @@ describe('Employee Test Gestion Hotelera App', () => {
         cy.contains('Registrar').click();
         cy.contains('Registrar Colaborador');
         //se llena formulario
-        cy.get('input[placeholder="Nombre"]').type('Nombre5');
-        cy.get('input[placeholder="Apellido"]').type('Apellido5');
+        cy.get('input[placeholder="Nombre"]').type('Nombre10');
+        cy.get('input[placeholder="Apellido"]').type('Apellido10');
         cy.get('select[formcontrolname="documentType"]').select('CC');
-        cy.get('input[placeholder="Número de documento"]').type('1000000005');
-        cy.get('input[placeholder="Teléfono"]').type('3000000005');
-        cy.get('input[placeholder="Puesto"]').type('Cargo5');
-        cy.get('input[placeholder="Email"]').type('nombre.apellido5@mail.com');
+        cy.get('input[placeholder="Número de documento"]').type('1000000030');
+        cy.get('input[placeholder="Teléfono"]').type('3000000010');
+        cy.get('input[placeholder="Puesto"]').type('Cargo10');
+        cy.get('input[placeholder="Email"]').type('nombre.apellido10@mail.com');
         cy.get('select[formcontrolname="genre"]').select('M');
         cy.get('select[formcontrolname="bloodType"]').select('O+');
         cy.get('input').last().type('08/06/1980');
@@ -36,9 +35,9 @@ describe('Employee Test Gestion Hotelera App', () => {
         
         //cuando pase a listar colaboradores
         cy.contains('Registro colaborador');
-        cy.contains('Nombre5 Apellido5');
-        cy.contains('3000000005');
-        cy.contains('Cargo5');
+        cy.contains('Nombre10 Apellido10');
+        cy.contains('3000000010');
+        cy.contains('Cargo10');
     })
     
 

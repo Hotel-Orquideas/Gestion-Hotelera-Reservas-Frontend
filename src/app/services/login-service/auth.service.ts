@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/auth/login';
+  private urlEndPoint: string = 'https://backend-gestion-hotelera.fly.dev/management/api/auth/login';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 

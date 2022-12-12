@@ -6,12 +6,11 @@ describe('Company Test Gestion Hotelera App', () => {
         cy.get('input#email').first().type('andresAdmin@gmail.com');
         cy.get('input#password').type('Abcde12345');
         cy.contains('Iniciar sesión').click();
-        cy.contains('home works');
     });
 
 
   
-    it('Registrar tarifa', () => {
+    it('Registrar método de pago', () => {
         cy.get('body > app-root > app-nav-bar > p-menubar > div > p-menubarsub > ul > li:nth-child(6)').click();
         cy.contains('Metodos de pago').dblclick();
         cy.contains('Agregar método').click();
@@ -28,14 +27,14 @@ describe('Company Test Gestion Hotelera App', () => {
     
 
 
-    it('Listar tarifas', () => {
+    it('Listar métodos de pago', () => {
         cy.get('body > app-root > app-nav-bar > p-menubar > div > p-menubarsub > ul > li:nth-child(6)').click();
         cy.contains('Metodos de pago').dblclick();
         cy.contains('Listar métodos').click();
         cy.contains('Métodos de pago Registrados');
     })
 
-    it('Actualizar tarifa', () => {
+    it('Actualizar método de pago', () => {
         cy.get('body > app-root > app-nav-bar > p-menubar > div > p-menubarsub > ul > li:nth-child(6)').click();
         cy.contains('Metodos de pago').dblclick();
         cy.contains('Listar métodos').click();
@@ -53,7 +52,7 @@ describe('Company Test Gestion Hotelera App', () => {
 
     })
     
-    it('Eliminar tarifa', () => {
+    it('Eliminar método de pago', () => {
         cy.get('body > app-root > app-nav-bar > p-menubar > div > p-menubarsub > ul > li:nth-child(6)').click();
         cy.contains('Metodos de pago').dblclick();
         cy.contains('Listar métodos').click();
