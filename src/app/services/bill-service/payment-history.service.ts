@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PaymentHistoryService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/paymentHistory';
+  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/paymentHistory';
 
 
   constructor(private http: HttpClient) { }

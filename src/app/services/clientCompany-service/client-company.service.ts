@@ -9,7 +9,7 @@ import { Client } from '../../components/client-components/list-clients/client';
 })
 export class ClientCompanyService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/clientCompany';
+  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/clientCompany';
 
 
   constructor(private http: HttpClient) { }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PromotionService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/promotion';
+  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/promotion';
 
   constructor(private http: HttpClient) { }
 

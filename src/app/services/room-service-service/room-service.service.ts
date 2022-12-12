@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class RoomServiceService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/roomService';
+  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/roomService';
 
   constructor(private http: HttpClient) { }
 

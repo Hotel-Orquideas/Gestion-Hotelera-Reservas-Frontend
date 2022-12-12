@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class PaymentMethodService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/paymentMethod';
+  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/paymentMethod';
 
   constructor(private http: HttpClient) { }
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class BillDetailService {
 
-  private urlEndPoint: string = 'http://localhost:3005/management/api/billDetail';
+  private urlEndPoint: string = 'http://54.90.71.67:3005/management/api/billDetail';
 
   constructor(private http:HttpClient) { }
 
